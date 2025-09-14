@@ -27,12 +27,12 @@ services:
       npm ci --silent --production=false
       echo "🔨 Preparando para produção..."
       echo "✅ Build do backend concluído!"
-    
-    # Comando de start otimizado
+
+    # Comando de start otimizado usando tsx diretamente
     startCommand: |
       echo "🚀 Iniciando servidor backend..."
       cd appserver
-      npm start
+      npx tsx server.ts
     
     # Health check endpoint
     healthCheckPath: /health

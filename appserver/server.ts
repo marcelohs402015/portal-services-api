@@ -234,7 +234,7 @@ async function startServer() {
 }
 
 // Start the server
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   startServer().catch(error => {
     logger.error('Server startup failed:', error);
     process.exit(1);
