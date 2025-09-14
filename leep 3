@@ -1,0 +1,13 @@
+           List of relations
+ Schema |     Name     | Type  | Owner 
+--------+--------------+-------+-------
+ public | appointments | table | admin
+ public | categories   | table | admin
+ public | clients      | table | admin
+ public | emails       | table | admin
+ public | quotations   | table | admin
+ public | services     | table | admin
+ public | settings     | table | admin
+ public | users        | table | admin
+(8 rows)
+

@@ -1,0 +1,29 @@
+                                            Table "public.emails"
+      Column       |            Type             | Collation | Nullable |              Default               
+-------------------+-----------------------------+-----------+----------+------------------------------------
+ id                | integer                     |           | not null | nextval('emails_id_seq'::regclass)
+ gmail_id          | character varying(255)      |           | not null | 
+ subject           | text                        |           | not null | 
+ sender            | character varying(500)      |           | not null | 
+ date              | timestamp without time zone |           | not null | 
+ body              | text                        |           |          | 
+ snippet           | text                        |           |          | 
+ category          | character varying(100)      |           |          | 
+ confidence        | numeric(3,2)                |           |          | 
+ processed         | boolean                     |           |          | false
+ responded         | boolean                     |           |          | false
+ response_template | character varying(255)      |           |          | 
+ created_at        | timestamp without time zone |           |          | CURRENT_TIMESTAMP
+ updated_at        | timestamp without time zone |           |          | CURRENT_TIMESTAMP
+Indexes:
+    "emails_pkey" PRIMARY KEY, btree (id)
+    "emails_gmail_id_key" UNIQUE CONSTRAINT, btree (gmail_id)
+    "idx_emails_category" btree (category)
+    "idx_emails_created_at" btree (created_at)
+    "idx_emails_date" btree (date)
+    "idx_emails_gmail_id" btree (gmail_id)
+    "idx_emails_processed" btree (processed)
+    "idx_emails_sender" btree (sender)
+Triggers:
+    update_emails_updated_at BEFORE UPDATE ON emails FOR EACH ROW EXECUTE FUNCTION update_updated_at_column()
+

@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-11T19:41:47.304Z",
+  "summary": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6,
+    "successRate": "25.0%"
+  },
+  "results": [
+    {
+      "name": "Health Check",
+      "status": "PASSOU",
+      "details": "Servidor saudável - Versão: 3.1.0, Modo: real"
+    },
+    {
+      "name": "Categories API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "POST /categories falhou: 500"
+    },
+    {
+      "name": "Services API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "Falha ao criar categoria para teste de serviços"
+    },
+    {
+      "name": "Clients API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "POST /clients falhou: 500"
+    },
+    {
+      "name": "Quotations API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "POST /quotations falhou: 500"
+    },
+    {
+      "name": "Appointments API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "Falha ao criar cliente para teste de agendamentos"
+    },
+    {
+      "name": "Emails API - CRUD Completo",
+      "status": "FALHOU",
+      "error": "POST /emails falhou: 500"
+    },
+    {
+      "name": "Admin API - Segurança",
+      "status": "PASSOU",
+      "details": "Admin API protegida corretamente - acesso negado sem chave válida"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: portal-services-backend
+    runtime: node
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATA_MODE
+        value: real
+      - key: APP_VERSION
+        value: 3.1.0
+      - key: FEATURES
+        value: email-management,ai-chat,quotation-automation,postgresql
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-database
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-database
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-database
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-database
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-database
+          property: password
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portal-services-database
+          property: connectionString
+      - key: CLIENT_URL
+        value: https://portal-services-frontend.onrender.com
+      - key: CORS_ORIGIN
+        value: https://portal-services-frontend.onrender.com
+      - key: GOOGLE_AI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash-exp
+    healthCheckPath: /health

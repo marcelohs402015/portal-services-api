@@ -1,0 +1,55 @@
+{
+  "categories": {
+    "work": {
+      "label": "Work",
+      "color": "#4285f4",
+      "autoLabel": true
+    },
+    "personal": {
+      "label": "Personal",
+      "color": "#ea4335",
+      "autoLabel": true
+    },
+    "finance": {
+      "label": "Finance",
+      "color": "#34a853",
+      "autoLabel": true
+    },
+    "shopping": {
+      "label": "Shopping",
+      "color": "#fbbc05",
+      "autoLabel": true
+    },
+    "newsletters": {
+      "label": "Newsletters",
+      "color": "#9aa0a6",
+      "autoLabel": true
+    },
+    "promotions": {
+      "label": "Promotions",
+      "color": "#ff6d01",
+      "autoLabel": true
+    },
+    "social": {
+      "label": "Social",
+      "color": "#ab47bc",
+      "autoLabel": true
+    },
+    "spam": {
+      "label": "Spam",
+      "color": "#f44336",
+      "autoLabel": true
+    }
+  },
+  "rules": {
+    "confidenceThreshold": 0.3,
+    "maxEmailsPerRun": 100,
+    "skipLabeled": true,
+    "includeRead": false
+  },
+  "automation": {
+    "enabled": false,
+    "schedule": "0 9 * * *",
+    "dryRun": false
+  }
+}

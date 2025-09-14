@@ -1,0 +1,131 @@
+# =====================================================
+# Portal Services - Render.com Blueprint Configuration
+# Sistema de gestão de serviços e orçamentos
+# =====================================================
+
+databases:
+  - name: portal-services-db
+    databaseName: portalservicesdb
+    user: admin
+    plan: starter
+
+services:
+  # =====================================================
+  # Backend Service - API Server
+  # =====================================================
+  - type: web
+    name: portal-services-backend
+    runtime: node
+    plan: starter
+    region: oregon
+    
+    # Comandos de build otimizados para produção
+    buildCommand: |
+      echo "🚀 Iniciando build do backend..."
+      cd appserver
+      echo "📦 Instalando dependências..."
+      npm ci --silent
+      echo "🔨 Compilando TypeScript..."
+      npm run build
+      echo "✅ Build do backend concluído!"
+    
+    # Comando de start otimizado
+    startCommand: |
+      echo "🚀 Iniciando servidor backend..."
+      cd appserver
+      npm start
+    
+    # Health check endpoint
+    healthCheckPath: /health
+    
+    # Configurações de auto-deploy
+    autoDeploy: true
+    branch: main
+    
+    # Variáveis de ambiente
+    envVars:
+      # Configurações básicas
+      - key: NODE_ENV
+        value: production
+      - key: DATA_MODE
+        value: real
+      - key: PORT
+        value: "10000"
+      
+      # Configurações do banco de dados
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-db
+          property: password
+      - key: DB_SSL
+        value: "true"  # SSL obrigatório no Render
+      
+      # Configurações de segurança
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+
+  # =====================================================
+  # Frontend Service - React Application
+  # =====================================================
+  - type: web
+    name: portal-services-frontend
+    runtime: static
+    plan: starter  # Plano gratuito do Render
+    region: oregon
+    
+    # Comandos de build otimizados
+    buildCommand: |
+      echo "🚀 Iniciando build do frontend..."
+      cd appclient
+      echo "📦 Instalando dependências..."
+      npm ci --legacy-peer-deps --silent
+      echo "🔨 Compilando React..."
+      npm run build
+      echo "✅ Build do frontend concluído!"
+    
+    # Caminho dos arquivos estáticos
+    staticPublishPath: ./appclient/build
+    
+    # Configurações de auto-deploy
+    autoDeploy: true
+    branch: main
+    
+    # Headers de segurança
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://portal-services-backend.onrender.com;"
+    
+    # Variáveis de ambiente do frontend
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://portal-services-backend.onrender.com
+      - key: GENERATE_SOURCEMAP
+        value: "false"

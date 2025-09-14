@@ -1,0 +1,16 @@
+# Cursor Rules - Handyman Manager
+# Configuração para desenvolvimento do projeto principal
+
+## Projeto
+Este é o projeto Handyman Manager - Sistema de gestão de serviços com IA para automação de emails e criação de orçamentos.
+
+## Estrutura
+- `appclient/` - Frontend React
+- `appserver/` - Backend Node.js/Express
+- `docs/` - Documentação do projeto
+
+## Scripts Principais
+- `npm start` - Inicia o servidor backend
+- `npm run dev` - Inicia desenvolvimento (frontend + backend)
+- `npm run build` - Build completo do projeto
+- `./start.sh` - Script para iniciar o servidor
