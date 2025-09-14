@@ -24,9 +24,8 @@ services:
       echo "🚀 Iniciando build do backend..."
       cd appserver
       echo "📦 Instalando dependências..."
-      npm ci --silent
-      echo "🔨 Compilando TypeScript..."
-      npm run build
+      npm ci --silent --production=false
+      echo "🔨 Preparando para produção..."
       echo "✅ Build do backend concluído!"
     
     # Comando de start otimizado
@@ -102,26 +101,11 @@ services:
       echo "✅ Build do frontend concluído!"
     
     # Caminho dos arquivos estáticos
-    staticPublishPath: ./appclient/build
+    rootDir: ./appclient/build
     
     # Configurações de auto-deploy
     autoDeploy: true
     branch: main
-    
-    # Headers de segurança
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-      - path: /*
-        name: Referrer-Policy
-        value: strict-origin-when-cross-origin
-      - path: /*
-        name: Content-Security-Policy
-        value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://portal-services-backend.onrender.com;"
     
     # Variáveis de ambiente do frontend
     envVars:
