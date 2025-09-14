@@ -52,26 +52,10 @@ services:
         value: "10000"
       
       # Configurações do banco de dados
-      - key: DB_HOST
+      - key: DATABASE_URL
         fromDatabase:
           name: portal-services-db
-          property: host
-      - key: DB_PORT
-        fromDatabase:
-          name: portal-services-db
-          property: port
-      - key: DB_NAME
-        fromDatabase:
-          name: portal-services-db
-          property: database
-      - key: DB_USER
-        fromDatabase:
-          name: portal-services-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: portal-services-db
-          property: password
+          property: connectionString
       - key: DB_SSL
         value: "true"  # SSL obrigatório no Render
       

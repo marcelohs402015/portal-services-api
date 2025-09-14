@@ -37,25 +37,34 @@ console.log('🔧 Configurações:', {
 });
 
 function getDatabaseConfig(): DatabaseConfig {
-  if (process.env.DATABASE_URL) {
-    const useSSL = (process.env.DB_SSL || 'true').toLowerCase() === 'true';
+  // Use individual environment variables if available
+  if (process.env.DB_HOST) {
     return {
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT || '5432'),
       database: process.env.DB_NAME || 'portalservicesdb',
       user: process.env.DB_USER || 'admin',
       password: process.env.DB_PASSWORD || 'admin',
-      ssl: useSSL ? { rejectUnauthorized: false } : false
+      ssl: (process.env.DB_SSL || 'true').toLowerCase() === 'true' ? { rejectUnauthorized: false } : false
     } as any;
   }
 
+  // Fallback to DATABASE_URL (Render.com format)
+  if (process.env.DATABASE_URL) {
+    return {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    } as any;
+  }
+
+  // Local development fallback
   return {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-      database: process.env.DB_NAME || 'portalservicesdb',
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'admin',
-    ssl: (process.env.DB_SSL || 'false') === 'true'
+    host: 'localhost',
+    port: 5432,
+    database: 'portalservicesdb',
+    user: 'admin',
+    password: 'admin',
+    ssl: false
   } as any;
 }
 
