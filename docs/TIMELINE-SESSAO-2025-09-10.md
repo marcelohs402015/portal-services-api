@@ -141,7 +141,7 @@ Resolver problema de comunicação entre frontend e backend, e corrigir erros na
 ### Iniciar Serviços (Método Manual)
 ```bash
 # Backend
-cd /home/mstech/projetos/app-email-attendant
+cd /home/mstech/projetos/portal-services
 npm run server:dev
 
 # Frontend  

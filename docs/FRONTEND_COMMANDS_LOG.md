@@ -4,10 +4,10 @@
 
 ### **1. Navegação e Verificação**
 ```bash
-cd /home/mstech/projetos/app-email-attendant && cd appclient && pwd && ls -la
+cd /home/mstech/projetos/portal-services && cd appclient && pwd && ls -la
 ```
 **Resultado:** ✅ Diretório correto
-- **Path:** /home/mstech/projetos/app-email-attendant/appclient
+- **Path:** /home/mstech/projetos/portal-services/appclient
 - **Arquivos principais:** src/, public/, build/, package.json, .env
 - **Build existente:** build/ com arquivos estáticos
 

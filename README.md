@@ -137,8 +137,8 @@ Runtime aids:
 
 ```powershell
 # Clone the repository
-git clone https://github.com/marcelohs402015/app-email-attendant.git
-cd app-email-attendant
+git clone https://github.com/marcelohs402015/portal-services.git
+cd portal-services
 
 # Option 1: Use the automated installer (Recommended)
 install-windows.bat
@@ -154,8 +154,8 @@ npm run dev
 
 ```bash
 # Clone the repository
-git clone https://github.com/marcelohs402015/app-email-attendant.git
-cd app-email-attendant
+git clone https://github.com/marcelohs402015/portal-services.git
+cd portal-services
 
 # Option 1: Use the automated installer (Recommended)
 npm run install:all
@@ -230,11 +230,11 @@ npm run client:dev  # Frontend on port 3000
 **Method 2 - Manual terminal approach:**
 ```bash
 # Terminal 1 - Start Server
-cd /path/to/project-email-attendant/server
+cd /path/to/portal-services/server
 npm start
 
 # Terminal 2 - Start Client  
-cd /path/to/project-email-attendant/client
+cd /path/to/portal-services/client
 npm start
 ```
 
@@ -523,8 +523,8 @@ The project includes automated deployment scripts:
 
 #### 1. **Clone and Navigate**
 ```bash
-git clone https://github.com/marcelohs402015/app-email-attendant.git
-cd app-email-attendant
+git clone https://github.com/marcelohs402015/portal-services.git
+cd portal-services
 ```
 
 #### 2. **Install Dependencies**
@@ -620,10 +620,10 @@ pkill -f node
 **Wrong Directory Error:**
 ```bash
 # Make sure you're in the correct project directory
-pwd  # Should show /path/to/project-email-attendant
+pwd  # Should show /path/to/portal-services
 
 # If you're in the wrong directory, navigate to the correct one
-cd /path/to/your/project-email-attendant
+cd /path/to/your/portal-services
 
 # Then try starting again
 npm run dev
@@ -709,7 +709,7 @@ cd appserver && npm run build && npm start && cd ..
 ## 🏗️ Project Structure
 
 ```
-project-email-attendant/
+portal-services/
 ├── client/                 # React Frontend (Separate Service)
 │   ├── src/
 │   │   ├── components/     # Reusable components

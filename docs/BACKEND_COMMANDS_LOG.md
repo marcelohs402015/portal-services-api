@@ -4,11 +4,11 @@
 
 ### **1. Navegação e Verificação**
 ```bash
-cd /home/mstech/projetos/app-email-attendant/appserver
+cd /home/mstech/projetos/portal-services/appserver
 pwd && ls -la
 ```
 **Resultado:** ✅ Diretório correto
-- **Path:** /home/mstech/projetos/app-email-attendant/appserver
+- **Path:** /home/mstech/projetos/portal-services/appserver
 - **Arquivos principais:** server.ts, package.json, dist/, node_modules/, .env
 
 ### **2. Instalação de Dependências**

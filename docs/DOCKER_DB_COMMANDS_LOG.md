@@ -4,7 +4,7 @@
 
 ### **1. Subir Banco PostgreSQL**
 ```bash
-cd /home/mstech/projetos/app-email-attendant/appserver
+cd /home/mstech/projetos/portal-services/appserver
 docker-compose up -d postgres_db
 ```
 **Resultado:** ✅ Container já estava rodando (Up 58 minutes)
