@@ -4,7 +4,7 @@ async function testConnection() {
   const client = new Client({
     host: 'localhost',
     port: 5432,
-    database: 'postalservices-db',
+    database: 'portalservicesdb',
     user: 'admin',
     password: 'admin',
     ssl: false

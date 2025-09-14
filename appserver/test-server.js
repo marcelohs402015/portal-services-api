@@ -8,7 +8,7 @@ const PORT = 3002;
 const dbConfig = {
   host: 'localhost',
   port: 5432,
-  database: 'postalservices-db',
+  database: 'portalservicesdb',
   user: 'admin',
   password: 'admin',
   ssl: false

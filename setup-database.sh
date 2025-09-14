@@ -3,7 +3,7 @@
 echo "🚀 Criando todas as tabelas no banco de dados..."
 
 # Conectar ao banco e executar comandos SQL
-docker exec portalservices_postgres psql -U admin -d postalservices-db << 'EOF'
+docker exec portalservices_postgres psql -U admin -d portalservicesdb << 'EOF'
 
 -- 1. Tabela de Emails
 CREATE TABLE IF NOT EXISTS emails (

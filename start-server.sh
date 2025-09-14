@@ -5,7 +5,7 @@ echo "🚀 Iniciando servidor Portal Services..."
 # Configurar variáveis de ambiente
 export DB_HOST=localhost
 export DB_PORT=5432
-export DB_NAME=postalservices-db
+export DB_NAME=portalservicesdb
 export DB_USER=admin
 export DB_PASSWORD=admin
 export DB_SSL=false

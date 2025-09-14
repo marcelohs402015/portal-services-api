@@ -1,5 +1,5 @@
 -- Script para criar todas as tabelas necessárias para o Postal Services
--- Execute: docker exec -i db-portalservices-postgress psql -U admin -d postalservices-db < create-tables.sql
+-- Execute: docker exec -i db-portalservices-postgress psql -U admin -d portalservicesdb < create-tables.sql
 
 -- Tabela de categorias
 CREATE TABLE IF NOT EXISTS categories (

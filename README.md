@@ -217,7 +217,7 @@ npm run install:all
 **Method 1 - Using root commands (Recommended):**
 ```bash
 # Make sure you're in the correct project directory
-cd /path/to/project-email-attendant
+cd /path/to/portal-services
 
 # Start both services automatically
 npm run dev

@@ -158,7 +158,7 @@ npm run typecheck     # TypeScript verification
 
 ### 🚀 Production-Ready Structure
 ```
-project-email-attendant/
+portal-services/
 ├── client/                 # React Frontend (Separate Service)
 ├── server/                 # Node.js Backend (Separate Service)  
 ├── build.sh               # Render.com build script
@@ -363,7 +363,7 @@ The project is **READY FOR DEPLOYMENT** on Render.com with complete full-stack a
 ```bash
 # Quick setup
 git clone [repo]
-cd project-email-attendant
+cd portal-services
 npm run install:all  # Install all dependencies
 npm run dev          # Start development servers
 ```

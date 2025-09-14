@@ -17,11 +17,11 @@ netstat -tlnp | grep 5432 || echo "Porta 5432 livre"
 
 echo ""
 echo "4. Testando conexão com PostgreSQL:"
-PGPASSWORD=admin psql -h localhost -p 5432 -U admin -d postalservices-db -c "SELECT 1;" 2>/dev/null && echo "✅ Conexão OK" || echo "❌ Erro na conexão"
+PGPASSWORD=admin psql -h localhost -p 5432 -U admin -d portalservicesdb -c "SELECT 1;" 2>/dev/null && echo "✅ Conexão OK" || echo "❌ Erro na conexão"
 
 echo ""
 echo "5. Verificando tabelas no banco:"
-PGPASSWORD=admin psql -h localhost -p 5432 -U admin -d postalservices-db -c "\dt" 2>/dev/null || echo "❌ Erro ao listar tabelas"
+PGPASSWORD=admin psql -h localhost -p 5432 -U admin -d portalservicesdb -c "\dt" 2>/dev/null || echo "❌ Erro ao listar tabelas"
 
 echo ""
 echo "6. Verificando processos Node.js:"

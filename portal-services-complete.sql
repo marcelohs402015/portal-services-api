@@ -1,7 +1,7 @@
 -- =====================================================
 -- PORTAL SERVICES - SCRIPT COMPLETO DE CRIAÇÃO
 -- =====================================================
--- Execute este script no DBeaver conectado ao banco postalservices-db
+-- Execute este script no DBeaver conectado ao banco portalservicesdb
 -- Usuário: admin | Senha: admin
 
 -- =====================================================
