@@ -12,7 +12,7 @@ function getDatabaseConfig() {
     return {
         host: process.env.DB_HOST || 'localhost',
         port: parseInt(process.env.DB_PORT || '5432'),
-        database: process.env.DB_NAME || 'postalservices-db',
+        database: process.env.DB_NAME || 'portalservicesdb',
         user: process.env.DB_USER || 'admin',
         password: process.env.DB_PASSWORD || 'admin',
         ssl: (process.env.DB_SSL || 'false') === 'true'

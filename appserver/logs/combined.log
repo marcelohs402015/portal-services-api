@@ -66,3 +66,32 @@
 {"ip":"::1","level":"info","message":"GET /api/stats/clients","service":"Server","timestamp":"2025-09-14T22:30:28.187Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
 {"ip":"::1","level":"info","message":"GET /api/stats/appointments","service":"Server","timestamp":"2025-09-14T22:30:28.203Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
 {"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-14T22:32:19.836Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-14T22:47:31.446Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-14T22:47:31.322Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-14T22:47:31.443Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-14T22:47:32.004Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-14T22:47:32.129Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-14T22:47:32.141Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-14T22:47:32.186Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-14T22:47:32.395Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-14T22:47:32.396Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-14T22:47:32.445Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-14T22:47:32.446Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-14T22:47:32.447Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-14T22:47:32.213Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-14T22:47:32.365Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-14T22:47:32.315Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-14T22:47:32.263Z"}
+{"ip":"::1","level":"info","message":"GET /health","service":"Server","timestamp":"2025-09-14T22:47:34.239Z","userAgent":"curl/8.5.0"}
+{"ip":"::1","level":"info","message":"GET /api/health","service":"Server","timestamp":"2025-09-14T22:48:50.202Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/stats/business","service":"Server","timestamp":"2025-09-14T22:48:50.702Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/categories","service":"Server","timestamp":"2025-09-14T22:48:50.941Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/stats/revenue/monthly","service":"Server","timestamp":"2025-09-14T22:48:50.958Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/stats/appointments","service":"Server","timestamp":"2025-09-14T22:48:51.076Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/stats/clients","service":"Server","timestamp":"2025-09-14T22:48:51.165Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/emails","service":"Server","timestamp":"2025-09-14T22:48:54.450Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/categories","service":"Server","timestamp":"2025-09-14T22:48:55.038Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /api/services","service":"Server","timestamp":"2025-09-14T22:48:56.186Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Getting all services","params":{},"service":"ServiceService","timestamp":"2025-09-14T22:48:56.216Z"}
+{"ip":"::1","level":"info","message":"GET /api/stats/business","service":"Server","timestamp":"2025-09-14T22:48:59.060Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-14T22:49:05.109Z"}
