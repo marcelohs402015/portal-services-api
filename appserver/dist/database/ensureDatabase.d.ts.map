@@ -1,1 +1,0 @@
-{"version":3,"file":"ensureDatabase.d.ts","sourceRoot":"","sources":["../../database/ensureDatabase.ts"],"names":[],"mappings":"AAMA,UAAU,cAAc;IACtB,IAAI,EAAE,MAAM,CAAC;IACb,QAAQ,EAAE,MAAM,CAAC;IACjB,IAAI,EAAE,MAAM,CAAC;IACb,IAAI,EAAE,MAAM,CAAC;IACb,GAAG,CAAC,EAAE,GAAG,CAAC;CACX;AAED,wBAAsB,oBAAoB,CACxC,YAAY,EAAE,MAAM,EACpB,MAAM,EAAE,cAAc,GACrB,OAAO,CAAC,IAAI,CAAC,CAkCf"}
