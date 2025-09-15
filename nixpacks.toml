@@ -3,16 +3,19 @@ nixPkgs = ["nodejs", "npm"]
 
 [phases.install]
 cmds = [
-  "npm ci",
-  "cd appserver && npm ci",
-  "cd ../appclient && npm ci --legacy-peer-deps"
+  "npm ci --silent",
+  "cd appserver && npm ci --silent",
+  "cd ../appclient && npm ci --legacy-peer-deps --silent"
 ]
 
 [phases.build]
 cmds = [
-  "cd appserver && npm run typecheck",
-  "cd ../appclient && npm run build"
+  "echo '🚀 Railway Build - Portal Services'",
+  "npm run typecheck",
+  "cd appserver && npm run railway:build",
+  "cd ../appclient && npm run railway:build",
+  "echo '✅ Railway build completed successfully'"
 ]
 
 [start]
-cmd = "cd appserver && npx tsx server.ts"
+cmd = "npm run railway:start"

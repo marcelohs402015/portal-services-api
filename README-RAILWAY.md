@@ -16,14 +16,20 @@ Baseado em [Railway.com](https://railway.com/new), a plataforma mais simples e c
 
 ## 🚀 **Deploy em 5 Minutos**
 
-### **1. Acesse Railway**
+### **1. Preparar Projeto**
+```bash
+# Execute o script de deploy
+./deploy-railway.sh
+```
+
+### **2. Acesse Railway**
 👉 **[https://railway.com/new](https://railway.com/new)**
 
-### **2. Conecte GitHub**
+### **3. Conecte GitHub**
 - **"Sign up with GitHub"**
 - **Autorize** o Railway
 
-### **3. Deploy Automático**
+### **4. Deploy Automático**
 - **"New Project"** → **"Deploy from GitHub repo"**
 - **Selecione**: `marcelohs402015/portal-services`
 - **Railway detecta automaticamente**:

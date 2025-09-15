@@ -453,27 +453,35 @@ The application includes **complete demonstration data**:
 - ✅ 25+ quotes in various statuses
 - ✅ 30+ distributed appointments
 
-## 🚀 Deployment on Render.com
+## 🚀 Deployment on Railway.com
 
 ### 🌐 Cloud Deployment Setup
 
-The application is **ready for deployment** on Render.com with automated build and deployment scripts.
+The application is **ready for deployment** on Railway.com with automated build and deployment scripts.
+
+**🎯 Railway é a solução PERFEITA!**
+- ✅ **Deploy em 1 clique** do GitHub
+- ✅ **PostgreSQL incluído** automaticamente
+- ✅ **Funciona IGUAL ao local**
+- ✅ **$5/mês** - Muito barato
+- ✅ **Zero configuração**
 
 #### Quick Deploy Steps:
 
-1. **Push to Git Repository**
+1. **Prepare Project**
 ```bash
-git add .
-git commit -m "Ready for deployment"
-git push origin main
+# Execute o script de deploy
+./deploy-railway.sh
 ```
 
-2. **Deploy on Render.com**
-   - Go to [Render.com](https://render.com) and sign in
-   - Click "New" → "Blueprint"
-   - Connect your Git repository
-   - Render will detect `render.yaml` automatically
-   - Review and deploy both services
+2. **Deploy on Railway.com**
+   - Go to [Railway.com](https://railway.com/new) and sign in
+   - Click "New Project" → "Deploy from GitHub repo"
+   - Select: `marcelohs402015/portal-services`
+   - Railway will detect automatically:
+     - ✅ Backend in `appserver/`
+     - ✅ Frontend in `appclient/`
+     - ✅ PostgreSQL (creates automatically)
 
 #### Environment Variables for Production:
 
