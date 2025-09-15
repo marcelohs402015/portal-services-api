@@ -464,10 +464,10 @@ The application is **ready for deployment** on various cloud platforms with auto
 **Backend Service:**
 - `NODE_ENV=production`
 - `PORT=10000`
-- `CLIENT_URL=https://your-frontend-url.onrender.com`
+- `CLIENT_URL=https://your-frontend-url.com`
 
 **Frontend Service:**
-- `REACT_APP_API_URL=https://your-backend-url.onrender.com`
+- `REACT_APP_API_URL=https://your-backend-url.com`
 
 ### 📝 Environment Configuration
 
@@ -485,7 +485,7 @@ REACT_APP_NAME=Email Attendant
 ```
 
 #### Production Environment
-The deployment uses environment variables set on Render.com platform for security and flexibility.
+The deployment uses environment variables set on your chosen cloud platform for security and flexibility.
 
 ### 🔧 Deployment Scripts
 
@@ -493,12 +493,10 @@ The project includes automated deployment scripts:
 
 - **`npm run build`** - Complete build process
 - **`start.sh`** - Production server startup
-- **`render.yaml`** - Render.com service configuration
 
 ### 📚 Complete Setup & Deployment Guides
 
 - **🏠 Local Development:** [LOCAL-SETUP-INSTRUCTIONS.md](LOCAL-SETUP-INSTRUCTIONS.md)
-- **🚀 Render.com Deployment:** [RENDER-DEPLOY-INSTRUCTIONS.md](RENDER-DEPLOY-INSTRUCTIONS.md)  
 - **📋 General Deployment:** [DEPLOY.md](DEPLOY.md)
 
 ## 🔧 Development Setup Guide
@@ -730,8 +728,7 @@ portal-services/
 │   ├── package.json        # Server dependencies
 │   ├── tsconfig.json       # TypeScript configuration
 │   └── .env.example        # Server environment template
-├── start.sh                # 🚀 Render.com start script
-├── render.yaml             # 🚀 Render.com configuration
+├── start.sh                # 🚀 Production start script
 ├── DEPLOY.md               # 📝 Complete deployment guide
 ├── package.json            # Root package.json with unified scripts
 └── README.md               # This file
@@ -796,125 +793,11 @@ portal-services/
 ## 🚀 Technology Stack & Features
 
 ### ✅ Ready for Production
-- **🌐 Render.com Deployment Ready** - Complete automation with build scripts
 - **🔄 Separated Services** - Independent client and server deployments  
 - **📦 Deploy Ready** - Support for various hosting platforms
 - **🔧 Environment Flexible** - Easy configuration for different environments
 - **📈 Scalable Architecture** - Microservices-ready structure
 
-## 🚀 **Deploy no Render - Guia Completo**
-
-### 📋 **Configuração Automática**
-
-O projeto está **100% configurado** para deploy automático no Render com:
-
-- ✅ **Backend**: Node.js otimizado
-- ✅ **Frontend**: React com build otimizado
-- ✅ **Database**: PostgreSQL gerenciado
-- ✅ **Deploy**: Automático via Blueprint
-
-### 🎯 **Deploy Rápido (3 passos)**
-
-#### **1. Execute o Script de Deploy**
-```bash
-# Deploy manual no Render
-```
-
-#### **2. Configure no Render**
-1. Acesse: https://dashboard.render.com
-2. Clique em "New +" → "Blueprint"
-3. Conecte seu repositório GitHub/GitLab
-4. O Render detectará automaticamente o `render.yaml`
-
-#### **3. Aguarde o Deploy**
-- ⏱️ Tempo estimado: 5-10 minutos
-- 📊 Acompanhe no dashboard do Render
-- 🔍 Verifique os logs se necessário
-
-### 🌐 **URLs de Produção**
-
-Após o deploy, suas URLs serão:
-- **Frontend**: https://portal-services-frontend.onrender.com
-- **Backend**: https://portal-services-backend.onrender.com
-- **Health Check**: https://portal-services-backend.onrender.com/health
-
-### 🐳 **Desenvolvimento Local**
-
-```bash
-# Backend
-cd appserver
-npm run dev
-
-# Frontend
-cd appclient
-npm start
-```
-
-### 📊 **Monitoramento**
-
-#### **Health Checks**
-- ✅ Backend: `/health` endpoint
-- ✅ Database: Health check automático
-- ✅ Frontend: Build status
-
-#### **Logs**
-- Render Dashboard → Services → Logs
-- Local: `npm run dev` logs
-
-### 🔐 **Segurança Configurada**
-
-- ✅ SSL automático
-- ✅ CORS configurado
-- ✅ Headers de segurança
-- ✅ Variáveis sensíveis protegidas
-
-### ⚠️ **Limitações Free Tier**
-
-- Serviços "dormem" após inatividade
-- Database limitado a 1GB
-- Build time: 5-10 minutos
-
-### 🚨 **Troubleshooting Rápido**
-
-#### **Se o deploy falhar:**
-1. Verificar logs no Render Dashboard
-2. Testar build local: `npm run build`
-3. Verificar configurações no `render.yaml`
-
-#### **Se o frontend não conectar:**
-1. Verificar REACT_APP_API_URL
-2. Confirmar CORS no backend
-3. Testar health check
-
-### 📁 **Arquivos de Configuração**
-
-```
-✅ render.yaml                    # Configuração principal do Render
-✅ render.yaml                   # Configuração do Render
-✅ deploy-render-optimized.md    # Guia completo
-✅ README-DEPLOY.md              # Documentação de deploy
-✅ DEPLOY-SUMMARY.md             # Resumo final
-
-✅ appserver/
-  ✅ healthcheck.js              # Health check
-  ✅ package.json                # Dependências e scripts
-
-✅ appclient/
-  ✅ static.json                 # Configuração do frontend
-  ✅ package.json                # Dependências e scripts
-```
-
-### 🎉 **Resultado Final**
-
-Com essa configuração, você terá:
-- ✅ **Backend** rodando otimizado no Render
-- ✅ **Frontend** otimizado e funcionando
-- ✅ **PostgreSQL** persistente e seguro
-- ✅ **Deploy automático** a cada push
-- ✅ **Monitoramento completo**
-- ✅ **Segurança configurada**
-
-**Status**: ✅ **PRONTO PARA DEPLOY!**
 
 ### 🎯 Key Technical Features
 - **TypeScript Full Stack** - Type safety across client and server
@@ -942,9 +825,6 @@ Com essa configuração, você terá:
 ## 📞 Support & Documentation
 
 ### 🚀 **Deploy e Configuração**
-- **🚀 Deploy no Render**: Seção completa acima com guia passo-a-passo
-- **📋 Script de Deploy**: `# Deploy manual no Render` - Deploy automatizado
-- **📖 Guia Completo**: [deploy-render-optimized.md](deploy-render-optimized.md)
 - **📝 Documentação de Deploy**: [README-DEPLOY.md](README-DEPLOY.md)
 - **📊 Resumo de Deploy**: [DEPLOY-SUMMARY.md](DEPLOY-SUMMARY.md)
 
@@ -987,8 +867,6 @@ This project is under the MSTECH system development license. See the `LICENSE` f
 
 *Developed with ❤️ for professionals who make a difference in people's daily lives*
 
-**✨ Now with PostgreSQL persistence and Render automation ready ✨**
-
-**🎉 Deploy automatizado no Render - Execute `# Deploy manual no Render` e tenha sua aplicação rodando em minutos!**
+**✨ Now with PostgreSQL persistence and ready for deployment ✨**
 
 </div>
