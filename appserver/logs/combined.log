@@ -486,3 +486,10 @@
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:37:33.121Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:37:36.851Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:37:36.962Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:38:32.142Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:38:33.075Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:38:33.109Z"}
+{"id":5,"level":"info","message":"Client created","name":"Joãochhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T09:39:10.957Z"}
+{"id":6,"level":"info","message":"Client created","name":"João Silva","service":"portal-services-server","timestamp":"2025-09-15T09:39:37.117Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:40:54.157Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:40:54.225Z"}
