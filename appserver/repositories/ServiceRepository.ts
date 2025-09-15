@@ -91,6 +91,36 @@ export class ServiceRepository extends BaseRepository<Service, CreateServiceDTO,
     }
   }
 
+  async findByName(name: string): Promise<ApiResponse<Service | null>> {
+    try {
+      const query = `
+        SELECT s.*, c.name as category_name, c.color as category_color
+        FROM services s
+        LEFT JOIN categories c ON s.category_id = c.id
+        WHERE s.name = $1
+      `;
+      const result = await this.db.query(query, [name]);
+      
+      if (result.rows.length === 0) {
+        return {
+          success: true,
+          data: null
+        };
+      }
+
+      return {
+        success: true,
+        data: this.mapRowToService(result.rows[0])
+      };
+    } catch (error) {
+      this.logger.error('Error finding service by name:', error);
+      return {
+        success: false,
+        error: (error as Error).message
+      };
+    }
+  }
+
   async findActive(): Promise<ApiResponse<Service[]>> {
     try {
       const query = `

@@ -90,10 +90,8 @@ export class CategoryService {
 
       // Se não foi especificado sort_order, pegar o próximo
       if (!validatedData.sort_order) {
-        const nextOrderResult = await this.repository.getNextSortOrder();
-        if (nextOrderResult.success) {
-          validatedData.sort_order = nextOrderResult.data;
-        }
+        const nextOrder = await this.repository.getNextSortOrder();
+        validatedData.sort_order = nextOrder;
       }
 
       return await this.repository.create(validatedData);
@@ -232,7 +230,18 @@ export class CategoryService {
         }
       }
 
-      return await this.repository.updateSortOrder(categoryIds);
+      // Atualizar sort_order para cada categoria
+      const results = [];
+      for (let i = 0; i < categoryIds.length; i++) {
+        const result = await this.repository.updateSortOrder(categoryIds[i], i + 1);
+        results.push(result);
+      }
+      
+      return {
+        success: true,
+        data: results.every(r => r.success),
+        message: 'Categorias reordenadas com sucesso'
+      };
     } catch (error) {
       this.logger.error('Error updating category order:', error);
       return {
