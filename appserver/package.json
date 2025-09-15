@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch server.ts",
     "db:setup": "tsx scripts/db-setup.ts",
-    "build": "tsc && echo 'Build completed successfully' && ls -la dist/",
+    "build": "tsc -p tsconfig.production.json && echo 'Build completed successfully' && ls -la dist/",
+    "build:dev": "tsc && echo 'Build completed successfully' && ls -la dist/",
     "build:clean": "rm -rf dist && npm run build",
     "build:verify": "npm run build && node -e \"console.log('Build verification: OK')\" && ls -la dist/",
     "start": "node dist/server.js",
