@@ -1,4 +1,4 @@
-# Configuração de Banco de Dados para Vercel
+# Configuração de Banco de Dados para Render
 
 ## Opções de Banco PostgreSQL
 
@@ -10,7 +10,7 @@
   1. Criar conta no Neon
   2. Criar novo projeto
   3. Copiar connection string
-  4. Adicionar no Vercel como `DATABASE_URL`
+  4. Adicionar no Render como `DATABASE_URL`
 
 ### 2. **Supabase (Gratuito)**
 - **URL**: [supabase.com](https://supabase.com)
@@ -20,7 +20,7 @@
   1. Criar projeto no Supabase
   2. Ir em Settings → Database
   3. Copiar connection string
-  4. Adicionar no Vercel como `DATABASE_URL`
+  4. Adicionar no Render como `DATABASE_URL`
 
 ### 3. **Railway (Gratuito)**
 - **URL**: [railway.app](https://railway.app)
@@ -30,7 +30,7 @@
   1. Conectar GitHub no Railway
   2. Deploy PostgreSQL template
   3. Copiar connection string
-  4. Adicionar no Vercel como `DATABASE_URL`
+  4. Adicionar no Render como `DATABASE_URL`
 
 ### 4. **PlanetScale (MySQL - Alternativa)**
 - **URL**: [planetscale.com](https://planetscale.com)
@@ -65,8 +65,8 @@ APP_VERSION=2.0.0
 FEATURES=email-management,service-management,quotations
 
 # CORS
-CORS_ORIGIN=https://your-frontend-domain.vercel.app
-CLIENT_URL=https://your-frontend-domain.vercel.app
+CORS_ORIGIN=https://your-frontend-domain.onrender.com
+CLIENT_URL=https://your-frontend-domain.onrender.com
 
 # Security
 JWT_SECRET=your-super-secret-jwt-key

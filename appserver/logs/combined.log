@@ -425,3 +425,64 @@
 {"level":"info","message":"Server started","port":3001,"service":"portal-services-server","timestamp":"2025-09-15T08:42:17.424Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T08:42:17.520Z"}
 {"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T08:46:44.375Z"}
+{"level":"info","message":"Server started","port":3001,"service":"portal-services-server","timestamp":"2025-09-15T08:58:27.828Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T08:58:27.919Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T09:00:53.423Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:04:08.092Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:04:08.186Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T09:04:20.044Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:05:32.085Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:05:32.141Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:11:44.717Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:11:52.536Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:11:52.678Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:12:04.733Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:12:09.967Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:12:10.126Z"}
+{"id":4,"level":"info","message":"Email created","service":"portal-services-server","subject":"Assunto do Email","timestamp":"2025-09-15T09:12:14.513Z"}
+{"id":5,"level":"info","message":"Email created","service":"portal-services-server","subject":"Assunto do Email","timestamp":"2025-09-15T09:13:16.197Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:15:45.857Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:15:50.090Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:15:50.192Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:15:57.883Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:16:00.421Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:16:00.546Z"}
+{"error":"duplicate key value violates unique constraint \"categories_name_key\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-15T09:18:42.005Z"}
+{"id":7,"level":"info","message":"Category created","name":"Eletricista2","service":"portal-services-server","timestamp":"2025-09-15T09:18:50.985Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:19:44.159Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:19:49.652Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:19:49.832Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:20:34.296Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:20:36.724Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:20:36.786Z"}
+{"id":"bc93be05-f361-40d1-92b4-5afae81766bf","level":"info","message":"Service created","name":"Instalação de Tomada","service":"portal-services-server","timestamp":"2025-09-15T09:21:37.648Z"}
+{"client_name":"João Silva","id":"b60617e0-dc36-446d-98b7-47eecc27cabf","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-15T09:21:42.725Z"}
+{"client_name":"João Silva","id":"0fc40c47-f6e3-434b-a574-c91e0e54125c","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-15T09:21:56.328Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:22:43.369Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:22:44.930Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:22:44.944Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:22:45.030Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:22:51.781Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:22:51.869Z"}
+{"error":"duplicate key value violates unique constraint \"emails_gmail_id_key\"","level":"error","message":"Error creating email","service":"portal-services-server","timestamp":"2025-09-15T09:24:05.278Z"}
+{"id":7,"level":"info","message":"Email created","service":"portal-services-server","subject":"Assunto do Email","timestamp":"2025-09-15T09:24:09.941Z"}
+{"client_name":"João da Silva","id":"7cdbe8aa-f17f-4c9b-994f-cc68b54a51ad","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-15T09:24:16.091Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:28:41.270Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:28:43.584Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:28:43.823Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:28:47.353Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:28:49.797Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:28:49.848Z"}
+{"error":"column \"id\" is of type integer but expression is of type uuid","level":"error","message":"Error creating client","service":"portal-services-server","timestamp":"2025-09-15T09:28:51.146Z"}
+{"error":"column \"id\" is of type integer but expression is of type uuid","level":"error","message":"Error creating client","service":"portal-services-server","timestamp":"2025-09-15T09:31:34.412Z"}
+{"error":"column \"id\" is of type integer but expression is of type uuid","level":"error","message":"Error creating client","service":"portal-services-server","timestamp":"2025-09-15T09:32:07.043Z"}
+{"error":"column \"id\" is of type integer but expression is of type uuid","level":"error","message":"Error creating client","service":"portal-services-server","timestamp":"2025-09-15T09:32:36.378Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:33:31.273Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:33:35.765Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:33:35.939Z"}
+{"id":2,"level":"info","message":"Client created","name":"Joãochhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T09:36:02.636Z"}
+{"id":3,"level":"info","message":"Client created","name":"Joãochhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T09:36:08.086Z"}
+{"id":4,"level":"info","message":"Client created","name":"Joãochhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T09:36:13.223Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T09:37:33.121Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:37:36.851Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:37:36.962Z"}
