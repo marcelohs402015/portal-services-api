@@ -9,14 +9,16 @@ services:
     name: portal-services-api
     env: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/server.js
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
+      - key: APP_VERSION
+        value: "2.0.0"
+      - key: FEATURES
+        value: "email-management,service-management,quotations"
       - key: DB_HOST
         fromDatabase:
           name: portalservices-db
@@ -41,3 +43,5 @@ services:
         fromDatabase:
           name: portalservices-db
           property: connectionString
+      - key: DB_SSL
+        value: "true"

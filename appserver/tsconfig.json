@@ -14,7 +14,8 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "allowImportingTsExtensions": false
+    "allowImportingTsExtensions": false,
+    "allowJs": true
   },
   "include": [
     "**/*.ts"
