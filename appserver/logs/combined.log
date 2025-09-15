@@ -501,3 +501,9 @@
 {"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T09:43:03.500Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T10:55:07.802Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T10:55:07.903Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T12:09:22.707Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T12:09:45.720Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T12:09:45.823Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T12:17:20.856Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T12:17:20.957Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T12:18:37.998Z"}
