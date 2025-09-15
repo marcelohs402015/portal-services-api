@@ -19,35 +19,45 @@ Certifique-se de que seu código está no GitHub com os seguintes arquivos:
 ### 2. Conectar ao Render
 
 1. Acesse [render.com](https://render.com) e faça login
-2. Clique em **"New +"** → **"Blueprint"**
+2. Clique em **"New +"** → **"Web Service"**
 3. Conecte seu repositório GitHub
 4. Selecione o repositório `portal-services`
 
-### 3. Configuração Automática
+### 3. Configuração do Web Service
 
 O Render irá detectar automaticamente o arquivo `render.yaml` e configurar:
-- ✅ **Database PostgreSQL** (plano gratuito)
 - ✅ **Web Service** (plano gratuito)
-- ✅ **Variáveis de ambiente** (conectadas ao banco)
 - ✅ **Build e Start commands**
+- ✅ **Variáveis de ambiente básicas**
 
-### 4. Variáveis de Ambiente Configuradas
+### 4. Configurar Database Separadamente
 
-O `render.yaml` já configura automaticamente:
+1. No Dashboard do Render, clique em **"New +"** → **"PostgreSQL"**
+2. Configure:
+   - **Name**: `portalservices-db`
+   - **Database**: `portalservicesdb`
+   - **User**: `admin`
+   - **Plan**: Free
+3. Após criar, copie a **Connection String** (DATABASE_URL)
 
-```yaml
-# Variáveis do Sistema
+### 5. Configurar Variáveis de Ambiente
+
+No Dashboard do Web Service, vá em **"Environment"** e adicione:
+
+```bash
+# Variáveis do Sistema (já configuradas pelo render.yaml)
 NODE_ENV=production
 APP_VERSION=2.0.0
 FEATURES=email-management,service-management,quotations
-
-# Variáveis do Banco (conectadas automaticamente)
-DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
-DATABASE_URL (connection string completa)
 DB_SSL=true
+
+# Variável do Banco (configure manualmente)
+DATABASE_URL=postgresql://admin:senha@host:port/portalservicesdb
 ```
 
-### 5. Processo de Deploy
+**Importante**: Substitua a `DATABASE_URL` pela connection string real do seu banco PostgreSQL criado no passo 4.
+
+### 6. Processo de Deploy
 
 O Render executará automaticamente:
 
@@ -60,7 +70,7 @@ npm run build            # Compila TypeScript
 node dist/server.js      # Inicia o servidor
 ```
 
-### 6. Verificação do Deploy
+### 7. Verificação do Deploy
 
 Após o deploy, verifique:
 
