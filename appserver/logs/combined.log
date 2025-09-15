@@ -422,3 +422,6 @@
 {"ip":"::1","level":"info","message":"GET /api/clients","service":"Server","timestamp":"2025-09-15T08:17:53.860Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
 {"level":"info","message":"Getting all clients","params":{},"service":"ClientService","timestamp":"2025-09-15T08:17:53.861Z"}
 {"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T08:23:13.282Z"}
+{"level":"info","message":"Server started","port":3001,"service":"portal-services-server","timestamp":"2025-09-15T08:42:17.424Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T08:42:17.520Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T08:46:44.375Z"}

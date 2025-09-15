@@ -96,9 +96,15 @@ REACT_APP_API_URL=https://portal-services-backend.onrender.com
 ```json
 {
   "start": "cd appserver && npm start",
-  "dev": "./start-dev.sh"
+  "dev": "./start-dev.sh",
+  "server:dev": "cd appserver && npm run dev"
 }
 ```
+
+### **Server Principal**
+- **Arquivo**: `appserver/server.ts`
+- **Runtime**: `tsx` (TypeScript direto)
+- **Porta**: 3001 (desenvolvimento) / 10000 (produção)
 
 ### **Setup Commands**
 ```json

@@ -39,9 +39,9 @@ services:
       echo "🔍 Verificando TypeScript..."
       npm run typecheck
       
-      # Build do backend
-      echo "🔨 Compilando backend..."
-      npm run build
+      # Criar diretório de logs se não existir
+      echo "📁 Criando diretório de logs..."
+      mkdir -p logs
       
       echo "✅ Build do backend concluído!"
 
@@ -52,7 +52,7 @@ services:
       echo "📊 Versão Node: $(node --version)"
       echo "📊 Versão NPM: $(npm --version)"
       echo "🌐 Iniciando servidor na porta $PORT..."
-      npm start
+      npx tsx server.ts
     
     # Health check endpoint
     healthCheckPath: /health
