@@ -1,0 +1,87 @@
+# Portal Services API - Render Configuration
+# Este arquivo configura o deploy automático no Render
+
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: portal-services-db
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile.db
+    envVars:
+      - key: POSTGRES_USER
+        value: admin
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: portalservicesdb
+      - key: POSTGRES_INITDB_ARGS
+        value: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    healthCheckPath: /health
+    autoDeploy: true
+
+  # Portal Services API
+  - type: web
+    name: portal-services-api
+    runtime: node
+    plan: starter
+    buildCommand: cd appserver && npm install && npm run build && npm run init-db
+    startCommand: cd appserver && npm start
+    envVars:
+      # Server Configuration
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: APP_VERSION
+        value: 2.0.0
+      - key: FEATURES
+        value: email-management,service-management,quotations
+      
+      # Database Configuration (Render PostgreSQL)
+      # These will be automatically set by Render when connecting to the database service
+      - key: DB_HOST
+        value: ${DB_HOST}
+      - key: DB_PORT
+        value: ${DB_PORT}
+      - key: DB_NAME
+        value: ${DB_NAME}
+      - key: DB_USER
+        value: ${DB_USER}
+      - key: DB_PASSWORD
+        value: ${DB_PASSWORD}
+      - key: DB_SSL
+        value: "true"
+      
+      # API Configuration
+      - key: API_URL
+        value: https://portal-services-api.onrender.com
+      - key: API_BASE_URL
+        value: https://portal-services-api.onrender.com
+      - key: FRONTEND_URL
+        value: https://portal-services-api.onrender.com
+      
+      # Logging
+      - key: LOG_LEVEL
+        value: info
+      
+      # Security (Change these in production)
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+      
+      # Application Settings
+      - key: MAX_REQUEST_SIZE
+        value: 10mb
+      - key: REQUEST_TIMEOUT
+        value: 30000
+      
+      # Health Check Configuration
+      - key: HEALTH_CHECK_TIMEOUT
+        value: 5000
+      - key: HEALTH_CHECK_INTERVAL
+        value: 30000
+    healthCheckPath: /health
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true

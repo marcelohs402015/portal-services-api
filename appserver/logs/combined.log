@@ -512,3 +512,31 @@
 {"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T12:51:19.150Z"}
 {"environment":"production","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T16:11:30.202Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T16:11:30.358Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:26:55.279Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:26:56.277Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing emails","service":"portal-services-server","timestamp":"2025-09-15T16:27:00.802Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:27:04.687Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:32:51.759Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:32:51.850Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error listing emails","service":"portal-services-server","timestamp":"2025-09-15T16:33:14.507Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:33:15.113Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:34:21.626Z"}
+{"error":"getaddrinfo EAI_AGAIN db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:34:21.656Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing emails","service":"portal-services-server","timestamp":"2025-09-15T16:34:25.458Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:34:26.474Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:38:56.930Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error getting business stats","service":"portal-services-server","timestamp":"2025-09-15T16:39:28.639Z"}
+{"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:39:28.648Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-15T16:44:04.671Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T16:46:52.864Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T16:46:53.060Z"}
+{"client_name":"João Silva","id":"11c42ec2-aa6d-4aea-bc0f-7882ad27fee3","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-15T16:47:32.413Z"}
+{"id":4,"level":"info","message":"Email created","service":"portal-services-server","subject":"Assunto do Email","timestamp":"2025-09-15T16:47:52.144Z"}
+{"id":5,"level":"info","message":"Email created","service":"portal-services-server","subject":"Assunto do Email","timestamp":"2025-09-15T16:47:57.276Z"}
+{"error":"duplicate key value violates unique constraint \"emails_gmail_id_key\"","level":"error","message":"Error creating email","service":"portal-services-server","timestamp":"2025-09-15T16:52:49.575Z"}
+{"id":"71538b74-ff77-40e5-9f3d-e9b07d16f780","level":"info","message":"Service created","name":"Nome dohhh Serviço","service":"portal-services-server","timestamp":"2025-09-15T16:53:04.888Z"}
+{"id":"207569d5-b1df-40bc-bafe-fa7d52889ef4","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-15T16:53:22.660Z"}
+{"id":5,"level":"info","message":"Client created","name":"Joãochbbnnhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T16:54:20.893Z"}
+{"id":6,"level":"info","message":"Client created","name":"Joãochbbnnhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T16:54:22.221Z"}
+{"id":7,"level":"info","message":"Client created","name":"Joãochbbnnhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T16:54:23.119Z"}
+{"id":8,"level":"info","message":"Client created","name":"JoMARCELOHERNANDESSILVAa","service":"portal-services-server","timestamp":"2025-09-15T16:54:49.655Z"}

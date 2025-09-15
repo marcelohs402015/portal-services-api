@@ -1,4 +1,4 @@
-# Portal Services API - Backend Only Dockerfile
+# Portal Services API - Development Dockerfile
 FROM node:18-alpine
 
 # Set working directory
@@ -26,5 +26,5 @@ EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD node healthcheck.js
 
-# Start the application with tsx
-CMD ["npx", "tsx", "server.ts"]
+# Start the application with tsx in watch mode for development
+CMD ["npx", "tsx", "watch", "server.ts"]

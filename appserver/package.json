@@ -23,6 +23,7 @@
     "start:simple": "DB_HOST=localhost DB_PORT=5432 DB_NAME=portalservicesdb DB_USER=admin DB_PASSWORD=admin PORT=3001 tsx server-simple.ts",
     "typecheck": "tsc --noEmit",
     "setup": "tsx setup.ts",
+    "init-db": "node scripts/init-database.js",
     "postbuild": "echo 'Post-build: Checking compiled files' && ls -la dist/ && echo 'Build verification completed'",
     "prestart": "echo 'Starting server...' && node -e \"console.log('Node version:', process.version)\"",
     "healthcheck": "node healthcheck.js",
