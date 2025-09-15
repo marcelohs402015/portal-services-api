@@ -1,0 +1,100 @@
+# =====================================================
+# Portal Services - Render.com Blueprint SIMPLIFICADO
+# Versão compatível com planos atuais do Render
+# =====================================================
+
+databases:
+  - name: portal-services-db
+    databaseName: portalservicesdb
+    user: admin
+    plan: free
+
+services:
+  # =====================================================
+  # Backend Service - API Server
+  # =====================================================
+  - type: web
+    name: portal-services-backend
+    runtime: node
+    plan: free
+    
+    buildCommand: |
+      echo "🚀 Portal Services - Build Backend"
+      npm ci --silent
+      cd appserver
+      npm ci --silent --production=false
+      npm run typecheck
+      mkdir -p logs
+    
+    startCommand: |
+      echo "🚀 Iniciando Portal Services Backend..."
+      cd appserver
+      npx tsx server.ts
+    
+    healthCheckPath: /health
+    autoDeploy: true
+    branch: main
+    
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portal-services-db
+          property: connectionString
+      - key: DB_SSL
+        value: "true"
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+
+  # =====================================================
+  # Frontend Service - React Application
+  # =====================================================
+  - type: web
+    name: portal-services-frontend
+    runtime: static
+    plan: free
+    
+    buildCommand: |
+      echo "🚀 Portal Services - Build Frontend"
+      npm ci --silent
+      cd appclient
+      npm ci --legacy-peer-deps --silent
+      npm run typecheck
+      npm run build
+    
+    rootDir: ./appclient/build
+    autoDeploy: true
+    branch: main
+    
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://portal-services-backend.onrender.com
+      - key: REACT_APP_ENVIRONMENT
+        value: production
+      - key: GENERATE_SOURCEMAP
+        value: "false"
+      - key: CI
+        value: "false"
