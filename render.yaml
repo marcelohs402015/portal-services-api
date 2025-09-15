@@ -116,11 +116,9 @@ services:
   # =====================================================
   # Frontend Service - React Application
   # =====================================================
-  - type: web
+  - type: static
     name: portal-services-frontend
-    runtime: static
     plan: starter
-    region: oregon
     
     # Comandos de build baseados no package.json
     buildCommand: |
@@ -170,7 +168,7 @@ services:
   - type: cron
     name: portal-services-db-setup
     plan: starter
-    region: oregon
+    runtime: node
     
     # Comando para setup do banco
     buildCommand: |
@@ -205,7 +203,7 @@ services:
   - type: cron
     name: portal-services-health-check
     plan: starter
-    region: oregon
+    runtime: node
     
     # Comando para health check
     buildCommand: |
