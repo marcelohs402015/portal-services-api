@@ -1,37 +1,40 @@
-# Dependencies
-node_modules
+# Portal Services API - Docker Ignore File
+
+# Node.js
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-dist
-build
+dist/
+build/
 *.tsbuildinfo
 
 # Environment files
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.development
+.env.test
+.env.production
+docker.env
 
 # Logs
-logs
+logs/
 *.log
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
 *.lcov
 
 # nyc test coverage
-.nyc_output
+.nyc_output/
 
 # Dependency directories
 jspm_packages/
@@ -41,12 +44,6 @@ jspm_packages/
 
 # Optional eslint cache
 .eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -61,25 +58,28 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# Next.js build output
+# next.js build output
 .next
 
-# Nuxt.js build / generate output
+# nuxt.js build output
 .nuxt
 
-# Gatsby files
-.cache/
-public
+# vuepress build output
+.vuepress/dist
 
-# Storybook build outputs
-.out
-.storybook-out
+# Serverless directories
+.serverless
 
-# Temporary folders
-tmp/
-temp/
+# FuseBox cache
+.fusebox/
 
-# Editor directories and files
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# IDE files
 .vscode/
 .idea/
 *.swp
@@ -96,13 +96,18 @@ ehthumbs.db
 Thumbs.db
 
 # Git
-.git
+.git/
 .gitignore
 
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
 # Documentation
-README.md
-*.md
+README*.md
 docs/
+*.md
 
 # Test files
 test/
@@ -113,10 +118,24 @@ __tests__/
 *.spec.js
 *.spec.ts
 
+# Database files
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
 # Backup files
 *.bak
 *.backup
 
-# Development files
-docker-compose.yml
-Dockerfile.dev
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Package files
+*.tar.gz
+*.zip
+
+# Local development files
+pgdata/

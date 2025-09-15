@@ -321,7 +321,7 @@ END
 $$;
 
 -- Conceder permissões ao usuário da aplicação
-GRANT CONNECT ON DATABASE portal_services_api TO portal_services_app;
+GRANT CONNECT ON DATABASE portalservicesdb TO portal_services_app;
 GRANT USAGE ON SCHEMA public TO portal_services_app;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO portal_services_app;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO portal_services_app;

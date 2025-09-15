@@ -1,0 +1,139 @@
+nohup: ignoring input
+[0;34m[2025-09-15 12:36:45][0m 🚀 Iniciando Portal Services API com Docker nativo...
+[0;34m[2025-09-15 12:36:45][0m 🛑 Parando containers existentes...
+[0;34m[2025-09-15 12:36:45][0m 🌐 Criando rede...
+[0;34m[2025-09-15 12:36:45][0m 📊 Iniciando banco de dados PostgreSQL...
+Unable to find image 'postgres:17-alpine' locally
+17-alpine: Pulling from library/postgres
+9824c27679d3: Pulling fs layer
+52b431e71196: Pulling fs layer
+fc0ade3a132d: Pulling fs layer
+71cd10be37f4: Pulling fs layer
+fdb0f042d918: Pulling fs layer
+55a58bb42c06: Pulling fs layer
+76416bd8113e: Pulling fs layer
+8914ca6edcdf: Pulling fs layer
+a693e6a145c7: Pulling fs layer
+f5f8ead99dae: Pulling fs layer
+71cd10be37f4: Waiting
+fdb0f042d918: Waiting
+55a58bb42c06: Waiting
+a693e6a145c7: Waiting
+76416bd8113e: Waiting
+8914ca6edcdf: Waiting
+f5f8ead99dae: Waiting
+52b431e71196: Verifying Checksum
+52b431e71196: Download complete
+9824c27679d3: Verifying Checksum
+9824c27679d3: Download complete
+fc0ade3a132d: Verifying Checksum
+fc0ade3a132d: Download complete
+71cd10be37f4: Download complete
+55a58bb42c06: Download complete
+9824c27679d3: Pull complete
+52b431e71196: Pull complete
+fc0ade3a132d: Pull complete
+76416bd8113e: Verifying Checksum
+76416bd8113e: Download complete
+71cd10be37f4: Pull complete
+8914ca6edcdf: Verifying Checksum
+8914ca6edcdf: Download complete
+a693e6a145c7: Download complete
+fdb0f042d918: Download complete
+f5f8ead99dae: Verifying Checksum
+f5f8ead99dae: Download complete
+fdb0f042d918: Pull complete
+55a58bb42c06: Pull complete
+76416bd8113e: Pull complete
+8914ca6edcdf: Pull complete
+a693e6a145c7: Pull complete
+f5f8ead99dae: Pull complete
+Digest: sha256:d5f196a551b5cef1c70853c6dd588f456d16ca4ea733e3f31c75bc1ae2f65f3f
+Status: Downloaded newer image for postgres:17-alpine
+a9b42eab43ae314bb074f434afc7c8429e0e8ded2fdb6fbf3bf08759611047b7
+[0;34m[2025-09-15 12:37:11][0m ⏳ Aguardando banco de dados ficar pronto...
+..........................
+[0;32m[SUCCESS][0m Banco de dados está pronto!
+[0;34m[2025-09-15 12:38:06][0m 🔨 Construindo imagem da API...
+failed to fetch metadata: fork/exec /usr/local/lib/docker/cli-plugins/docker-buildx: no such file or directory
+
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  651.8kB
+Step 1/21 : FROM node:18-alpine AS builder
+ ---> ee77c6cd7c18
+Step 2/21 : WORKDIR /app
+ ---> Running in afb54c8714b2
+ ---> Removed intermediate container afb54c8714b2
+ ---> 9f47debfc742
+Step 3/21 : RUN apk add --no-cache python3 make g++
+ ---> Running in d90afa66d74d
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/community/x86_64/APKINDEX.tar.gz
+(1/29) Installing libstdc++-dev (14.2.0-r4)
+(2/29) Installing jansson (2.14-r4)
+(3/29) Installing zstd-libs (1.5.6-r2)
+(4/29) Installing binutils (2.43.1-r3)
+(5/29) Installing libgomp (14.2.0-r4)
+(6/29) Installing libatomic (14.2.0-r4)
+(7/29) Installing gmp (6.3.0-r2)
+(8/29) Installing isl26 (0.26-r1)
+(9/29) Installing mpfr4 (4.2.1-r0)
+(10/29) Installing mpc1 (1.3.1-r1)
+(11/29) Installing gcc (14.2.0-r4)
+(12/29) Installing musl-dev (1.2.5-r9)
+(13/29) Installing g++ (14.2.0-r4)
+(14/29) Installing make (4.4.1-r2)
+(15/29) Installing libbz2 (1.0.8-r6)
+(16/29) Installing libexpat (2.7.0-r0)
+(17/29) Installing libffi (3.4.7-r0)
+(18/29) Installing gdbm (1.24-r0)
+(19/29) Installing xz-libs (5.6.3-r1)
+(20/29) Installing mpdecimal (4.0.0-r0)
+(21/29) Installing ncurses-terminfo-base (6.5_p20241006-r3)
+(22/29) Installing libncursesw (6.5_p20241006-r3)
+(23/29) Installing libpanelw (6.5_p20241006-r3)
+(24/29) Installing readline (8.2.13-r0)
+(25/29) Installing sqlite-libs (3.48.0-r3)
+(26/29) Installing python3 (3.12.11-r0)
+(27/29) Installing python3-pycache-pyc0 (3.12.11-r0)
+(28/29) Installing pyc (3.12.11-r0)
+(29/29) Installing python3-pyc (3.12.11-r0)
+Executing busybox-1.37.0-r12.trigger
+OK: 269 MiB in 46 packages
+ ---> Removed intermediate container d90afa66d74d
+ ---> fe12245521ed
+Step 4/21 : COPY package*.json ./
+ ---> ca715630339d
+Step 5/21 : COPY tsconfig*.json ./
+ ---> 6977dbbbce5b
+Step 6/21 : RUN npm ci --only=production && npm cache clean --force
+ ---> Running in 7656b33afe90
+[91mnpm warn config only Use `--omit=dev` to omit dev dependencies from the install.
+[0m
+added 197 packages, and audited 198 packages in 40s
+
+25 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+[91mnpm notice
+npm notice New major version of npm available! 10.8.2 -> 11.6.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.0
+npm notice To update run: npm install -g npm@11.6.0
+npm notice
+[0m[91mnpm warn using --force Recommended protections disabled.
+[0m ---> Removed intermediate container 7656b33afe90
+ ---> 2dd10c6ea2cf
+Step 7/21 : COPY . .
+ ---> f073a213bba6
+Step 8/21 : RUN npm run build
+ ---> Running in a06d83c93f93
+
+> portal-services-server@2.0.0 build
+> tsc -p tsconfig.production.json && echo 'Build completed successfully' && ls -la dist/
+
+[91msh: tsc: not found
+[0mThe command '/bin/sh -c npm run build' returned a non-zero code: 127

@@ -7,8 +7,8 @@
 
 const http = require('http');
 
-const PORT = process.env.PORT || 10000;
-const HOST = 'localhost';
+const PORT = process.env.PORT || 3001;
+const HOST = process.env.HOST || 'localhost';
 const HEALTH_PATH = '/health';
 const TIMEOUT = 5000;
 
