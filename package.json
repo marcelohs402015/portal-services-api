@@ -27,7 +27,12 @@
     "typecheck": "cd appserver && npm run typecheck",
     "test": "cd appserver && npm test",
     "setup": "cd appserver && npm run setup",
-    "deploy:prepare": "npm run typecheck && npm run build"
+    "deploy:prepare": "npm run typecheck && npm run build",
+    "validate:blueprint": "node validate-blueprint.js",
+    "deploy:check": "npm run validate:blueprint && npm run typecheck && npm run build",
+    "blueprint:validate": "./deploy-blueprint.sh validate",
+    "blueprint:prepare": "./deploy-blueprint.sh prepare",
+    "blueprint:deploy": "./deploy-blueprint.sh deploy"
   },
   "keywords": [
     "portal-services",
