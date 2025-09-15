@@ -493,3 +493,9 @@
 {"id":6,"level":"info","message":"Client created","name":"João Silva","service":"portal-services-server","timestamp":"2025-09-15T09:39:37.117Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T09:40:54.157Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T09:40:54.225Z"}
+{"id":8,"level":"info","message":"Category created","name":"tttt","service":"portal-services-server","timestamp":"2025-09-15T09:42:05.604Z"}
+{"id":"c28fe789-6fe8-49fc-bf63-bcd56c996bcd","level":"info","message":"Service created","name":"yyyy","service":"portal-services-server","timestamp":"2025-09-15T09:42:19.099Z"}
+{"client_name":"Joãochhhssss Silva","id":"bd6c28ba-c698-45ee-8eb5-3e0c7c9eceef","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-15T09:42:31.035Z"}
+{"id":7,"level":"info","message":"Client created","name":"yyyy","service":"portal-services-server","timestamp":"2025-09-15T09:42:46.536Z"}
+{"client_name":"Joãochhhssss Silva","id":"537ec4b3-8c9e-44e0-9127-b6a2a850e9b6","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-15T09:42:55.685Z"}
+{"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T09:43:03.500Z"}
