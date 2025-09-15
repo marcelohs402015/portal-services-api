@@ -1,6 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": ".",
     "strict": false,
     "noImplicitAny": false,
     "noImplicitReturns": false,
@@ -10,6 +15,29 @@
     "strictBindCallApply": false,
     "strictPropertyInitialization": false,
     "noImplicitOverride": false,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "sourceMap": false,
+    "allowJs": true
+  },
+  "include": [
+    "server.ts",
+    "types/**/*.ts",
+    "database/**/*.ts",
+    "repositories/**/*.ts",
+    "services/**/*.ts",
+    "routes/**/*.ts",
+    "shared/**/*.ts",
+    "controllers/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "*.bak",
+    "**/*.bak"
+  ]
 }

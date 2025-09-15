@@ -10,8 +10,8 @@ services:
     name: portal-services-api
     runtime: node
     plan: free
-    buildCommand: cd appserver && npm ci --include=dev && npm run build
-    startCommand: cd appserver && npm start
+    buildCommand: cd appserver && npm ci
+    startCommand: cd appserver && npx tsx server.ts
     healthCheckPath: /health
     autoDeploy: true
     envVars:
