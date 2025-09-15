@@ -43,6 +43,8 @@ services:
         fromDatabase:
           name: portal-services-db
           property: connectionString
+      - key: DB_SSL
+        value: "true"
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGIN
