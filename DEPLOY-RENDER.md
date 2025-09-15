@@ -1,228 +1,194 @@
-# 🚀 Deploy no Render.com - Portal Services
+# 🚀 Portal Services - Deploy no Render.com
 
-Este guia explica como fazer o deploy da aplicação Portal Services no Render.com usando o Blueprint.
+## 📋 Visão Geral
 
-## 📋 Pré-requisitos
+Este guia explica como fazer deploy completo do **Portal Services** no Render.com usando o Blueprint (render.yaml).
 
-1. **Conta no Render.com** - [Criar conta gratuita](https://render.com)
-2. **Repositório no GitHub** - Código deve estar no GitHub
+## 🎯 O que será criado
 
-## 🔧 Configuração do Blueprint
+O deploy criará automaticamente:
 
-### 1. Acessar o Render.com
-- Faça login no [Render.com](https://render.com)
-- Clique em **"New +"** → **"Blueprint"**
+- **🗄️ Database**: PostgreSQL (portal-services-db)
+- **🔧 Backend**: API Node.js (portal-services-backend) 
+- **🎨 Frontend**: React Static (portal-services-frontend)
+- **⚙️ DB Setup**: Cron Job para configuração do banco
+- **🔍 Health Check**: Cron Job para monitoramento
 
-### 2. Conectar Repositório
-- Selecione seu repositório GitHub
-- O Render detectará automaticamente o arquivo `render.yaml`
+## 🚀 Deploy Rápido
 
-### 3. Configurar Variáveis de Ambiente
+### 1. Preparar o Repositório
 
-#### 🔐 Variáveis de Segurança
-O Render gerará automaticamente:
-- `JWT_SECRET` - Para autenticação
-- `SESSION_SECRET` - Para sessões
-
-## 🏗️ Estrutura do Deploy
-
-### Serviços Criados:
-
-1. **🗄️ Banco de Dados PostgreSQL**
-   - Nome: `portal-services-db`
-   - Plano: Starter (gratuito)
-   - SSL habilitado
-
-2. **🔧 Backend API**
-   - Nome: `portal-services-backend`
-   - URL: `https://portal-services-backend.onrender.com`
-   - Health Check: `/health`
-   - Auto-deploy habilitado
-
-3. **🌐 Frontend React**
-   - Nome: `portal-services-frontend`
-   - URL: `https://portal-services-frontend.onrender.com`
-   - Headers de segurança configurados
-   - Auto-deploy habilitado
-
-4. **⏰ Cron Job (Opcional)**
-   - Limpeza automática de dados antigos
-   - Executa diariamente às 2h da manhã
-
-## 🚀 Processo de Deploy
-
-### 1. Deploy Automático
 ```bash
-# O deploy acontece automaticamente quando você:
-git add .
-git commit -m "Deploy para produção"
-git push origin main
+# Execute o script de deploy (na raiz do projeto)
+./deploy-render.sh
 ```
 
-### 2. Monitoramento
-- Acesse o dashboard do Render
-- Monitore logs em tempo real
-- Verifique health checks
+### 2. Deploy no Render.com
 
-### 3. URLs de Acesso
-- **Frontend**: `https://portal-services-frontend.onrender.com`
+1. **Acesse**: https://dashboard.render.com
+2. **Clique**: "New +" → "Blueprint"
+3. **Conecte**: Seu repositório GitHub
+4. **Selecione**: Este repositório (portal-services)
+5. **Aplique**: O Render detectará automaticamente o `render.yaml`
+6. **Clique**: "Apply" para criar todos os serviços
+
+## ⚙️ Configurações Técnicas
+
+### Backend (portal-services-backend)
+- **Runtime**: Node.js
+- **Build Command**: Instala dependências e verifica TypeScript
+- **Start Command**: `npx tsx server.ts`
+- **Health Check**: `/health`
+- **Port**: 10000 (automático)
+
+### Frontend (portal-services-frontend)
+- **Runtime**: Static Site
+- **Build Command**: Build do React com TypeScript
+- **Root Directory**: `./appclient/build`
+- **API URL**: Conecta automaticamente ao backend
+
+### Database (portal-services-db)
+- **Tipo**: PostgreSQL
+- **Plan**: Starter (gratuito)
+- **Região**: Oregon
+- **SSL**: Habilitado
+
+## 🔧 Variáveis de Ambiente
+
+### Automáticas (Render gerencia)
+- `DATABASE_URL` - String de conexão do banco
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+- `JWT_SECRET`, `SESSION_SECRET` (gerados automaticamente)
+
+### Manuais (você deve configurar)
+```bash
+# Gmail API (para funcionalidade de emails)
+GMAIL_CLIENT_ID=your-gmail-client-id
+GMAIL_CLIENT_SECRET=your-gmail-client-secret
+GMAIL_REFRESH_TOKEN=your-gmail-refresh-token
+```
+
+## 📊 URLs dos Serviços
+
+Após o deploy, você terá:
+
 - **Backend API**: `https://portal-services-backend.onrender.com`
+- **Frontend**: `https://portal-services-frontend.onrender.com`
 - **Health Check**: `https://portal-services-backend.onrender.com/health`
 
-## 🔍 Verificação do Deploy
+## 🧪 Testando o Deploy
 
-### 1. Testar Health Check
+### 1. Health Check
 ```bash
 curl https://portal-services-backend.onrender.com/health
 ```
 
-### 2. Testar API
+### 2. API Endpoints
 ```bash
+# Listar categorias
 curl https://portal-services-backend.onrender.com/api/categories
+
+# Listar clientes
+curl https://portal-services-backend.onrender.com/api/clients
+
+# Estatísticas
+curl https://portal-services-backend.onrender.com/api/stats/dashboard
 ```
 
-### 3. Verificar Frontend
-- Acesse a URL do frontend
-- Teste login e funcionalidades principais
+## 🔍 Monitoramento
 
-## 🛠️ Comandos de Build
-
-### Backend
-```bash
-cd appserver
-npm ci --only=production
-npm run build
-npm start
-```
-
-### Frontend
-```bash
-cd appclient
-npm ci --legacy-peer-deps
-npm run build
-```
-
-## 📊 Monitoramento e Logs
-
-### 1. Logs do Backend
+### Logs
 - Acesse o dashboard do Render
-- Vá para o serviço `portal-services-backend`
-- Clique em "Logs"
+- Clique no serviço desejado
+- Aba "Logs" para ver logs em tempo real
 
-### 2. Métricas
-- CPU e memória
-- Requests por minuto
-- Tempo de resposta
+### Health Checks
+- Cron job executa a cada 5 minutos
+- Verifica status da API e banco de dados
+- Logs de erro são enviados automaticamente
 
-### 3. Health Checks
-- Verificação automática a cada 5 minutos
-- Endpoint: `/health`
+## 🛠️ Troubleshooting
 
-## 🔧 Troubleshooting
+### Problemas Comuns
 
-### Problemas Comuns:
-
-1. **Build Falha**
-   ```bash
-   # Verificar logs de build
-   # Verificar dependências no package.json
-   ```
-
-2. **Banco de Dados não Conecta**
-   ```bash
-   # Verificar variáveis de ambiente
-   # Verificar SSL habilitado
-   ```
-
-3. **Frontend não Carrega**
-   ```bash
-   # Verificar REACT_APP_API_URL
-   # Verificar CORS no backend
-   ```
-
-### Logs Úteis:
+#### 1. Build Falha
 ```bash
-# Verificar status do banco
-curl https://portal-services-backend.onrender.com/api/health
-
-# Verificar categorias
-curl https://portal-services-backend.onrender.com/api/categories
+# Verificar logs no Render Dashboard
+# Problema comum: dependências não instaladas
 ```
 
-## 🔄 Atualizações
-
-### Deploy de Novas Versões:
+#### 2. Database Connection
 ```bash
-# 1. Fazer alterações no código
-# 2. Commit e push
-git add .
-git commit -m "Nova funcionalidade"
-git push origin main
-
-# 3. Deploy automático no Render
+# Verificar se DATABASE_URL está configurada
+# Aguardar alguns minutos após criação do banco
 ```
 
-### Rollback:
-- Use o dashboard do Render
-- Vá para "Deploys"
-- Clique em "Rollback" na versão desejada
+#### 3. Frontend não carrega
+```bash
+# Verificar se REACT_APP_API_URL está correto
+# Deve apontar para o backend no Render
+```
 
-## 💰 Custos
+### Comandos Úteis
 
-### Plano Gratuito (Starter):
-- **Backend**: 750 horas/mês
-- **Frontend**: Ilimitado (estático)
-- **Banco**: 1GB de armazenamento
-- **Cron**: 100 execuções/mês
+```bash
+# Verificar status local
+npm run dev
 
-### Limitações:
-- Serviços "dormem" após 15min de inatividade
-- Primeira requisição pode demorar ~30s (cold start)
-- Logs limitados a 7 dias
+# Testar build local
+npm run build
 
-## 🚀 Otimizações para Produção
+# Verificar TypeScript
+npm run typecheck
+```
 
-### 1. Performance
-- Cache de assets estáticos
-- Compressão gzip habilitada
-- Headers de cache configurados
+## 📈 Escalabilidade
 
-### 2. Segurança
-- HTTPS obrigatório
-- Headers de segurança
-- CORS configurado
-- SSL no banco de dados
+### Plans Disponíveis
+- **Starter**: Gratuito (limitações de CPU/memória)
+- **Standard**: $7/mês (mais recursos)
+- **Pro**: $25/mês (alta disponibilidade)
 
-### 3. Monitoramento
-- Health checks automáticos
-- Logs estruturados
-- Métricas de performance
+### Upgrade
+1. Acesse o serviço no dashboard
+2. Clique em "Settings"
+3. Mude o plan desejado
+4. Aplique as mudanças
+
+## 🔐 Segurança
+
+### SSL/TLS
+- ✅ Automático no Render
+- ✅ HTTPS obrigatório
+- ✅ Certificados gerenciados
+
+### Variáveis Sensíveis
+- ✅ Não commitadas no código
+- ✅ Gerenciadas pelo Render
+- ✅ Criptografadas em repouso
 
 ## 📞 Suporte
 
 ### Render.com
-- [Documentação](https://render.com/docs)
-- [Status Page](https://status.render.com)
-- [Community](https://community.render.com)
+- **Documentação**: https://render.com/docs
+- **Suporte**: https://render.com/support
+- **Status**: https://status.render.com
 
 ### Portal Services
-- Verificar logs no dashboard
-- Testar endpoints de health check
-- Verificar variáveis de ambiente
+- **Issues**: GitHub Issues
+- **Documentação**: README.md
+- **Logs**: Render Dashboard
+
+## 🎉 Próximos Passos
+
+Após o deploy bem-sucedido:
+
+1. **Configure Gmail API** para funcionalidade de emails
+2. **Teste todas as funcionalidades** no ambiente de produção
+3. **Configure domínio personalizado** (opcional)
+4. **Monitore logs** e performance
+5. **Configure backups** do banco de dados
 
 ---
 
-## ✅ Checklist de Deploy
-
-- [ ] Repositório no GitHub
-- [ ] Arquivo `render.yaml` configurado
-- [ ] Chave da API do Google AI configurada
-- [ ] Blueprint criado no Render
-- [ ] Deploy executado com sucesso
-- [ ] Health checks funcionando
-- [ ] Frontend acessível
-- [ ] API respondendo
-- [ ] Banco de dados conectado
-- [ ] Logs sendo gerados
-
-**🎉 Sua aplicação está no ar!**
+**🚀 Seu Portal Services estará online e pronto para seus clientes!**
