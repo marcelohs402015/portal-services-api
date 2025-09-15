@@ -1,6 +1,7 @@
 # =====================================================
 # Portal Services - Render.com Blueprint Configuration
-# Sistema de gestão de serviços e orçamentos
+# Sistema de gestão de serviços e orçamentos com IA
+# Baseado no package.json v2.0.0
 # =====================================================
 
 databases:
@@ -8,6 +9,7 @@ databases:
     databaseName: portalservicesdb
     user: admin
     plan: starter
+    region: oregon
 
 services:
   # =====================================================
@@ -19,20 +21,38 @@ services:
     plan: starter
     region: oregon
     
-    # Comandos de build otimizados para produção
+    # Comandos de build baseados no package.json
     buildCommand: |
-      echo "🚀 Iniciando build do backend..."
+      echo "🚀 Portal Services - Build Backend"
+      echo "=================================="
+      
+      # Instalar dependências do projeto principal
+      echo "📦 Instalando dependências principais..."
+      npm ci --silent
+      
+      # Instalar dependências do backend
+      echo "📦 Instalando dependências do backend..."
       cd appserver
-      echo "📦 Instalando dependências..."
       npm ci --silent --production=false
-      echo "🔨 Preparando para produção..."
+      
+      # Verificar TypeScript
+      echo "🔍 Verificando TypeScript..."
+      npm run typecheck
+      
+      # Build do backend
+      echo "🔨 Compilando backend..."
+      npm run build
+      
       echo "✅ Build do backend concluído!"
 
-    # Comando de start otimizado usando tsx diretamente
+    # Comando de start otimizado
     startCommand: |
-      echo "🚀 Iniciando servidor backend..."
+      echo "🚀 Iniciando Portal Services Backend..."
       cd appserver
-      npx tsx server.ts
+      echo "📊 Versão Node: $(node --version)"
+      echo "📊 Versão NPM: $(npm --version)"
+      echo "🌐 Iniciando servidor na porta $PORT..."
+      npm start
     
     # Health check endpoint
     healthCheckPath: /health
@@ -57,13 +77,41 @@ services:
           name: portal-services-db
           property: connectionString
       - key: DB_SSL
-        value: "true"  # SSL obrigatório no Render
+        value: "true"
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-db
+          property: password
       
       # Configurações de segurança
       - key: JWT_SECRET
         generateValue: true
       - key: SESSION_SECRET
         generateValue: true
+      
+      # Configurações de email (Gmail API)
+      - key: GMAIL_CLIENT_ID
+        value: "your-gmail-client-id"
+      - key: GMAIL_CLIENT_SECRET
+        value: "your-gmail-client-secret"
+      - key: GMAIL_REFRESH_TOKEN
+        value: "your-gmail-refresh-token"
 
   # =====================================================
   # Frontend Service - React Application
@@ -71,17 +119,31 @@ services:
   - type: web
     name: portal-services-frontend
     runtime: static
-    plan: starter  # Plano gratuito do Render
+    plan: starter
     region: oregon
     
-    # Comandos de build otimizados
+    # Comandos de build baseados no package.json
     buildCommand: |
-      echo "🚀 Iniciando build do frontend..."
+      echo "🚀 Portal Services - Build Frontend"
+      echo "==================================="
+      
+      # Instalar dependências do projeto principal
+      echo "📦 Instalando dependências principais..."
+      npm ci --silent
+      
+      # Instalar dependências do frontend
+      echo "📦 Instalando dependências do frontend..."
       cd appclient
-      echo "📦 Instalando dependências..."
       npm ci --legacy-peer-deps --silent
+      
+      # Verificar TypeScript
+      echo "🔍 Verificando TypeScript..."
+      npm run typecheck
+      
+      # Build do frontend
       echo "🔨 Compilando React..."
       npm run build
+      
       echo "✅ Build do frontend concluído!"
     
     # Caminho dos arquivos estáticos
@@ -95,5 +157,79 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: https://portal-services-backend.onrender.com
+      - key: REACT_APP_ENVIRONMENT
+        value: production
       - key: GENERATE_SOURCEMAP
         value: "false"
+      - key: CI
+        value: "false"
+
+  # =====================================================
+  # Database Setup Service (Cron Job)
+  # =====================================================
+  - type: cron
+    name: portal-services-db-setup
+    plan: starter
+    region: oregon
+    
+    # Comando para setup do banco
+    buildCommand: |
+      echo "🚀 Portal Services - Setup Database"
+      echo "==================================="
+      cd appserver
+      npm ci --silent --production=false
+    
+    # Comando para executar setup
+    startCommand: |
+      echo "🗄️ Configurando banco de dados..."
+      cd appserver
+      npm run setup
+    
+    # Executar uma vez por dia
+    schedule: "0 0 * * *"
+    
+    # Variáveis de ambiente
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portal-services-db
+          property: connectionString
+      - key: DB_SSL
+        value: "true"
+
+  # =====================================================
+  # Health Check Service (Cron Job)
+  # =====================================================
+  - type: cron
+    name: portal-services-health-check
+    plan: starter
+    region: oregon
+    
+    # Comando para health check
+    buildCommand: |
+      echo "🚀 Portal Services - Health Check Setup"
+      echo "======================================="
+      cd appserver
+      npm ci --silent --production=false
+    
+    # Comando para executar health check
+    startCommand: |
+      echo "🔍 Executando health check..."
+      cd appserver
+      npm run healthcheck
+    
+    # Executar a cada 5 minutos
+    schedule: "*/5 * * * *"
+    
+    # Variáveis de ambiente
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portal-services-db
+          property: connectionString
+      - key: DB_SSL
+        value: "true"

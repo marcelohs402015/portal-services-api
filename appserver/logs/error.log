@@ -9,3 +9,4 @@
 {"level":"error","message":"Failed to seed default data:","service":"DataSeeder","timestamp":"2025-09-14T22:26:14.369Z"}
 {"level":"error","message":"Failed to initialize database","service":"Server","timestamp":"2025-09-14T22:26:14.373Z"}
 {"error":"duplicate key value violates unique constraint \"emails_gmail_id_key\"","level":"error","message":"Query error","params":["uniqugggssssgggggge-xxx-id-123","Assunto do Email","Nome do Remetente <remetente@email.com>","2025-09-12T13:35:49.795Z","Corpo do email...","Eletricista",false],"service":"Database","text":"INSERT INTO emails (gmail_id, subject, sender, date, body, category, processed)\n         VALUES ($1, $2, $3, $4, $5, $6, $7)\n         RETURNING *","timestamp":"2025-09-14T22:30:06.893Z"}
+{"level":"error","message":"Validation error creating service:","service":"ServiceService","timestamp":"2025-09-15T08:12:01.693Z"}

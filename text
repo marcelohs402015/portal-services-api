@@ -1,0 +1,122 @@
+
+> portal-services@2.0.0 dev
+> ./start-dev.sh
+
+🚀 Iniciando Portal Services - Ambiente de Desenvolvimento
+==========================================================
+[0;34m[05:10:20][0m Limpando processos anteriores...
+[0;34m[05:10:20][0m Parando container do banco...
+[0;34m[05:10:23][0m Verificando dependências...
+[0;34m[05:10:23][0m Iniciando banco de dados PostgreSQL...
+[0;34m[05:10:30][0m Aguardando banco de dados ficar pronto...
+[0;32m[SUCCESS][0m Banco de dados está pronto!
+[0;34m[05:10:30][0m Iniciando servidor backend...
+
+> portal-services-server@2.0.0 dev
+> tsx watch server.ts
+
+[0;34m[05:10:33][0m Tentativa 1/10 - Aguardando servidor...
+🔍 Iniciando carregamento do servidor...
+✅ dotenv carregado
+✅ logger criado
+🔧 Configurações: { PORT: 3001, DB_HOST: undefined, DB_NAME: undefined }
+🚀 Iniciando função startServer...
+2025-09-15T08:10:33.819Z [Server] [32minfo[39m: Starting server with PostgreSQL database...
+2025-09-15T08:10:33.831Z [Server] [32minfo[39m: Running database migrations...
+2025-09-15T08:10:33.832Z [DBMigrations] [32minfo[39m: Running database migrations...
+2025-09-15T08:10:33.893Z [DBMigrations] [32minfo[39m: Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.
+2025-09-15T08:10:33.912Z [DBMigrations] [32minfo[39m: Migrations completed - indexes and triggers updated
+2025-09-15T08:10:33.914Z [DataSeeder] [32minfo[39m: Checking if database needs seeding...
+2025-09-15T08:10:33.919Z [DataSeeder] [32minfo[39m: Database already contains data, skipping seed
+2025-09-15T08:10:33.922Z [APIRoutes] [32minfo[39m: Setting up API routes
+2025-09-15T08:10:33.931Z [CategoryRoutes] [32minfo[39m: Setting up category routes
+2025-09-15T08:10:33.940Z [ServiceRoutes] [32minfo[39m: Setting up service routes
+2025-09-15T08:10:33.953Z [ClientRoutes] [32minfo[39m: Setting up client routes
+2025-09-15T08:10:33.958Z [Server] [32minfo[39m: Database connection initialized, migrations applied, and all routes enabled.
+2025-09-15T08:10:33.959Z [Server] [32minfo[39m: Default data automatically loaded if database was empty.
+2025-09-15T08:10:33.965Z [Server] [32minfo[39m: Server running on port 3001
+2025-09-15T08:10:33.965Z [Server] [32minfo[39m: Health check: http://localhost:3001/health
+2025-09-15T08:10:33.966Z [Server] [32minfo[39m: API base URL: http://localhost:3001/api
+2025-09-15T08:10:35.672Z [Server] [32minfo[39m: GET /health
+[0;32m[SUCCESS][0m Servidor backend está rodando em http://localhost:3001
+[0;34m[05:10:35][0m Iniciando cliente frontend...
+
+> portal-services-client@2.0.0 dev
+> react-scripts start
+
+Starting the development server...
+
+[0;32m[SUCCESS][0m Cliente frontend está rodando em http://localhost:3000
+
+==========================================================
+[0;32m[SUCCESS][0m 🎉 Portal Services está rodando!
+==========================================================
+
+📊 Status dos Serviços:
+  🗄️  Banco de Dados: http://localhost:5432 (portalservicesdb)
+  🔧 Backend API:     http://localhost:3001
+  🌐 Frontend:        http://localhost:3000
+
+📋 Comandos Úteis:
+  • Ver logs:         docker logs postalservices-api
+  • Parar sistema:    Ctrl+C
+  • Reiniciar banco:  npm run db:restart
+
+🔍 Testando APIs:
+  • Health Check:     curl http://localhost:3001/health
+  • Categorias:       curl http://localhost:3001/api/categories
+  • Clientes:         curl http://localhost:3001/api/clients
+
+==========================================================
+[0;34m[05:10:40][0m Sistema rodando... Pressione Ctrl+C para parar
+Compiled successfully!
+
+You can now view portal-services-client in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.27.235.162:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+2025-09-15T08:10:49.501Z [Server] [32minfo[39m: GET /api/health
+2025-09-15T08:10:49.752Z [Server] [32minfo[39m: GET /api/stats/business
+2025-09-15T08:10:49.775Z [Server] [32minfo[39m: GET /api/stats/revenue/monthly
+2025-09-15T08:10:49.802Z [Server] [32minfo[39m: GET /api/stats/appointments
+2025-09-15T08:10:49.818Z [Server] [32minfo[39m: GET /api/stats/clients
+2025-09-15T08:10:49.858Z [Server] [32minfo[39m: GET /api/categories
+No issues found.
+2025-09-15T08:11:14.762Z [Server] [32minfo[39m: GET /api/emails
+2025-09-15T08:11:16.577Z [Server] [32minfo[39m: GET /api/categories
+2025-09-15T08:11:19.333Z [Server] [32minfo[39m: GET /api/stats/business
+2025-09-15T08:11:29.796Z [Server] [32minfo[39m: GET /api/services
+2025-09-15T08:11:29.797Z [ServiceService] [32minfo[39m: Getting all services
+2025-09-15T08:11:31.633Z [Server] [32minfo[39m: GET /api/quotations
+2025-09-15T08:11:31.645Z [Server] [32minfo[39m: GET /api/services
+2025-09-15T08:11:31.646Z [ServiceService] [32minfo[39m: Getting all services
+2025-09-15T08:11:31.656Z [Server] [32minfo[39m: GET /api/clients
+2025-09-15T08:11:31.659Z [ClientService] [32minfo[39m: Getting all clients
+2025-09-15T08:11:33.759Z [Server] [32minfo[39m: GET /api/appointments
+2025-09-15T08:12:01.676Z [Server] [32minfo[39m: POST /api/services
+2025-09-15T08:12:01.678Z [ServiceService] [32minfo[39m: Creating service
+2025-09-15T08:12:01.693Z [ServiceService] [31merror[39m: Validation error creating service:
+2025-09-15T08:12:01.708Z [Server] [32minfo[39m: GET /api/services
+2025-09-15T08:12:01.709Z [ServiceService] [32minfo[39m: Getting all services
+
+2025-09-15T08:16:16.171Z [Server] [32minfo[39m: Received shutdown signal, closing server...
+2025-09-15T08:16:16.176Z [Server] [32minfo[39m: HTTP server closed
+[0;34m[05:16:16][0m Parando sistema...
+[0;34m[05:16:16][0m Parando banco de dados...
+
+[0;34m[05:16:16][0m Parando sistema...
+[0;34m[05:16:16][0m Parando banco de dados...
+
+[0;34m[05:16:16][0m Parando sistema...
+[0;34m[05:16:16][0m Parando banco de dados...
+
+[0;34m[05:16:16][0m Parando sistema...
+[0;34m[05:16:16][0m Parando banco de dados...
+[0;32m[SUCCESS][0m Sistema parado com sucesso!
