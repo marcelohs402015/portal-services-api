@@ -28,10 +28,7 @@
     "typecheck": "cd appserver && npm run typecheck && cd ../appclient && npm run typecheck",
     "test": "cd appclient && npm test",
     "setup": "cd appserver && npm run setup",
-    "railway:deploy": "echo '🚀 Railway Deploy - Portal Services' && npm run build",
-    "railway:start": "cd appserver && npm start",
-    "deploy:prepare": "npm run typecheck && npm run build",
-    "deploy:railway": "git add . && git commit -m 'Deploy Railway - Portal Services' && git push origin main"
+    "deploy:prepare": "npm run typecheck && npm run build"
   },
   "keywords": [
     "portal-services",
