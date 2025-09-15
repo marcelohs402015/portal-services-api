@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "typecheck": "tsc --noEmit",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
