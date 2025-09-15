@@ -499,3 +499,5 @@
 {"id":7,"level":"info","message":"Client created","name":"yyyy","service":"portal-services-server","timestamp":"2025-09-15T09:42:46.536Z"}
 {"client_name":"Joãochhhssss Silva","id":"537ec4b3-8c9e-44e0-9127-b6a2a850e9b6","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-15T09:42:55.685Z"}
 {"level":"info","message":"Server shutting down","service":"portal-services-server","timestamp":"2025-09-15T09:43:03.500Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-15T10:55:07.802Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-15T10:55:07.903Z"}

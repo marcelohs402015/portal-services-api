@@ -1,0 +1,18 @@
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = [
+  "npm ci",
+  "cd appserver && npm ci",
+  "cd ../appclient && npm ci --legacy-peer-deps"
+]
+
+[phases.build]
+cmds = [
+  "cd appserver && npm run typecheck",
+  "cd ../appclient && npm run build"
+]
+
+[start]
+cmd = "cd appserver && npx tsx server.ts"
