@@ -121,7 +121,7 @@ services:
       # Instalar dependências do frontend
       echo "📦 Instalando dependências do frontend..."
       cd appclient
-      npm ci --legacy-peer-deps --silent
+      npm ci --legacy-peer-deps --silent || npm ci --force --silent
       
       # Verificar TypeScript
       echo "🔍 Verificando TypeScript..."
