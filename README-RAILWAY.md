@@ -37,6 +37,10 @@ Baseado em [Railway.com](https://railway.com/new), a plataforma mais simples e c
   - ✅ Frontend em `appclient/`
   - ✅ PostgreSQL (cria automaticamente)
 
+### **5. Se der erro de build:**
+- Railway usará o **Dockerfile** automaticamente
+- Ou configure manualmente: **Settings** → **Build** → **Dockerfile**
+
 ### **4. Pronto!**
 Railway faz TUDO sozinho:
 - ✅ **PostgreSQL** criado

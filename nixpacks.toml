@@ -1,21 +1,18 @@
 [phases.setup]
-nixPkgs = ["nodejs", "npm"]
+nixPkgs = ["nodejs"]
 
 [phases.install]
 cmds = [
-  "npm ci --silent",
-  "cd appserver && npm ci --silent",
-  "cd ../appclient && npm ci --legacy-peer-deps --silent"
+  "npm ci",
+  "cd appserver && npm ci",
+  "cd ../appclient && npm ci --legacy-peer-deps"
 ]
 
 [phases.build]
 cmds = [
-  "echo '🚀 Railway Build - Portal Services'",
-  "npm run typecheck",
-  "cd appserver && npm run railway:build",
-  "cd ../appclient && npm run railway:build",
-  "echo '✅ Railway build completed successfully'"
+  "cd appserver && npm run build",
+  "cd ../appclient && npm run build"
 ]
 
 [start]
-cmd = "npm run railway:start"
+cmd = "cd appserver && npm start"
