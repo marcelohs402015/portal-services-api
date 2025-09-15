@@ -14,10 +14,14 @@ services:
   - type: pserv
     name: portal-services-db
     plan: starter
-    databaseName: portalservicesdb
-    user: portaladmin
     region: oregon
-    ipAllowList: []
+    envVars:
+      - key: POSTGRES_USER
+        value: portaladmin
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: portalservicesdb
 
   # Portal Services API Web Service
   - type: web
