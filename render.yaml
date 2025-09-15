@@ -116,8 +116,9 @@ services:
   # =====================================================
   # Frontend Service - React Application
   # =====================================================
-  - type: static
+  - type: web
     name: portal-services-frontend
+    runtime: static
     plan: starter
     
     # Comandos de build baseados no package.json
