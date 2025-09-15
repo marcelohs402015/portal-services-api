@@ -166,6 +166,9 @@ export interface CreateCategoryDTO {
   color?: string;
   icon?: string;
   sort_order?: number;
+  keywords?: string[];
+  patterns?: string[];
+  domains?: string[];
 }
 
 export interface UpdateCategoryDTO {
@@ -175,6 +178,9 @@ export interface UpdateCategoryDTO {
   icon?: string;
   active?: boolean;
   sort_order?: number;
+  keywords?: string[];
+  patterns?: string[];
+  domains?: string[];
 }
 
 export interface CreateClientDTO {
@@ -255,6 +261,7 @@ export interface CreateQuotationDTO {
   valid_until?: Date;
   notes?: string;
   items?: CreateQuotationItemDTO[];
+  created_by?: string;
 }
 
 export interface UpdateQuotationDTO {

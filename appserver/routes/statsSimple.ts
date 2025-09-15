@@ -1,7 +1,7 @@
 import express from 'express';
 import { Database } from '../database/Database.js';
 
-export function createStatsRoutesSimple(db) {
+export function createStatsRoutesSimple(db: Database) {
   const router = express.Router();
 
   // Get business statistics overview

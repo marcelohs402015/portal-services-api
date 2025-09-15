@@ -18,7 +18,14 @@
     "allowJs": true
   },
   "include": [
-    "**/*.ts"
+    "server.ts",
+    "types/**/*.ts",
+    "database/**/*.ts",
+    "repositories/**/*.ts",
+    "services/**/*.ts",
+    "routes/**/*.ts",
+    "shared/**/*.ts",
+    "controllers/**/*.ts"
   ],
   "exclude": [
     "node_modules",

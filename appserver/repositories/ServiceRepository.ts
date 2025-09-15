@@ -150,9 +150,9 @@ export class ServiceRepository extends BaseRepository<Service, CreateServiceDTO,
   async getServiceStats(): Promise<ApiResponse<{ total: number; active: number; inactive: number; by_category: any[] }>> {
     try {
       const [totalResult, activeResult, categoryResult] = await Promise.all([
-        this.repository.count(),
-        this.repository.count({ active: true }),
-        this.executeQuery(`
+        this.count(),
+        this.count({ active: true }),
+        this.db.query(`
           SELECT 
             c.name as category_name,
             c.color as category_color,

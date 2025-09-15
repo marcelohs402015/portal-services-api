@@ -261,9 +261,9 @@ export class CategoryService {
       return {
         success: true,
         data: {
-          total: totalResult.data,
-          active: activeResult.data,
-          inactive: totalResult.data - activeResult.data
+          total: totalResult.data || 0,
+          active: activeResult.data || 0,
+          inactive: (totalResult.data || 0) - (activeResult.data || 0)
         }
       };
     } catch (error) {

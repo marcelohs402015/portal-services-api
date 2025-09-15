@@ -18,6 +18,7 @@ export class CategoryRepository extends BaseRepository<Category, CreateCategoryD
       description: row.description,
       color: row.color,
       active: row.active || true,
+      sort_order: row.sort_order || 0,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at)
     };
@@ -104,6 +105,42 @@ export class CategoryRepository extends BaseRepository<Category, CreateCategoryD
       };
     } catch (error) {
       this.logger.error('Error finding category by name:', error);
+      return {
+        success: false,
+        error: (error as Error).message
+      };
+    }
+  }
+
+  async getNextSortOrder(): Promise<number> {
+    try {
+      const query = `SELECT COALESCE(MAX(sort_order), 0) + 1 as next_order FROM categories`;
+      const result = await this.db.query(query);
+      return result.rows[0]?.next_order || 1;
+    } catch (error) {
+      this.logger.error('Error getting next sort order:', error);
+      return 1;
+    }
+  }
+
+  async updateSortOrder(id: string, sortOrder: number): Promise<ApiResponse<Category | null>> {
+    try {
+      const query = `UPDATE categories SET sort_order = $1, updated_at = NOW() WHERE id = $2 RETURNING *`;
+      const result = await this.db.query(query, [sortOrder, id]);
+      
+      if (result.rows.length === 0) {
+        return {
+          success: false,
+          error: 'Category not found'
+        };
+      }
+
+      return {
+        success: true,
+        data: this.mapRowToEntity(result.rows[0])
+      };
+    } catch (error) {
+      this.logger.error('Error updating sort order:', error);
       return {
         success: false,
         error: (error as Error).message

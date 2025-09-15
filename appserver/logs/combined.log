@@ -124,3 +124,224 @@
 {"ip":"::1","level":"info","message":"GET /api/appointments","service":"Server","timestamp":"2025-09-15T02:43:55.904Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
 {"ip":"::1","level":"info","message":"GET /api/clients","service":"Server","timestamp":"2025-09-15T02:43:55.915Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
 {"level":"info","message":"Getting all clients","params":{},"service":"ClientService","timestamp":"2025-09-15T02:43:55.918Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:02:55.649Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:07.642Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:07.612Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:07.641Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:07.882Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:07.944Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:07.946Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:07.967Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:08.122Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:08.126Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:08.145Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:08.145Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:08.146Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:07.993Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:08.109Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:08.032Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:08.068Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:03:14.595Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:17.833Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:17.815Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:17.832Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:17.945Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:17.987Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:17.988Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:18.001Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:18.126Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:18.128Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:18.144Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:18.145Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:18.145Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:18.011Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:18.036Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:18.078Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:18.122Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:03:21.263Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:26.748Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:26.654Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:26.737Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:27.296Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:27.365Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:27.369Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:27.405Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:27.718Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:27.726Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:27.767Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:27.768Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:27.768Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:27.432Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:27.543Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:27.632Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:27.697Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:03:29.002Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:34.201Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:34.186Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:34.200Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:34.294Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:34.308Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:34.309Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:34.314Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:34.393Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:34.394Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:34.405Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:34.405Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:34.407Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:34.319Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:34.335Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:34.362Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:34.384Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:03:43.675Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:45.927Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:45.887Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:45.924Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:46.080Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:46.105Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:46.110Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:46.122Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:46.236Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:46.240Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:46.253Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:46.255Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:46.258Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:46.134Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:46.166Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:46.201Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:46.231Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:03:52.837Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:03:56.140Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:03:56.031Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:03:56.135Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:03:56.615Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:03:56.691Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:03:56.693Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:03:56.709Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:03:56.889Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:03:56.890Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:03:56.908Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:03:56.908Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:03:56.909Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:03:56.724Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:03:56.768Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:03:56.822Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:03:56.873Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:07.755Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:04:10.673Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:04:10.559Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:04:10.670Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:04:10.974Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:04:10.996Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:04:10.997Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:04:11.009Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:04:11.148Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:04:11.152Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:04:11.165Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:04:11.166Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:04:11.167Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:04:11.022Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:04:11.067Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:04:11.114Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:04:11.134Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:15.956Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:04:18.621Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:04:18.596Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:04:18.620Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:04:18.733Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:04:18.755Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:04:18.759Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:04:18.769Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:04:18.901Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:04:18.902Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:04:18.928Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:04:18.929Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:04:18.930Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:04:18.778Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:04:18.810Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:04:18.846Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:04:18.889Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:22.874Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:04:26.903Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:04:26.882Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:04:26.902Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:04:27.002Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:04:27.017Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:04:27.018Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:04:27.024Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:04:27.130Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:04:27.131Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:04:27.146Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:04:27.148Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:04:27.149Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:04:27.029Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:04:27.059Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:04:27.094Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:04:27.122Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:30.664Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:04:40.352Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:04:40.331Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:04:40.348Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:04:40.447Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:04:40.476Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:04:40.478Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:04:40.492Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:04:40.665Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:04:40.666Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:04:40.718Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:04:40.719Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:04:40.721Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:04:40.500Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:04:40.546Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:04:40.586Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:04:40.659Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:46.857Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:04:49.742Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:04:49.671Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:04:49.740Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:04:49.914Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:04:49.950Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:04:49.954Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:04:49.969Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:04:50.183Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:04:50.185Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:04:50.205Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:04:50.206Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:04:50.207Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:04:49.981Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:04:50.031Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:04:50.089Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:04:50.157Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:04:57.823Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:05:00.798Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:05:00.755Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:05:00.796Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:05:01.121Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:05:01.193Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:05:01.199Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:05:01.238Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:05:01.447Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:05:01.450Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:05:01.487Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:05:01.488Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:05:01.489Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:05:01.254Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:05:01.311Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:05:01.370Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:05:01.423Z"}
+{"level":"info","message":"Received shutdown signal, closing server...","service":"Server","timestamp":"2025-09-15T03:11:45.161Z"}
+{"level":"info","message":"Running database migrations...","service":"DBMigrations","timestamp":"2025-09-15T03:11:48.911Z"}
+{"level":"info","message":"Starting server with PostgreSQL database...","service":"Server","timestamp":"2025-09-15T03:11:48.881Z"}
+{"level":"info","message":"Running database migrations...","service":"Server","timestamp":"2025-09-15T03:11:48.908Z"}
+{"level":"info","message":"Tables already exist: emails, categories, services, clients, quotations, appointments. Skipping table creation.","service":"DBMigrations","timestamp":"2025-09-15T03:11:49.060Z"}
+{"level":"info","message":"Migrations completed - indexes and triggers updated","service":"DBMigrations","timestamp":"2025-09-15T03:11:49.088Z"}
+{"level":"info","message":"Checking if database needs seeding...","service":"DataSeeder","timestamp":"2025-09-15T03:11:49.090Z"}
+{"level":"info","message":"Database already contains data, skipping seed","service":"DataSeeder","timestamp":"2025-09-15T03:11:49.101Z"}
+{"level":"info","message":"Database connection initialized, migrations applied, and all routes enabled.","service":"Server","timestamp":"2025-09-15T03:11:49.249Z"}
+{"level":"info","message":"Default data automatically loaded if database was empty.","service":"Server","timestamp":"2025-09-15T03:11:49.250Z"}
+{"level":"info","message":"Server running on port 3001","service":"Server","timestamp":"2025-09-15T03:11:49.264Z"}
+{"level":"info","message":"Health check: http://localhost:3001/health","service":"Server","timestamp":"2025-09-15T03:11:49.266Z"}
+{"level":"info","message":"API base URL: http://localhost:3001/api","service":"Server","timestamp":"2025-09-15T03:11:49.267Z"}
+{"level":"info","message":"Setting up API routes","service":"APIRoutes","timestamp":"2025-09-15T03:11:49.111Z"}
+{"level":"info","message":"Setting up category routes","service":"CategoryRoutes","timestamp":"2025-09-15T03:11:49.145Z"}
+{"level":"info","message":"Setting up service routes","service":"ServiceRoutes","timestamp":"2025-09-15T03:11:49.197Z"}
+{"level":"info","message":"Setting up client routes","service":"ClientRoutes","timestamp":"2025-09-15T03:11:49.234Z"}

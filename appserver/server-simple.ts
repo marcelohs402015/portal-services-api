@@ -42,7 +42,7 @@ app.get('/api/categories', async (req, res) => {
     res.json({ success: true, data: result.rows });
   } catch (error) {
     console.error('❌ Erro ao buscar categorias:', error);
-    res.status(500).json({ success: false, error: 'Erro ao buscar categorias', details: error.message });
+    res.status(500).json({ success: false, error: 'Erro ao buscar categorias', details: (error as Error).message });
   }
 });
 

@@ -17,7 +17,13 @@ export class ClientRepository extends BaseRepository<Client, CreateClientDTO, Up
       name: row.name,
       email: row.email,
       phone: row.phone,
+      phone_secondary: row.phone_secondary,
       address: row.address,
+      city: row.city,
+      state: row.state,
+      zip_code: row.zip_code,
+      document: row.document,
+      document_type: row.document_type || 'cpf',
       notes: row.notes,
       active: row.active || true,
       created_at: new Date(row.created_at),
@@ -46,7 +52,13 @@ export class ClientRepository extends BaseRepository<Client, CreateClientDTO, Up
     if (dto.name !== undefined) fields.push('name');
     if (dto.email !== undefined) fields.push('email');
     if (dto.phone !== undefined) fields.push('phone');
+    if (dto.phone_secondary !== undefined) fields.push('phone_secondary');
     if (dto.address !== undefined) fields.push('address');
+    if (dto.city !== undefined) fields.push('city');
+    if (dto.state !== undefined) fields.push('state');
+    if (dto.zip_code !== undefined) fields.push('zip_code');
+    if (dto.document !== undefined) fields.push('document');
+    if (dto.document_type !== undefined) fields.push('document_type');
     if (dto.notes !== undefined) fields.push('notes');
     if (dto.active !== undefined) fields.push('active');
     return fields;
@@ -57,10 +69,41 @@ export class ClientRepository extends BaseRepository<Client, CreateClientDTO, Up
     if (dto.name !== undefined) values.push(dto.name);
     if (dto.email !== undefined) values.push(dto.email);
     if (dto.phone !== undefined) values.push(dto.phone);
+    if (dto.phone_secondary !== undefined) values.push(dto.phone_secondary);
     if (dto.address !== undefined) values.push(dto.address);
+    if (dto.city !== undefined) values.push(dto.city);
+    if (dto.state !== undefined) values.push(dto.state);
+    if (dto.zip_code !== undefined) values.push(dto.zip_code);
+    if (dto.document !== undefined) values.push(dto.document);
+    if (dto.document_type !== undefined) values.push(dto.document_type);
     if (dto.notes !== undefined) values.push(dto.notes);
     if (dto.active !== undefined) values.push(dto.active);
     return values;
+  }
+
+  async findByDocument(document: string): Promise<ApiResponse<Client | null>> {
+    try {
+      const query = `SELECT * FROM clients WHERE document = $1 LIMIT 1`;
+      const result = await this.db.query(query, [document]);
+      
+      if (result.rows.length === 0) {
+        return {
+          success: true,
+          data: null
+        };
+      }
+
+      return {
+        success: true,
+        data: this.mapRowToEntity(result.rows[0])
+      };
+    } catch (error) {
+      this.logger.error('Error finding client by document:', error);
+      return {
+        success: false,
+        error: (error as Error).message
+      };
+    }
   }
 
   // Métodos específicos para clientes
