@@ -22,7 +22,7 @@ services:
           property: host
       - key: DB_PORT
         fromDatabase:
-          name: portal-services-db
+          name: portal-services-db``
           property: port
       - key: DB_NAME
         fromDatabase:
@@ -51,6 +51,4 @@ services:
   - type: pserv
     name: portal-services-db
     plan: free
-    databaseName: portalservicesdb
-    user: admin
     ipAllowList: []
