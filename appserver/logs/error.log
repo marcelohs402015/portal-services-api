@@ -33,3 +33,4 @@
 {"error":"getaddrinfo ENOTFOUND db","level":"error","message":"Error listing categories","service":"portal-services-server","timestamp":"2025-09-15T16:39:28.648Z"}
 {"error":"duplicate key value violates unique constraint \"emails_gmail_id_key\"","level":"error","message":"Error creating email","service":"portal-services-server","timestamp":"2025-09-15T16:52:49.575Z"}
 {"error":"duplicate key value violates unique constraint \"categories_name_key\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-16T10:09:31.673Z"}
+{"error":"connect ECONNREFUSED 127.0.0.1:5432","level":"error","message":"Database connection failed","service":"portal-services-server","timestamp":"2025-09-16T15:05:37.557Z"}

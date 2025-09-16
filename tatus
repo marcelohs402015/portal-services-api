@@ -1,5 +1,0 @@
-[33mf2c3b54[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Update server logs to include additional client creation events and server startup information
-[33m6c091ba[m Update deployment configurations and documentation for Render, replacing Vercel references
-[33mb011600[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Implement server setup and logging enhancements for Portal Services
-[33m3aaa342[m Update deployment configurations and documentation for Render and Vercel
-[33m5dc4ce2[m Enhance error handling and logging in server and repository files

@@ -94,7 +94,7 @@ export class CategoryService {
         validatedData.sort_order = nextOrder;
       }
 
-      return await this.repository.create(validatedData);
+      return await this.repository.create(validatedData as CreateCategoryDTO);
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessage = error.errors.map(e => e.message).join(', ');

@@ -110,7 +110,7 @@ export class ServiceRepository extends BaseRepository<Service, CreateServiceDTO,
 
       return {
         success: true,
-        data: this.mapRowToService(result.rows[0])
+        data: this.mapRowToEntity(result.rows[0])
       };
     } catch (error) {
       this.logger.error('Error finding service by name:', error);
@@ -208,7 +208,7 @@ export class ServiceRepository extends BaseRepository<Service, CreateServiceDTO,
           total: totalResult.data,
           active: activeResult.data,
           inactive: totalResult.data - activeResult.data,
-          by_category: categoryResult
+          by_category: categoryResult.rows
         }
       };
     } catch (error) {

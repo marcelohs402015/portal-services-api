@@ -39,7 +39,7 @@ console.log('🔧 Configuração do banco:', {
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -905,6 +905,45 @@ app.get('/api/stats/business', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       error: 'Erro ao buscar estatísticas do negócio' 
+    });
+  }
+});
+
+// GET /api/stats/revenue/monthly - Receita mensal dos últimos 12 meses
+app.get('/api/stats/revenue/monthly', async (req, res) => {
+  try {
+    console.log('📊 Buscando receita mensal...');
+    
+    const monthlyRevenueResult = await pool.query(`
+      SELECT 
+        DATE_TRUNC('month', created_at) as month,
+        COALESCE(SUM(total), 0) as revenue,
+        COUNT(*) as quotations_count
+      FROM quotations 
+      WHERE created_at >= CURRENT_DATE - INTERVAL '12 months'
+        AND status = 'accepted'
+      GROUP BY DATE_TRUNC('month', created_at)
+      ORDER BY month DESC
+    `);
+
+    const monthlyData = monthlyRevenueResult.rows.map(row => ({
+      month: row.month,
+      revenue: parseFloat(row.revenue),
+      quotationsCount: parseInt(row.quotations_count)
+    }));
+
+    console.log(`✅ Receita mensal carregada: ${monthlyData.length} meses`);
+    res.json({ 
+      success: true, 
+      data: monthlyData,
+      count: monthlyData.length
+    });
+  } catch (error) {
+    console.error('❌ Erro ao buscar receita mensal:', error);
+    logger.error('Error getting monthly revenue', { error: (error as Error).message });
+    res.status(500).json({ 
+      success: false, 
+      error: 'Erro ao buscar receita mensal' 
     });
   }
 });

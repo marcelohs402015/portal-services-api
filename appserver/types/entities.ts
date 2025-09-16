@@ -162,7 +162,7 @@ export interface UpdateUserDTO {
 
 export interface CreateCategoryDTO {
   name: string;
-  description?: string;
+  description: string;
   color?: string;
   icon?: string;
   sort_order?: number;
@@ -185,7 +185,7 @@ export interface UpdateCategoryDTO {
 
 export interface CreateClientDTO {
   name: string;
-  email?: string;
+  email: string;
   phone?: string;
   phone_secondary?: string;
   address?: string;
@@ -214,7 +214,7 @@ export interface UpdateClientDTO {
 
 export interface CreateServiceDTO {
   name: string;
-  description?: string;
+  description: string;
   price?: number;
   duration?: number;
   category_id?: string;
@@ -411,7 +411,7 @@ export const UpdateUserSchema = z.object({
 
 export const CreateCategorySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
-  description: z.string().optional(),
+  description: z.string().min(1, 'Descrição é obrigatória'),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, 'Cor deve ser um hex válido').optional(),
   icon: z.string().optional(),
   sort_order: z.number().int().min(0).optional()
@@ -428,7 +428,7 @@ export const UpdateCategorySchema = z.object({
 
 export const CreateClientSchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
-  email: z.string().email().optional().or(z.literal('')),
+  email: z.string().email('Email deve ser válido'),
   phone: z.string().optional(),
   phone_secondary: z.string().optional(),
   address: z.string().optional(),
@@ -457,7 +457,7 @@ export const UpdateClientSchema = z.object({
 
 export const CreateServiceSchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
-  description: z.string().optional(),
+  description: z.string().min(1, 'Descrição é obrigatória'),
   price: z.number().min(0).optional(),
   duration: z.number().int().min(0).optional(),
   category_id: z.string().uuid().optional(),

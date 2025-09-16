@@ -185,7 +185,7 @@ export class ClientService {
         }
       }
 
-      return await this.repository.create(validatedData);
+      return await this.repository.create(validatedData as CreateClientDTO);
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessage = error.errors.map(e => e.message).join(', ');
