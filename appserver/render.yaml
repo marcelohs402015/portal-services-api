@@ -1,0 +1,30 @@
+services:
+  # Web Service - API
+  - type: web
+    name: portal-services-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    # Comando corrigido para rodar migrations antes de iniciar
+    startCommand: npx prisma migrate deploy && npm run start:prod
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: LOG_LEVEL
+        value: info
+      # Apenas a DATABASE_URL é necessária para o Prisma
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portal-services-db
+          property: connectionString
+
+  # PostgreSQL Database (não precisa mexer aqui)
+  - type: pserv
+    name: portal-services-db
+    plan: free
+    ipAllowList: []

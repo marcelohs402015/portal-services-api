@@ -30,8 +30,8 @@ RUN mkdir -p logs
 # Compilar TypeScript
 RUN npm run build
 
-# Expor porta (Render usa PORT do env)
-EXPOSE 10000
+# Expor porta
+EXPOSE 3001
 
 # Comando para iniciar a aplicação
 CMD ["node", "appserver/dist/server.js"]

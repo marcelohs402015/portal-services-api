@@ -1,5 +1,5 @@
 /**
- * Health check para o Render - baseado no docker-compose.yml
+ * Health Check Script
  */
 
 const http = require('http');

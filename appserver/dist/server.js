@@ -16,11 +16,8 @@ const { Pool } = pg_1.default;
 console.log('🚀 Iniciando Portal Services Server...');
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
-// Database config - Prioriza DATABASE_URL (Render) ou variáveis individuais (Docker)
-const dbConfig = process.env.DATABASE_URL ? {
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
-} : {
+// Database config - variáveis individuais
+const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432'),
     database: process.env.DB_NAME || 'portalservicesdb',
@@ -29,9 +26,7 @@ const dbConfig = process.env.DATABASE_URL ? {
     ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
 };
 const pool = new Pool(dbConfig);
-console.log('🔧 Configuração do banco:', process.env.DATABASE_URL ?
-    { connectionString: '***', ssl: true } :
-    { host: dbConfig.host, port: dbConfig.port, database: dbConfig.database, user: dbConfig.user, ssl: !!dbConfig.ssl });
+console.log('🔧 Configuração do banco:', { host: dbConfig.host, port: dbConfig.port, database: dbConfig.database, user: dbConfig.user, ssl: !!dbConfig.ssl });
 // Middleware
 app.use((0, cors_1.default)({
     origin: ['http://localhost:3000', 'http://localhost:3001'],
@@ -1478,25 +1473,8 @@ app.use((error, req, res, next) => {
         error: 'Erro interno do servidor'
     });
 });
-// Inicializar banco antes de iniciar servidor
-const initDatabase = async () => {
-    if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL) {
-        try {
-            const { checkAndInitDatabase } = require('./database/init-render');
-            console.log('🔧 Verificando e inicializando banco de dados...');
-            const success = await checkAndInitDatabase();
-            if (!success) {
-                console.error('❌ Falha na inicialização do banco. Continuando mesmo assim...');
-            }
-        }
-        catch (error) {
-            console.error('⚠️  Erro ao inicializar banco:', error.message);
-        }
-    }
-};
 // Start server
 const startServer = async () => {
-    await initDatabase();
     app.listen(PORT, () => {
         console.log(`🎉 Portal Services Server rodando em http://localhost:${PORT}`);
         console.log(`📋 Endpoints disponíveis:`);
