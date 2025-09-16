@@ -617,3 +617,16 @@
 {"id":5,"level":"info","message":"Email created","service":"portal-services-server","subject":"AssumagbsjhgdjhdgmaMARCELOnxxxxto do Email","timestamp":"2025-09-16T15:26:23.158Z"}
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T15:32:22.661Z"}
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T15:32:53.693Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T15:33:56.875Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T15:33:57.005Z"}
+{"client_name":"Ana Costa","id":"c5e42810-415e-4b5f-8e55-6252eb533aff","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-16T15:35:50.625Z"}
+{"id":5,"level":"info","message":"Client created","name":"SILVANA","service":"portal-services-server","timestamp":"2025-09-16T15:36:09.747Z"}
+{"client_name":"SILVANA","id":"59821acf-3736-451d-a0ff-7241bad42e7d","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T15:36:26.275Z"}
+{"id":"3568b661-8776-440b-b820-7027d4d9ee5e","level":"info","message":"Service created","name":"PADOLOGIA","service":"portal-services-server","timestamp":"2025-09-16T15:36:46.773Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T15:39:13.694Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T15:39:14.720Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T15:39:14.853Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T15:39:20.890Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T18:06:17.380Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T18:06:17.479Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T18:25:50.475Z"}
