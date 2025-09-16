@@ -551,3 +551,10 @@
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T09:33:53.883Z"}
 {"error":"duplicate key value violates unique constraint \"categories_name_key\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-16T10:09:31.673Z"}
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T10:33:26.625Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T10:43:52.263Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T10:43:52.485Z"}
+{"id":"67e1a639-5e07-4128-8a2c-7a28da11a3b4","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-16T10:44:14.712Z"}
+{"id":"258d7b95-cea6-4e5b-ad5a-3e2b194c16a8","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-16T10:44:16.271Z"}
+{"id":"2b45a183-2727-45df-8f5b-3d2389be8613","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-16T10:44:16.701Z"}
+{"client_name":"JoMARCELOHERNANDESSILVAa","id":"fb6c0142-fcd9-4dfd-bc0a-20497cf75262","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T10:46:02.950Z"}
+{"client_name":"Pedro Oliveira","id":"df2d49f2-8a81-4ebf-a61e-30659503a3ae","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T10:46:17.513Z"}
