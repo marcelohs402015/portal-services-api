@@ -17,8 +17,11 @@ console.log('🚀 Iniciando Portal Services Server...');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Database config
-const dbConfig = {
+// Database config - Prioriza DATABASE_URL (Render) ou variáveis individuais (Docker)
+const dbConfig = process.env.DATABASE_URL ? {
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+} : {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
   database: process.env.DB_NAME || 'portalservicesdb',
@@ -29,13 +32,10 @@ const dbConfig = {
 
 const pool = new Pool(dbConfig);
 
-console.log('🔧 Configuração do banco:', {
-  host: dbConfig.host,
-  port: dbConfig.port,
-  database: dbConfig.database,
-  user: dbConfig.user,
-  ssl: !!dbConfig.ssl
-});
+console.log('🔧 Configuração do banco:', process.env.DATABASE_URL ? 
+  { connectionString: '***', ssl: true } : 
+  { host: dbConfig.host, port: dbConfig.port, database: dbConfig.database, user: dbConfig.user, ssl: !!dbConfig.ssl }
+);
 
 // Middleware
 app.use(cors({
