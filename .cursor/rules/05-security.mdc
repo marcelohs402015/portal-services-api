@@ -1,0 +1,25 @@
+---
+title: Security Standards
+appliesTo: ["**/*"]
+priority: 80
+alwaysApply: true
+---
+
+# Variáveis de Ambiente
+- Usar dotenv; nunca commitar `.env`
+- Validar presença de variáveis críticas no boot
+
+# Autenticação/Autorização
+- JWT: segredo via `JWT_SECRET`; expiração configurável
+- Rotas sensíveis exigem auth (futuro)
+
+# Entrada & Sanitização
+- Validar e sanitizar todos inputs (zod)
+- Proteger contra SQL Injection com parâmetros do pg
+
+# Transporte & Cookies
+- Usar HTTPS em produção (fora do escopo local)
+- `cookies` com flags seguras quando aplicável
+
+# Logs
+- Jamais logar credenciais, JWTs, connection strings

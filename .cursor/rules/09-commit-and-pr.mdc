@@ -1,0 +1,20 @@
+---
+title: Commits & PRs
+appliesTo: ["**/*"]
+priority: 60
+alwaysApply: true
+---
+
+# Commits
+- Mensagens claras, no imperativo (pt-BR ok)
+- Escopo curto + descrição objetiva
+- Commits pequenos e atômicos
+
+# Pull Requests
+- Descrever objetivo, mudanças e impacto
+- Marcar breaking changes explicitamente
+- Garantir testes e lints verdes
+
+# Proibido
+- Commits contendo secrets
+- Adicionar Render/Blueprint/frontend

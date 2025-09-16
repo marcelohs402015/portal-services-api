@@ -1,0 +1,23 @@
+---
+title: Database (PostgreSQL) Rules
+appliesTo: ["appserver/**/*.ts","appserver/database/**/*"]
+priority: 75
+alwaysApply: true
+---
+
+# Conexão
+- Usar `pg.Pool` com config de env
+- `ssl` apenas se `DB_SSL=true`
+
+# Queries
+- Sempre parametrizadas (`$1, $2, ...`)
+- Evitar N+1; preferir JOINs e agregações
+- Indexar colunas de filtro/ordenacao
+
+# Migrações/Seeds
+- Manter scripts em `appserver/database/*`
+- Script `init-database.js` para inicialização local
+
+# Performance
+- Usar `EXPLAIN ANALYZE` para endpoints críticos
+- Paginar resultados longos

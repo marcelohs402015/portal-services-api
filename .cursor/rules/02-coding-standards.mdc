@@ -1,0 +1,31 @@
+---
+title: Coding Standards (SOLID, Clean Code)
+appliesTo: ["**/*.ts","**/*.js"]
+priority: 85
+alwaysApply: true
+---
+
+# SOLID
+- Single Responsibility: arquivos e funções com foco único
+- Open/Closed: extensível via interfaces/estratégias
+- Liskov/Substituição: respeitar contratos
+- Interface Segregation: interfaces pequenas e específicas
+- Dependency Inversion: depender de abstrações
+
+# Nomenclatura
+- Funções: verbos (`createClient`, `fetchStats`)
+- Variáveis: substantivos descritivos (`clientRepository`)
+- Evitar siglas obscuras; usar palavras completas
+
+# Formatação
+- Sem reformatar código não relacionado
+- Multilinhas preferível a ternários complexos
+- Imports ordenados por escopo
+
+# Comentários
+- Apenas quando explicar o "porquê"
+- Proibido comentários redundantes do óbvio
+
+# Tipagem
+- Tipar funções exportadas e bordas do sistema
+- Evitar `any`; não usar casts inseguros

@@ -1,0 +1,26 @@
+---
+title: API Design & Validation
+appliesTo: ["appserver/**/*.ts"]
+priority: 80
+alwaysApply: true
+---
+
+# REST
+- Prefixo `/api`
+- Recursos no plural (`/api/clients`, `/api/services`)
+- Path params para IDs, query params para filtros/paginação
+
+# Validação
+- Usar `zod` para corpos/params/query
+- Rejeitar requisições inválidas com 400
+
+# CORS
+- Permitir apenas `http://localhost:3001` (ajuste conforme necessidade)
+- Headers: `Content-Type`, `Authorization`
+
+# Paginação
+- Parâmetros: `page`, `pageSize`
+- Resposta inclui `meta: { page, pageSize, total }`
+
+# Versionamento (se necessário)
+- Reservar `/v1` futuramente sem quebrar contratos existentes

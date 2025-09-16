@@ -1,0 +1,42 @@
+---
+title: Project Overview - Portal Services API
+appliesTo: ["**/*"]
+priority: 100
+alwaysApply: true
+---
+
+# Contexto do Projeto
+
+Este repositório contém apenas o backend (Node.js/Express + TypeScript) com banco PostgreSQL. Execução exclusivamente em localhost usando Docker Compose. Não há frontend, nem Render, nem blueprints neste projeto.
+
+# Objetivos
+- Garantir API REST estável, segura e observável
+- Padronizar práticas de código (SOLID, Clean Code)
+- Integrar PostgreSQL com queries performáticas e seguras
+- Facilitar desenvolvimento local com Docker
+
+# Diretrizes Globais
+- Não criar ou referenciar frontend (`appclient`) ou Render/Blueprint
+- Usar variáveis de ambiente carregadas via dotenv
+- Logs estruturados com winston e níveis apropriados
+- Validação de entrada com zod
+- Tratar erros com middlewares e respostas padronizadas
+- Padrões de camadas: Controller → Service → Repository
+
+# Execução Local
+- Subir serviços: `npm run dev`
+- API: `http://localhost:3001`
+- DB: `postgres://admin:admin@localhost:5432/portalservicesdb`
+
+# Estrutura Principal
+- `appserver/server.ts` (entrypoint)
+- `appserver/routes/*` (rotas)
+- `appserver/services/*` (regras de negócio)
+- `appserver/repositories/*` (acesso a dados)
+- `appserver/database/*` (scripts SQL e seeds)
+- `docker-compose.yml` (db + api)
+
+# Restrições
+- Proibido adicionar configurações de deploy em cloud neste repo
+- Proibido expor segredos em logs ou commits
+- Não criar endpoints sem validação e tratamento de erro

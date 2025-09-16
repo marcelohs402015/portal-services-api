@@ -1,0 +1,16 @@
+---
+title: Testing (Jest)
+appliesTo: ["appserver/**/*.ts","appserver/**/*.test.ts"]
+priority: 65
+alwaysApply: true
+---
+
+# Padrões de Teste
+- Unit tests para services e utils
+- Integration tests para rotas críticas (supertest)
+- Cobrir casos de erro e validação
+
+# Boas Práticas
+- Evitar mocks desnecessários do pg (usar DB de teste se possível)
+- Dados seed leves e reprodutíveis
+- Scripts: `npm test`, `test:unit`, `test:integration`

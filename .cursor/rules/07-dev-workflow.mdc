@@ -1,0 +1,20 @@
+---
+title: Dev Workflow (Docker + NPM)
+appliesTo: ["**/*"]
+priority: 70
+alwaysApply: true
+---
+
+# Execução Local
+- Subir tudo com Docker: `npm run dev`
+- Logs: `npm run dev:logs`
+- Parar: `npm run dev:stop`
+
+# Scripts úteis
+- `server:dev`: TSX watch no server
+- `build:server`: compila server (outDir dist)
+- `db:*`: operar banco via docker-compose
+
+# Padrões
+- Não adicionar scripts de frontend
+- Não adicionar scripts de deploy cloud

@@ -1,0 +1,24 @@
+---
+title: Error Handling & Logging
+appliesTo: ["appserver/**/*.ts","appserver/**/*.js"]
+priority: 80
+alwaysApply: true
+---
+
+# Logging (winston)
+- Níveis: error, warn, info, http (opcional), debug
+- Formato: JSON quando possível; incluir timestamp, level, message, context
+- Nunca logar dados sensíveis (tokens, senhas)
+
+# Correlação
+- Incluir `traceId` por requisição (gerar se ausente)
+- Propagar `traceId` em logs de service/repository
+
+# Tratamento de Erros
+- Capturar erros em controllers; repassar para middleware central
+- Mapear erros conhecidos: validação(400), permissão(403), não encontrado(404)
+- Erros inesperados: 500 com `traceId`
+
+# Health/Observabilidade
+- Endpoint `/health` simples e leve
+- Logs de inicialização com config não sensível (host/porta/db ssl)

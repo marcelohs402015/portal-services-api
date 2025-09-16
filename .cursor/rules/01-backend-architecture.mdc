@@ -1,0 +1,32 @@
+---
+title: Backend Architecture Rules
+appliesTo: ["appserver/**/*.ts"]
+priority: 90
+alwaysApply: true
+---
+
+# Camadas
+- Controller: validação de entrada, mapeamento HTTP, sem lógica de negócio
+- Service: regras de negócio, orquestra fluxos, sem SQL direto
+- Repository: acesso a dados (pg), queries parametrizadas, sem regra de negócio
+
+# Padrões
+- Injeção de dependências via construtores
+- Interfaces para services e repositories críticos
+- Evitar singletons globais com estado mutável
+
+# Práticas
+- Funções pequenas (≤ 30 linhas)
+- Nomes descritivos (evitar abreviações)
+- Early return e tratamento de erros próximo à origem
+
+# Respostas HTTP
+- Sucesso: 200/201 com `{ success: true, data }`
+- Erros de validação: 400 `{ success: false, error: '...' }`
+- Não encontrado: 404 `{ success: false, error: 'not_found' }`
+- Erro servidor: 500 `{ success: false, error: 'internal_error', traceId }`
+
+# Middlewares
+- `express.json()` + `urlencoded`
+- CORS apenas localhost:3001 (ajuste se necessário)
+- Middleware de erros centralizado
