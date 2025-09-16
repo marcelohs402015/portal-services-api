@@ -18,23 +18,23 @@ services:
         value: 10000
       - key: DB_HOST
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: host
       - key: DB_PORT
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: port
       - key: DB_NAME
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: database
       - key: DB_USER
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: user
       - key: DB_PASSWORD
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: password
       - key: DB_SSL
         value: "true"
@@ -44,7 +44,7 @@ services:
         value: info
       - key: DATABASE_URL
         fromDatabase:
-          name: portal-services-db
+          name: portalservicesdb
           property: connectionString
 
   # PostgreSQL Database
