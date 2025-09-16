@@ -1478,55 +1478,75 @@ app.use((error, req, res, next) => {
         error: 'Erro interno do servidor'
     });
 });
+// Inicializar banco antes de iniciar servidor
+const initDatabase = async () => {
+    if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL) {
+        try {
+            const { checkAndInitDatabase } = require('./database/init-render');
+            console.log('🔧 Verificando e inicializando banco de dados...');
+            const success = await checkAndInitDatabase();
+            if (!success) {
+                console.error('❌ Falha na inicialização do banco. Continuando mesmo assim...');
+            }
+        }
+        catch (error) {
+            console.error('⚠️  Erro ao inicializar banco:', error.message);
+        }
+    }
+};
 // Start server
-app.listen(PORT, () => {
-    console.log(`🎉 Portal Services Server rodando em http://localhost:${PORT}`);
-    console.log(`📋 Endpoints disponíveis:`);
-    console.log(`   GET    /health`);
-    console.log(`   GET    /api/health`);
-    console.log(`   GET    /api/categories`);
-    console.log(`   GET    /api/categories/:id`);
-    console.log(`   POST   /api/categories`);
-    console.log(`   PUT    /api/categories/:id`);
-    console.log(`   DELETE /api/categories/:id`);
-    console.log(`   GET    /api/clients`);
-    console.log(`   GET    /api/clients/:id`);
-    console.log(`   POST   /api/clients`);
-    console.log(`   PUT    /api/clients/:id`);
-    console.log(`   DELETE /api/clients/:id`);
-    console.log(`   GET    /api/services`);
-    console.log(`   GET    /api/services/:id`);
-    console.log(`   POST   /api/services`);
-    console.log(`   PUT    /api/services/:id`);
-    console.log(`   DELETE /api/services/:id`);
-    console.log(`   GET    /api/quotations`);
-    console.log(`   GET    /api/quotations/:id`);
-    console.log(`   POST   /api/quotations`);
-    console.log(`   PUT    /api/quotations/:id`);
-    console.log(`   DELETE /api/quotations/:id`);
-    console.log(`   GET    /api/appointments`);
-    console.log(`   GET    /api/appointments/:id`);
-    console.log(`   POST   /api/appointments`);
-    console.log(`   PUT    /api/appointments/:id`);
-    console.log(`   DELETE /api/appointments/:id`);
-    console.log(`   GET    /api/emails`);
-    console.log(`   GET    /api/emails/:id`);
-    console.log(`   POST   /api/emails`);
-    console.log(`   PUT    /api/emails/:id`);
-    console.log(`   DELETE /api/emails/:id`);
-    console.log(`   GET    /api/stats/business`);
-    console.log(`   GET    /api/stats/dashboard`);
-    console.log(`\n🧪 Para testar:`);
-    console.log(`   Health: GET http://localhost:${PORT}/health`);
-    console.log(`   Categories: GET http://localhost:${PORT}/api/categories`);
-    console.log(`   Clients: GET http://localhost:${PORT}/api/clients`);
-    console.log(`   Services: GET http://localhost:${PORT}/api/services`);
-    console.log(`   Quotations: GET http://localhost:${PORT}/api/quotations`);
-    console.log(`   Appointments: GET http://localhost:${PORT}/api/appointments`);
-    console.log(`   Emails: GET http://localhost:${PORT}/api/emails`);
-    console.log(`   Stats: GET http://localhost:${PORT}/api/stats/dashboard`);
-    logger.info('Server started', { port: PORT, environment: process.env.NODE_ENV });
-});
+const startServer = async () => {
+    await initDatabase();
+    app.listen(PORT, () => {
+        console.log(`🎉 Portal Services Server rodando em http://localhost:${PORT}`);
+        console.log(`📋 Endpoints disponíveis:`);
+        console.log(`   GET    /health`);
+        console.log(`   GET    /api/health`);
+        console.log(`   GET    /api/categories`);
+        console.log(`   GET    /api/categories/:id`);
+        console.log(`   POST   /api/categories`);
+        console.log(`   PUT    /api/categories/:id`);
+        console.log(`   DELETE /api/categories/:id`);
+        console.log(`   GET    /api/clients`);
+        console.log(`   GET    /api/clients/:id`);
+        console.log(`   POST   /api/clients`);
+        console.log(`   PUT    /api/clients/:id`);
+        console.log(`   DELETE /api/clients/:id`);
+        console.log(`   GET    /api/services`);
+        console.log(`   GET    /api/services/:id`);
+        console.log(`   POST   /api/services`);
+        console.log(`   PUT    /api/services/:id`);
+        console.log(`   DELETE /api/services/:id`);
+        console.log(`   GET    /api/quotations`);
+        console.log(`   GET    /api/quotations/:id`);
+        console.log(`   POST   /api/quotations`);
+        console.log(`   PUT    /api/quotations/:id`);
+        console.log(`   DELETE /api/quotations/:id`);
+        console.log(`   GET    /api/appointments`);
+        console.log(`   GET    /api/appointments/:id`);
+        console.log(`   POST   /api/appointments`);
+        console.log(`   PUT    /api/appointments/:id`);
+        console.log(`   DELETE /api/appointments/:id`);
+        console.log(`   GET    /api/emails`);
+        console.log(`   GET    /api/emails/:id`);
+        console.log(`   POST   /api/emails`);
+        console.log(`   PUT    /api/emails/:id`);
+        console.log(`   DELETE /api/emails/:id`);
+        console.log(`   GET    /api/stats/business`);
+        console.log(`   GET    /api/stats/dashboard`);
+        console.log(`\n🧪 Para testar:`);
+        console.log(`   Health: GET http://localhost:${PORT}/health`);
+        console.log(`   Categories: GET http://localhost:${PORT}/api/categories`);
+        console.log(`   Clients: GET http://localhost:${PORT}/api/clients`);
+        console.log(`   Services: GET http://localhost:${PORT}/api/services`);
+        console.log(`   Quotations: GET http://localhost:${PORT}/api/quotations`);
+        console.log(`   Appointments: GET http://localhost:${PORT}/api/appointments`);
+        console.log(`   Emails: GET http://localhost:${PORT}/api/emails`);
+        console.log(`   Stats: GET http://localhost:${PORT}/api/stats/dashboard`);
+        logger.info('Server started', { port: PORT, environment: process.env.NODE_ENV });
+    });
+};
+startServer();
 // Graceful shutdown
 process.on('SIGINT', async () => {
     console.log('\n👋 Encerrando servidor...');

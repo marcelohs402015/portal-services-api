@@ -1607,8 +1607,27 @@ app.use((error: Error, req: express.Request, res: express.Response, next: expres
   });
 });
 
+// Inicializar banco antes de iniciar servidor
+const initDatabase = async () => {
+  if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL) {
+    try {
+      const { checkAndInitDatabase } = require('./database/init-render');
+      console.log('🔧 Verificando e inicializando banco de dados...');
+      const success = await checkAndInitDatabase();
+      if (!success) {
+        console.error('❌ Falha na inicialização do banco. Continuando mesmo assim...');
+      }
+    } catch (error) {
+      console.error('⚠️  Erro ao inicializar banco:', error.message);
+    }
+  }
+};
+
 // Start server
-app.listen(PORT, () => {
+const startServer = async () => {
+  await initDatabase();
+  
+  app.listen(PORT, () => {
   console.log(`🎉 Portal Services Server rodando em http://localhost:${PORT}`);
   console.log(`📋 Endpoints disponíveis:`);
   console.log(`   GET    /health`);
@@ -1656,7 +1675,10 @@ app.listen(PORT, () => {
   console.log(`   Stats: GET http://localhost:${PORT}/api/stats/dashboard`);
   
   logger.info('Server started', { port: PORT, environment: process.env.NODE_ENV });
-});
+  });
+};
+
+startServer();
 
 // Graceful shutdown
 process.on('SIGINT', async () => {

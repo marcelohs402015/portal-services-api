@@ -20,6 +20,10 @@ RUN npm ci --only=production && npm cache clean --force
 # Copiar código fonte
 COPY . .
 
+# Copiar scripts SQL para inicialização
+COPY create-tables.sql /app/
+COPY seeds.sql /app/
+
 # Criar diretório de logs
 RUN mkdir -p logs
 
