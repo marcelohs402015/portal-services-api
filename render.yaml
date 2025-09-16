@@ -15,7 +15,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 3001
+        value: 10000
       - key: DB_HOST
         fromDatabase:
           name: portal-services-db
