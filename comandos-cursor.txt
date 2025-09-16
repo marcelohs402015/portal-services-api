@@ -33,7 +33,7 @@ npm start
 render login
 
 # 5.2 Deploy via interface web do Render
-# - Acesse render.com
+# - Acesse localhost:3001
 # - Conecte repositório GitHub
 # - Configure build settings
 
@@ -44,7 +44,7 @@ render login
 ## COMANDOS ÚTEIS PARA MONITORAMENTO
 
 # Ver logs do Render (via interface web)
-# - Acesse render.com/dashboard
+# - Acesse localhost:3001/dashboard
 # - Selecione seu serviço
 # - Vá em "Logs"
 

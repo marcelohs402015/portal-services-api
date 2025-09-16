@@ -540,3 +540,14 @@
 {"id":6,"level":"info","message":"Client created","name":"Joãochbbnnhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T16:54:22.221Z"}
 {"id":7,"level":"info","message":"Client created","name":"Joãochbbnnhhssss Silva","service":"portal-services-server","timestamp":"2025-09-15T16:54:23.119Z"}
 {"id":8,"level":"info","message":"Client created","name":"JoMARCELOHERNANDESSILVAa","service":"portal-services-server","timestamp":"2025-09-15T16:54:49.655Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T08:37:30.405Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T08:37:30.623Z"}
+{"id":9,"level":"info","message":"Client created","name":"JoMARCELOHERNANDESSILVAa","service":"portal-services-server","timestamp":"2025-09-16T08:38:09.685Z"}
+{"client_name":"João da Silva","id":"b2885c0f-2a8d-4a62-82b0-b93c93fd0e28","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T08:38:13.046Z"}
+{"id":"b6223599-0224-44a8-85a4-f8e542a4b820","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-16T08:38:26.897Z"}
+{"id":6,"level":"info","message":"Category created","name":"Eletricista2","service":"portal-services-server","timestamp":"2025-09-16T08:38:40.678Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T09:31:26.717Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T09:33:53.759Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T09:33:53.883Z"}
+{"error":"duplicate key value violates unique constraint \"categories_name_key\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-16T10:09:31.673Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T10:33:26.625Z"}

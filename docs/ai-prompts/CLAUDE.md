@@ -355,9 +355,9 @@ The project is **READY FOR DEPLOYMENT** on Render.com with complete full-stack a
 3. **Service Configuration** (Automated via render.yaml)
    - **Backend**: `portal-services-backend` (Node.js API)
      - `NODE_ENV=production`, `PORT=10000`
-     - `CLIENT_URL=https://portal-services-frontend.onrender.com`
+     - `CLIENT_URL=http://localhost:3000`
    - **Frontend**: `portal-services-frontend` (Static Site)
-     - `REACT_APP_API_URL=https://portal-services-backend.onrender.com`
+     - `REACT_APP_API_URL=http://localhost:3001`
 
 ### Local Development Setup
 ```bash

@@ -161,7 +161,7 @@ services:
 ```yaml
 envVars:
   - key: REACT_APP_API_URL
-    value: https://flowzi-backend.onrender.com
+    value: http://localhost:3001
   - key: REACT_APP_VERSION
     value: 3.1.0
   - key: REACT_APP_ENVIRONMENT

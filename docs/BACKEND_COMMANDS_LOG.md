@@ -215,9 +215,9 @@ envVars:
   - key: DB_SSL
     value: true
   - key: CORS_ORIGIN
-    value: https://flowzi-frontend.onrender.com
+    value: http://localhost:3000
   - key: CLIENT_URL
-    value: https://flowzi-frontend.onrender.com
+    value: http://localhost:3000
   - key: JWT_SECRET
     generateValue: true
   - key: LOG_LEVEL

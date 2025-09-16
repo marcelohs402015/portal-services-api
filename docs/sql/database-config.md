@@ -65,8 +65,8 @@ APP_VERSION=2.0.0
 FEATURES=email-management,service-management,quotations
 
 # CORS
-CORS_ORIGIN=https://your-frontend-domain.onrender.com
-CLIENT_URL=https://your-frontend-domain.onrender.com
+CORS_ORIGIN=http://localhost:3000
+CLIENT_URL=http://localhost:3000
 
 # Security
 JWT_SECRET=your-super-secret-jwt-key

@@ -3,7 +3,6 @@ import cors from 'cors';
 import pkg from 'pg';
 import dotenv from 'dotenv';
 import { createLogger } from './shared/logger';
-import config from './config/api-config';
 
 // Criar logger
 const logger = createLogger('portal-services-server');
@@ -39,7 +38,12 @@ console.log('🔧 Configuração do banco:', {
 });
 
 // Middleware
-app.use(cors(config.cors));
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -77,13 +81,6 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Info endpoint for frontend identification
-app.get('/api/info', (req, res) => {
-  res.json({
-    success: true,
-    data: config.getApiInfo()
-  });
-});
 
 // GET /api/categories - Lista todas as categorias
 app.get('/api/categories', async (req, res) => {
@@ -1577,7 +1574,6 @@ app.listen(PORT, () => {
   console.log(`📋 Endpoints disponíveis:`);
   console.log(`   GET    /health`);
   console.log(`   GET    /api/health`);
-  console.log(`   GET    /api/info`);
   console.log(`   GET    /api/categories`);
   console.log(`   GET    /api/categories/:id`);
   console.log(`   POST   /api/categories`);
@@ -1612,7 +1608,6 @@ app.listen(PORT, () => {
   console.log(`   GET    /api/stats/dashboard`);
   console.log(`\n🧪 Para testar:`);
   console.log(`   Health: GET http://localhost:${PORT}/health`);
-  console.log(`   API Info: GET http://localhost:${PORT}/api/info`);
   console.log(`   Categories: GET http://localhost:${PORT}/api/categories`);
   console.log(`   Clients: GET http://localhost:${PORT}/api/clients`);
   console.log(`   Services: GET http://localhost:${PORT}/api/services`);

@@ -3,7 +3,6 @@
 /**
  * Portal Services API - Database Initialization Script
  * Este script inicializa o banco de dados com as tabelas e dados iniciais
- * Executado automaticamente no deploy do Render
  */
 
 const { Pool } = require('pg');

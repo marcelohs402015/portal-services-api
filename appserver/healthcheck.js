@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Health Check Script para Render.com
+ * Health Check Script
  * Verifica se o servidor está respondendo corretamente
  */
 
@@ -21,7 +21,7 @@ const options = {
   method: 'GET',
   timeout: TIMEOUT,
   headers: {
-    'User-Agent': 'Render-HealthCheck/1.0'
+    'User-Agent': 'HealthCheck/1.0'
   }
 };
 
