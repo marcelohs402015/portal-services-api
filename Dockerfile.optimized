@@ -1,0 +1,55 @@
+# =====================================================
+# Portal Services API - Multi-Stage Dockerfile
+# =====================================================
+
+# STAGE 1: Build
+FROM node:18-alpine AS builder
+
+# Instalar dependências do sistema
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+
+# Copiar package.json de ambos os diretórios
+COPY package*.json ./
+COPY appserver/package*.json ./appserver/
+
+# Instalar TODAS as dependências (incluindo dev)
+RUN npm ci && cd appserver && npm ci
+
+# Copiar código fonte
+COPY . .
+
+# Compilar TypeScript
+RUN npm run build
+
+# =====================================================
+# STAGE 2: Production
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copiar package.json
+COPY package*.json ./
+COPY appserver/package*.json ./appserver/
+
+# Instalar apenas dependências de produção
+RUN npm ci --only=production && cd appserver && npm ci --only=production
+
+# Copiar arquivos compilados do stage anterior
+COPY --from=builder /app/appserver/dist ./appserver/dist
+
+# Copiar outros arquivos necessários
+COPY create-tables.sql /app/
+COPY seeds.sql /app/
+COPY appserver/database ./appserver/database
+COPY appserver/healthcheck.js ./appserver/
+
+# Criar diretório de logs
+RUN mkdir -p logs
+
+# Expor porta
+EXPOSE 3001
+
+# Comando para iniciar a aplicação
+CMD ["node", "appserver/dist/server.js"]
