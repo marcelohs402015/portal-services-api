@@ -1,0 +1,51 @@
+# =====================================================
+# Portal Services API - Render Blueprint
+# =====================================================
+
+services:
+  # Web Service - API
+  - type: web
+    name: portal-services-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node appserver/dist/server.js
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-db
+          property: password
+      - key: DB_SSL
+        value: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: LOG_LEVEL
+        value: info
+
+  # PostgreSQL Database
+  - type: pserv
+    name: portal-services-db
+    plan: free
+    databaseName: portalservicesdb
+    user: admin

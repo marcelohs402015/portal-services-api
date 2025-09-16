@@ -24,7 +24,8 @@
     "typecheck": "cd appserver && npm run typecheck",
     "test": "cd appserver && npm test",
     "setup": "cd appserver && npm run setup",
-    "deploy:prepare": "npm run typecheck && npm run build"
+    "deploy:prepare": "npm run typecheck && npm run build",
+    "init-db": "node appserver/scripts/init-database.js"
   },
   "keywords": [
     "portal-services",
