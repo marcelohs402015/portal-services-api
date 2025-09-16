@@ -252,4 +252,4 @@ healthCheckPath: /health
 - ✅ Dados sendo retornados corretamente
 - ✅ Processo rodando em background (PID 47001)
 
-**Próximo passo:** Subir o frontend e depois criar o render.yaml completo
+**Próximo passo:** Configurar deploy do backend

@@ -12,7 +12,7 @@ Portal Services is a complete system for automatic categorization and response o
 
 **DEPLOYMENT READY:** The project is now organized with separated client and server directories, complete build scripts, and ready for deployment on cloud platforms like Render.com.
 
-The project uses Node.js with TypeScript on the backend, React with Tailwind on the frontend and mock data in memory. **The application is exclusively in English.**
+The project uses Node.js with TypeScript on the backend and PostgreSQL database. **The application is exclusively in English.**
 
 ### Main Features
 
@@ -75,7 +75,6 @@ The project uses Node.js with TypeScript on the backend, React with Tailwind on 
 - **Responsive system** for desktop and mobile
 - **Modal components** for email composition and selection
 - **Email-quote integration** with two sending methods
-- **🌐 Internationalization (i18n)** - English-only system using react-i18next
 - **🎨 Dynamic Theme System** - Light and Dark themes with CSS custom properties
 - **Contact Information System** - Modal with support contacts accessible via footer
 - **Professional Footer** - Copyright information and contact access
@@ -122,7 +121,6 @@ npm run dev
 
 # Individual commands
 npm run server:dev    # Backend only (from root)
-npm run client:dev    # Frontend only (from root)
 
 # Build and production
 npm run build         # Complete build (both client and server)
@@ -205,7 +203,6 @@ portal-services/
 - **components/BusinessStats.tsx** - Complete business statistics
 
 #### Internationalization System
-- **i18n.ts** - react-i18next configuration (English-only)
 - **locales/en.json** - English translations
 - **data/mockEmails.ts** - English mock email data
 
@@ -220,7 +217,6 @@ portal-services/
 ### TypeScript Types
 - **/client/src/types/api.ts** - Frontend type definitions
 - **/server/types/** - Backend type definitions
-- Consistent interface between frontend and backend
 
 ## Main Components
 
@@ -330,7 +326,6 @@ PostgreSQL database with tables created automatically during setup.
 
 #### Internationalization System (i18n)
 - **🌐 English-Only Application** - Complete interface in English
-- **react-i18next Integration** - Translation system configured for English
 - **Translated Interface** - All interface texts using translation keys
 - **Consistent Terminology** - Professional portal services terminology
 - **Mock Data Translation** - All sample data in English
@@ -356,7 +351,6 @@ The project is **READY FOR DEPLOYMENT** on Render.com with complete full-stack a
    - **Backend**: `portal-services-backend` (Node.js API)
      - `NODE_ENV=production`, `PORT=10000`
      - `CLIENT_URL=http://localhost:3000`
-   - **Frontend**: `portal-services-frontend` (Static Site)
      - `REACT_APP_API_URL=http://localhost:3001`
 
 ### Local Development Setup

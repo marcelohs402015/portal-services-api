@@ -152,7 +152,6 @@ buildCommand: |
 
 # Frontend  
 buildCommand: |
-  cd appclient && npm ci --legacy-peer-deps && npm run build
 ```
 
 ### **Start Commands**

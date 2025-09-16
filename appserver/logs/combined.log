@@ -558,3 +558,4 @@
 {"id":"2b45a183-2727-45df-8f5b-3d2389be8613","level":"info","message":"Service created","name":"Nome dohhh Sejjjjrviço","service":"portal-services-server","timestamp":"2025-09-16T10:44:16.701Z"}
 {"client_name":"JoMARCELOHERNANDESSILVAa","id":"fb6c0142-fcd9-4dfd-bc0a-20497cf75262","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T10:46:02.950Z"}
 {"client_name":"Pedro Oliveira","id":"df2d49f2-8a81-4ebf-a61e-30659503a3ae","level":"info","message":"Quotation created","service":"portal-services-server","timestamp":"2025-09-16T10:46:17.513Z"}
+{"client_name":"JoMARCELOHERNANDESSILVAa","id":"a035f395-22cc-4827-81cd-876154da0397","level":"info","message":"Appointment created","service":"portal-services-server","timestamp":"2025-09-16T10:48:42.259Z"}

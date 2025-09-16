@@ -18,7 +18,6 @@
 ## 🔧 **ALTERAÇÕES TÉCNICAS**
 
 ### **Arquivo Modificado:**
-`appclient/src/components/ThemeSelector.tsx`
 
 ### **Mudanças:**
 
@@ -29,7 +28,6 @@ import {
   CheckIcon,
   SunIcon,        // ← NOVO
   MoonIcon        // ← NOVO
-} from '@heroicons/react/24/outline';
 ```
 
 2. **Função atualizada:**
@@ -116,9 +114,7 @@ className="w-full flex items-center justify-center px-2 py-3 ..." // Centralizad
 
 ## 📱 **COMO TESTAR**
 
-1. **Inicie o frontend:**
 ```bash
-cd appclient
 npm start
 ```
 

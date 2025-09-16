@@ -174,7 +174,6 @@ npm run dev
 npm install
 
 # Step 2: Install client dependencies (with legacy peer deps for React conflicts)
-cd appclient
 npm install --legacy-peer-deps
 cd ..
 
@@ -196,7 +195,6 @@ npm run dev
 **Problem: ERESOLVE dependency conflict (Windows/Mac)**
 ```bash
 # Solution: Use legacy peer deps flag
-cd appclient
 npm install --legacy-peer-deps
 ```
 
@@ -224,7 +222,6 @@ npm run dev
 
 # OR start individually from root
 npm run server:dev  # Backend on port 3001
-npm run client:dev  # Frontend on port 3000
 ```
 
 **Method 2 - Manual terminal approach:**
@@ -255,7 +252,7 @@ The application is **exclusively in English** and designed for professional serv
 #### Root Commands
 ```bash
 # Development
-npm run dev              # Starts backend (3001) + frontend (3000)
+npm run dev              # Starts backend (3001) + PostgreSQL
 npm run install:all      # Install dependencies for all modules (with auto-fix for conflicts)
 
 # Platform-specific Installation
@@ -278,7 +275,6 @@ install-windows.bat
 
 # Manual dependency installation
 npm install
-cd appclient
 npm install --legacy-peer-deps
 cd ..\appserver
 npm install
@@ -286,7 +282,7 @@ cd ..
 
 # Clear cache and reinstall (if needed)
 npm cache clean --force
-rmdir /s node_modules appclient\node_modules appserver\node_modules
+rmdir /s node_modules appserver\node_modules
 npm run install:all
 ```
 
@@ -296,11 +292,11 @@ npm run install:all
 npm run install:all
 
 # Manual dependency installation
-npm install && cd appclient && npm install --legacy-peer-deps && cd ../appserver && npm install && cd ..
+npm install &&  && npm install --legacy-peer-deps && cd ../appserver && npm install && cd ..
 
 # Clear cache and reinstall (if needed)
 npm cache clean --force
-rm -rf node_modules appclient/node_modules appserver/node_modules
+rm -rf node_modules appserver/node_modules
 npm run install:all
 ```
 
@@ -312,7 +308,6 @@ npm run build:server   # Build server for production
 
 #### Client Commands (from root)
 ```bash
-npm run client:dev     # Frontend only (React development server)
 npm run build:client   # Build client for production
 ```
 
@@ -464,10 +459,7 @@ The application is **ready for deployment** on various cloud platforms with auto
 **Backend Service:**
 - `NODE_ENV=production`
 - `PORT=10000`
-- `CLIENT_URL=https://your-frontend-url.com`
 
-**Frontend Service:**
-- `REACT_APP_API_URL=https://your-backend-url.com`
 
 ### 📝 Environment Configuration
 
@@ -521,7 +513,6 @@ npm run install:all
 
 # Option C: Manual installation
 npm install
-cd appclient
 npm install --legacy-peer-deps
 cd ..\appserver
 npm install
@@ -538,7 +529,7 @@ npm run install:all
 
 # Option C: Manual installation
 npm install
-cd appclient && npm install --legacy-peer-deps && cd ..
+ && npm install --legacy-peer-deps && cd ..
 cd appserver && npm install && cd ..
 ```
 
@@ -558,7 +549,6 @@ npm run dev
 
 # OR start individually in separate terminals
 npm run server:dev  # Terminal 1: Backend on port 3001
-npm run client:dev  # Terminal 2: Frontend on port 3000
 ```
 
 ### 🏃‍♂️ Quick Test Commands
@@ -628,12 +618,12 @@ cat package.json | grep "type"
 npm run typecheck
 
 # Clear and rebuild (Windows)
-rmdir /s node_modules appclient\node_modules appserver\node_modules
+rmdir /s node_modules appserver\node_modules
 npm run install:all
 npm run build
 
 # Clear and rebuild (macOS/Linux)
-rm -rf node_modules appclient/node_modules appserver/node_modules
+rm -rf node_modules appserver/node_modules
 npm run install:all
 npm run build
 ```
@@ -641,22 +631,21 @@ npm run build
 **ERESOLVE Dependency Conflicts:**
 ```bash
 # Windows
-cd appclient
 npm install --legacy-peer-deps
 cd ..
 
 # macOS/Linux  
-cd appclient && npm install --legacy-peer-deps && cd ..
+ && npm install --legacy-peer-deps && cd ..
 ```
 
 **Build Issues:**
 ```bash
 # Clean builds and dependencies (Windows)
-rmdir /s dist appclient\build appserver\dist
+rmdir /s dist appserver\dist
 npm run build
 
 # Clean builds and dependencies (macOS/Linux)
-rm -rf dist appclient/build appserver/dist
+rm -rf dist appserver/dist
 npm run build
 ```
 
@@ -680,7 +669,6 @@ cd appserver && npm run build && npm start && cd ..
 - Ensure NODE_ENV=production for server
 
 **CORS Issues:**
-- Update CLIENT_URL environment variable with actual frontend URL
 - Verify REACT_APP_API_URL points to correct backend URL
 
 **Build Failures:**
@@ -830,14 +818,14 @@ portal-services/
 
 ### 🚀 **Scripts de Desenvolvimento**
 - **📋 Script Principal**: `./start.sh` - Iniciar servidor da aplicação
-- **🔧 Desenvolvimento**: `npm run dev` - Iniciar frontend + backend
+- **🔧 Desenvolvimento**: `npm run dev` - Iniciar backend + PostgreSQL
 - **🏗️ Build**: `npm run build` - Build completo do projeto
 - **🧪 Testes**: `npm test` - Executar testes
 
 ### 🏗️ **Desenvolvimento**
 - **🏠 Local Setup Guide**: [LOCAL-SETUP-INSTRUCTIONS.md](LOCAL-SETUP-INSTRUCTIONS.md)
 - **📝 General Deployment Guide**: [DEPLOY.md](DEPLOY.md)
-- **🏗️ Architecture Documentation**: Check `/appserver` and `/appclient` directories
+- **🏗️ Architecture Documentation**: Check `/appserver` directory
 - **🐛 Issue Reporting**: Use GitHub Issues for bug reports and feature requests
 - **💬 Development Discussion**: Create GitHub Discussions for questions
 

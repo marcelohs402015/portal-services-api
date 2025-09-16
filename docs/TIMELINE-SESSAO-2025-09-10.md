@@ -1,15 +1,15 @@
 # Timeline da Sessão - 10 de Setembro de 2025
 
 ## 🎯 **OBJETIVO PRINCIPAL**
-Resolver problema de comunicação entre frontend e backend, e corrigir erros na página de cotações.
+Resolver problemas de comunicação e corrigir erros na API.
 
 ## ✅ **PROBLEMAS RESOLVIDOS**
 
-### 1. **Comunicação Frontend ↔ Backend**
-- **Problema:** Frontend não conseguia consumir API do backend
+### 1. **Comunicação API**
+- **Problema:** API não estava respondendo corretamente
 - **Causa:** Conflito de portas e configuração de CORS incorreta
 - **Solução:**
-  - ✅ Corrigido conflito de portas (backend: 10000 → 3001, frontend: 3001)
+  - ✅ Corrigido conflito de portas (backend: 10000 → 3001)
   - ✅ Melhorada configuração de CORS no backend
   - ✅ Sincronizadas configurações de ambiente (.env)
 
@@ -40,8 +40,6 @@ Resolver problema de comunicação entre frontend e backend, e corrigir erros na
 - `appserver/routes/adminRoutes.ts` - **NOVO** - Endpoints administrativos para gerenciar dados
 
 ### Frontend
-- `appclient/.env` - Corrigida URL da API para http://localhost:3001
-- `appclient/src/pages/Quotations.tsx` - Corrigidos todos os erros de undefined
 
 ### Scripts e Documentação
 - `start-with-docker.sh` - **NOVO** - Script para backend com Docker
@@ -66,7 +64,7 @@ Resolver problema de comunicação entre frontend e backend, e corrigir erros na
 - ✅ Dashboard carregando sem erros
 - ✅ Página de cotações sem crashes
 - ✅ Formulário de criação de cotações funcional
-- ✅ Comunicação frontend-backend estabelecida
+- ✅ Comunicação API estabelecida
 
 ### Scripts Docker Testados
 - ✅ `./start-with-docker.sh` - Backend com Docker funcionando
@@ -145,7 +143,6 @@ cd /home/mstech/projetos/portal-services
 npm run server:dev
 
 # Frontend  
-npm run client:dev
 
 # Banco de dados
 docker-compose -f docker-compose.dev.yml up -d

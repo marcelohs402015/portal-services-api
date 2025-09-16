@@ -7,7 +7,6 @@
 ./setup-supabase.sh
 
 # 1.2 Instalar dependências (se não executou o script)
-cd appclient
 npm install @supabase/supabase-js
 cd ..
 
@@ -21,11 +20,9 @@ npm install -g @render/cli
 # - Executar SQL: supabase-schema.sql
 
 ## PASSO 3: CONFIGURAR VARIÁVEIS
-# Editar arquivo: appclient/.env.local
 # (Use o editor do Cursor para criar/editar)
 
 ## PASSO 4: TESTAR LOCAL
-cd appclient
 npm start
 
 ## PASSO 5: DEPLOY RENDER
@@ -59,7 +56,6 @@ git push origin main
 
 ## COMANDOS DEBUG LOCAL
 # Testar conexão Supabase
-cd appclient
 npm start
 # Abrir: http://localhost:3000
 

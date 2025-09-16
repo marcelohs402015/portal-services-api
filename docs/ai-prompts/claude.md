@@ -22,7 +22,6 @@
 
 ### Frontend (React + TypeScript)
 ```
-appclient/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   ├── pages/              # Application pages
@@ -87,14 +86,11 @@ services:
     startCommand: "cd appserver && npm start"
     
   - type: web
-    name: portal-services-frontend
     runtime: static
-    buildCommand: "cd appclient && npm ci --legacy-peer-deps && npm run build"
 ```
 
 ### Environment Variables
 - **Backend**: NODE_ENV, PORT, CLIENT_URL, APP_VERSION
-- **Frontend**: REACT_APP_API_URL, REACT_APP_VERSION, REACT_APP_FEATURES
 
 ## 📊 Mock Data System
 
@@ -125,9 +121,7 @@ npm run typecheck       # TypeScript verification
 ### Individual Service Commands
 ```bash
 npm run server:dev      # Backend only
-npm run client:dev      # Frontend only
 npm run build:server    # Build backend
-npm run build:client    # Build frontend
 ```
 
 ## 📁 Key Files and Directories
@@ -135,14 +129,10 @@ npm run build:client    # Build frontend
 ### Configuration Files
 - `render.yaml` - Render.com deployment configuration
 - `package.json` - Root package with unified scripts
-- `appclient/package.json` - Frontend dependencies
 - `appserver/package.json` - Backend dependencies
 
 ### Build and Deploy
-- `appclient/build.sh` - Frontend build script
 - `appserver/build.sh` - Backend build script
-- `appclient/public/_redirects` - SPA routing configuration
-- `appclient/static.json` - Static site configuration
 
 ### Documentation
 - `prompt/PROJECT_DESCRIPTION.md` - Complete project documentation
