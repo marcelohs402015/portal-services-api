@@ -666,3 +666,6 @@
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:18:14.849Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:18:20.029Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:19:10.018Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:33:17.364Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-17T18:33:17.422Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-17T18:33:43.792Z"}

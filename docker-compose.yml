@@ -26,7 +26,7 @@ services:
   # Portal Services API Server
   api:
     build:
-      context: ./appserver
+      context: .
       dockerfile: Dockerfile
     container_name: portal-services-api
     restart: unless-stopped
@@ -36,8 +36,6 @@ services:
       - "3001:3001"
     volumes:
       - ./appserver/logs:/app/logs
-      - ./appserver:/app
-      - /app/node_modules
     networks:
       - portal-network
     depends_on:

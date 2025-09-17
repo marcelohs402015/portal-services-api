@@ -10,8 +10,8 @@ RUN apk add --no-cache python3 make g++
 # Copy package files
 COPY appserver/package*.json ./
 
-# Install production dependencies only
-RUN npm ci --only=production && npm cache clean --force
+# Install ALL dependencies (including dev for build)
+RUN npm ci && npm cache clean --force
 
 # Copy source code
 COPY appserver/ .
@@ -22,7 +22,8 @@ RUN npm run build
 # Remove dev dependencies and source files to reduce image size
 RUN rm -rf src/ tsconfig*.json *.md docs/ tests/ && \
     rm -rf node_modules/@types && \
-    npm prune --production
+    npm ci --only=production && \
+    npm cache clean --force
 
 # Create logs directory
 RUN mkdir -p logs
@@ -41,9 +42,6 @@ EXPOSE 3001
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD node healthcheck.js
-
-# Debug environment variables (remove in production)
-RUN echo "🔍 Environment Debug:" && node debug-env.js
 
 # Start the application
 CMD ["node", "dist/server.js"]

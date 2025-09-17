@@ -15,7 +15,8 @@ git push origin main
 1. Acesse [Render Dashboard](https://dashboard.render.com)
 2. **"New +"** → **"Blueprint"**
 3. Conecte seu repo GitHub
-4. Clique **"Apply"** - tudo será criado automaticamente!
+4. O Render detectará automaticamente o `render.yaml`
+5. Clique **"Apply"** - banco e API serão criados automaticamente!
 
 #### **Opção B: Manual**
 1. **Criar PostgreSQL:**
@@ -26,7 +27,7 @@ git push origin main
 2. **Criar Web Service:**
    - New+ → Web Service
    - Runtime: **Docker**
-   - Dockerfile Path: `./Dockerfile`
+   - Dockerfile Path: `Dockerfile`
    - Root Directory: (deixar vazio)
    - Environment Variable: `DATABASE_URL = [sua URL do banco]`
 
@@ -56,7 +57,7 @@ curl https://sua-api.onrender.com/health
 
 ### **Erro: "Cannot find module"**
 - Verifique se o Root Directory está correto
-- Use `./Dockerfile` como Dockerfile Path
+- Use `Dockerfile` como Dockerfile Path
 
 ### **Erro: "Database connection failed"**
 - Use a **Internal Database URL** (não External)
@@ -65,6 +66,11 @@ curl https://sua-api.onrender.com/health
 ### **Build falha:**
 - Verifique os logs de build no Render
 - Teste localmente: `docker build -t test .`
+
+### **Dockerfiles Disponíveis:**
+- **`Dockerfile`** - Para produção no Render (recomendado)
+- **`Dockerfile.optimized`** - Multi-stage build (alternativa)
+- **`docker-compose.yml`** - Para desenvolvimento local
 
 ## 🎯 **URLs Importantes**
 
