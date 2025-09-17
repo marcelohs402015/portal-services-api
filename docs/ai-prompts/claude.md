@@ -15,7 +15,7 @@
 - **📅 Calendar & Scheduling** - Professional appointment management
 - **📊 Analytics Dashboard** - Real-time business metrics
 - **🎨 Theme System** - Dark/Light mode with adaptive interface
-- **🚀 Deploy Ready** - Complete Render.com configuration
+- **🚀 Local Development** - Docker Compose configuration
 - **🔧 Code Quality** - Zero ESLint warnings, clean architecture
 
 ## 🏗️ Technical Architecture
@@ -75,9 +75,9 @@ appserver/
 
 ## 🚀 Deployment Configuration
 
-### Render.com Setup
+### Docker Setup
 ```yaml
-# render.yaml - Complete deployment configuration
+# docker-compose.yml - Local development configuration
 services:
   - type: web
     name: portal-services-backend
@@ -127,7 +127,7 @@ npm run build:server    # Build backend
 ## 📁 Key Files and Directories
 
 ### Configuration Files
-- `render.yaml` - Render.com deployment configuration
+- `docker-compose.yml` - Docker configuration for local development
 - `package.json` - Root package with unified scripts
 - `appserver/package.json` - Backend dependencies
 
@@ -177,7 +177,7 @@ npm run build:server    # Build backend
 ### Documentation
 - **Complete API Documentation**: All endpoints documented
 - **Setup Guides**: Step-by-step installation instructions
-- **Deployment Guides**: Render.com and other platforms
+- **Development Guides**: Docker and local setup
 - **Troubleshooting**: Common issues and solutions
 
 ### Monitoring

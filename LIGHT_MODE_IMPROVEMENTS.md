@@ -142,7 +142,7 @@ Todas as melhorias foram implementadas mantendo:
 ## 🎨 **Inspiração e Referências**
 
 As melhorias foram baseadas em:
-- ✅ Design systems modernos (GitHub, Linear, Render)
+- ✅ Design systems modernos (GitHub, Linear)
 - ✅ Melhores práticas de UI/UX 2024
 - ✅ Princípios de acessibilidade (WCAG 2.0)
 - ✅ Pesquisa em sites top de tecnologia

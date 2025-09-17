@@ -1,8 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import pkg from 'pg';
 import dotenv from 'dotenv';
 import { createLogger } from './shared/logger';
+import authRoutes from './routes/auth.routes';
+import { authenticate, optionalAuth, requirePermission, authorize } from './middlewares/auth.middleware';
+import { UserRole, Permission } from './types/auth.types';
+import { globalRateLimit, authRateLimit, createRateLimit } from './middlewares/rateLimiter.middleware';
+import { pool, testConnection, getDatabaseInfo } from './config/database';
 
 // Criar logger
 const logger = createLogger('portal-services-server');
@@ -10,64 +14,72 @@ const logger = createLogger('portal-services-server');
 // Carregar variáveis de ambiente
 dotenv.config();
 
-const { Pool } = pkg;
-
 console.log('🚀 Iniciando Portal Services Server...');
+console.log('🔧 Informações do banco:', getDatabaseInfo());
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
-// Database config - variáveis individuais
-const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'portalservicesdb',
-  user: process.env.DB_USER || 'admin',
-  password: process.env.DB_PASSWORD || 'admin',
-  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
-};
-
-const pool = new Pool(dbConfig);
-
-console.log('🔧 Configuração do banco:', 
-  { host: dbConfig.host, port: dbConfig.port, database: dbConfig.database, user: dbConfig.user, ssl: !!dbConfig.ssl }
-);
 
 // Middleware
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:3001'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Rate limiting global
+app.use(globalRateLimit);
+
+// Log de requisições
+app.use((req, res, next) => {
+  logger.http(`${req.method} ${req.path}`, {
+    ip: req.ip,
+    userAgent: req.headers['user-agent']
+  });
+  next();
+});
+
 console.log('✅ Middlewares configurados');
 
 // Test database connection
-pool.query('SELECT 1').then(() => {
-  console.log('✅ Banco de dados conectado');
-  logger.info('Database connection established');
-}).catch(err => {
-  console.log('❌ Erro na conexão com banco:', err.message);
-  logger.error('Database connection failed', { error: err.message });
+testConnection().then(connected => {
+  if (!connected && process.env.NODE_ENV === 'production') {
+    console.error('🛑 Não foi possível conectar ao banco em produção');
+    process.exit(1);
+  }
 });
 
-// Health check
-app.get('/health', (req, res) => {
+// Health check (rota pública)
+app.get('/health', async (req, res) => {
   console.log('📋 Health check solicitado');
+  
+  // Importar healthCheck dinamicamente para evitar dependência circular
+  const { healthCheck } = await import('./config/database');
+  const dbStatus = await healthCheck();
+  
   res.json({
     success: true,
     message: 'Portal Services API is running',
     timestamp: new Date().toISOString(),
     version: '2.0.0',
     environment: process.env.NODE_ENV || 'development',
-    database: 'connected'
+    database: {
+      connected: dbStatus.connected,
+      latency: dbStatus.latency,
+      ...(dbStatus.error && { error: dbStatus.error })
+    }
   });
 });
 
 // API Routes
+
+// Rotas de Autenticação (públicas)
+app.use('/api/auth', authRoutes);
+
+// Health check da API (rota pública)
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
@@ -77,9 +89,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// ====== ROTAS PROTEGIDAS - REQUEREM AUTENTICAÇÃO ======
+// Adicione authenticate como middleware para proteger rotas
 
-// GET /api/categories - Lista todas as categorias
-app.get('/api/categories', async (req, res) => {
+// GET /api/categories - Lista todas as categorias (autenticação opcional para leitura)
+app.get('/api/categories', optionalAuth, async (req, res) => {
   try {
     console.log('📋 Listando categorias...');
     const result = await pool.query('SELECT * FROM categories ORDER BY name ASC');
@@ -100,8 +114,8 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
-// GET /api/categories/:id - Obter categoria por ID
-app.get('/api/categories/:id', async (req, res) => {
+// GET /api/categories/:id - Obter categoria por ID (autenticação opcional)
+app.get('/api/categories/:id', optionalAuth, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -136,8 +150,8 @@ app.get('/api/categories/:id', async (req, res) => {
   }
 });
 
-// POST /api/categories - Criar nova categoria
-app.post('/api/categories', async (req, res) => {
+// POST /api/categories - Criar nova categoria (requer autenticação e permissão)
+app.post('/api/categories', authenticate, requirePermission(Permission.CREATE_CATEGORY), async (req, res) => {
   try {
     const { name, description, color = '#3B82F6', active = true } = req.body;
 
@@ -179,8 +193,8 @@ app.post('/api/categories', async (req, res) => {
   }
 });
 
-// PUT /api/categories/:id - Atualizar categoria
-app.put('/api/categories/:id', async (req, res) => {
+// PUT /api/categories/:id - Atualizar categoria (requer autenticação e permissão)
+app.put('/api/categories/:id', authenticate, requirePermission(Permission.UPDATE_CATEGORY), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -222,8 +236,8 @@ app.put('/api/categories/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/categories/:id - Deletar categoria (soft delete)
-app.delete('/api/categories/:id', async (req, res) => {
+// DELETE /api/categories/:id - Deletar categoria (soft delete) (requer autenticação e permissão)
+app.delete('/api/categories/:id', authenticate, requirePermission(Permission.DELETE_CATEGORY), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -266,8 +280,8 @@ app.delete('/api/categories/:id', async (req, res) => {
 // CLIENTS ROUTES
 // =====================================================
 
-// GET /api/clients - Lista todos os clientes
-app.get('/api/clients', async (req, res) => {
+// GET /api/clients - Lista todos os clientes (autenticação opcional)
+app.get('/api/clients', optionalAuth, async (req, res) => {
   try {
     console.log('👥 Listando clientes...');
     

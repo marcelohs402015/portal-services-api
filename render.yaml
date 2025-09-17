@@ -1,0 +1,96 @@
+services:
+  # Backend API Service
+  - type: web
+    name: portal-services-api
+    runtime: docker
+    region: oregon # ou ohio, virginia, frankfurt, singapore
+    plan: free # ou starter, standard, pro
+    
+    # Docker Configuration
+    dockerfilePath: ./Dockerfile
+    
+    # Health Check
+    healthCheckPath: /health
+    
+    # Environment Variables
+    envVars:
+      - key: NODE_ENV
+        value: production
+      
+      - key: PORT
+        value: 10000
+      
+      # JWT Configuration
+      - key: JWT_SECRET
+        generateValue: true
+      
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      
+      - key: JWT_ACCESS_EXPIRY
+        value: 15m
+      
+      - key: JWT_REFRESH_EXPIRY
+        value: 7d
+      
+      - key: JWT_ISSUER
+        value: portal-services-api
+      
+      - key: JWT_AUDIENCE
+        value: portal-services-client
+      
+      # Security Options
+      - key: REQUIRE_EMAIL_VERIFICATION
+        value: false
+      
+      - key: MAX_LOGIN_ATTEMPTS
+        value: 5
+      
+      - key: LOCKOUT_DURATION_MINUTES
+        value: 30
+      
+      # Password Requirements
+      - key: PASSWORD_MIN_LENGTH
+        value: 8
+      
+      # CORS
+      - key: CORS_ORIGIN
+        value: "*" # Ajuste para seu domínio frontend em produção
+      
+      # Logging
+      - key: LOG_LEVEL
+        value: info
+      
+      # Database Pool Settings
+      - key: DB_POOL_MAX
+        value: 20
+      
+      - key: DB_POOL_MIN
+        value: 2
+      
+      - key: DB_IDLE_TIMEOUT
+        value: 30000
+      
+      - key: DB_CONNECTION_TIMEOUT
+        value: 2000
+      
+      # Database URL será automaticamente injetada pelo Render
+      # quando você conectar um banco PostgreSQL
+
+databases:
+  # PostgreSQL Database
+  - name: portal-services-db
+    plan: free # ou starter, standard, pro
+    region: oregon # deve ser a mesma região do serviço
+    
+    # Configurações do banco
+    databaseName: portalservicesdb
+    user: portaladmin
+    
+    # IP Access Control (opcional)
+    # ipAllowList:
+    #   - source: 0.0.0.0/0
+    #     description: Allow all IPs
+
+# Configuração adicional para conectar o banco ao serviço
+# Isso será feito automaticamente pelo Render quando você criar os serviços

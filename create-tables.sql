@@ -1,5 +1,5 @@
 -- =====================================================
--- Portal Services API - Criação de Tabelas para Render
+-- Portal Services API - Criação de Tabelas
 -- =====================================================
 
 -- Configurações iniciais

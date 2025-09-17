@@ -4,13 +4,13 @@ This file provides guidance for Claude Code (claude.ai/code) when working with t
 
 ## Project Overview
 
-Portal Services is a complete system for automatic categorization and response of Gmail emails using **MOCK DATA ONLY**. **The project is now restructured for production deployment on Render.com with separated client and server architecture.**
+Portal Services is a complete system for automatic categorization and response of Gmail emails using **MOCK DATA ONLY**. **The project uses a separated client and server architecture for local development with Docker.**
 
 **Target Audience:** This application was developed especially for professionals who offer portal services — contractors who perform home repairs, maintenance and small repair services. The solution helps these professionals efficiently manage service requests, quotes, complaints, product inquiries, support and sales communications received via email.
 
 **IMPORTANT:** The project uses only mock data - no real connection to PostgreSQL or Gmail API.
 
-**DEPLOYMENT READY:** The project is now organized with separated client and server directories, complete build scripts, and ready for deployment on cloud platforms like Render.com.
+**LOCAL DEVELOPMENT:** The project is organized with separated client and server directories, complete with Docker Compose for local PostgreSQL database.
 
 The project uses Node.js with TypeScript on the backend and PostgreSQL database. **The application is exclusively in English.**
 
@@ -159,9 +159,8 @@ npm run typecheck     # TypeScript verification
 portal-services/
 ├── client/                 # React Frontend (Separate Service)
 ├── server/                 # Node.js Backend (Separate Service)  
-├── build.sh               # Render.com build script
-├── start.sh               # Render.com start script
-├── render.yaml            # Render.com configuration
+├── docker-compose.yml     # Docker configuration for local development
+├── env.dev                # Development environment variables
 ├── DEPLOY.md              # Complete deployment guide
 └── package.json           # Root package.json with unified scripts
 ```
@@ -330,28 +329,30 @@ PostgreSQL database with tables created automatically during setup.
 - **Consistent Terminology** - Professional portal services terminology
 - **Mock Data Translation** - All sample data in English
 
-## 🚀 Deployment Notes - RENDER.COM READY
+## 🚀 Local Development Setup
 
-### Production Deployment (Render.com)
-The project is **READY FOR DEPLOYMENT** on Render.com with complete full-stack automation:
+### Development Environment
+The project runs locally using Docker Compose for database management:
 
-1. **Push to Git Repository**
+1. **Start Local Development**
    ```bash
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
+   npm run dev           # Start all services
+   npm run dev:logs      # View logs
+   npm run dev:stop      # Stop services
    ```
 
-2. **Deploy on Render.com**
-   - **Blueprint deployment** (automatic detection of `render.yaml`)
-   - **Deploys 2 services**: Backend API + Frontend App
-   - **Complete integration** with cross-service communication
+2. **Service Configuration** (Local Docker)
+   - **Backend Service**: Node.js on port 3001
+   - **Frontend Service**: React on port 3000 (if configured)
+   - **Database**: PostgreSQL on port 5432
+   - **Environment Variables**: Loaded from .env file
 
-3. **Service Configuration** (Automated via render.yaml)
-   - **Backend**: `portal-services-backend` (Node.js API)
-     - `NODE_ENV=production`, `PORT=10000`
-     - `CLIENT_URL=http://localhost:3000`
-     - `REACT_APP_API_URL=http://localhost:3001`
+3. **Database Management**
+   ```bash
+   npm run db:reset      # Reset database
+   npm run db:seed       # Run seeds
+   docker exec -it portal-services-db psql -U admin -d portalservicesdb
+   ```
 
 ### Local Development Setup
 ```bash
@@ -363,17 +364,17 @@ npm run dev          # Start development servers
 ```
 
 ### Build Process
-- **`build.sh`** - Automated build script for Render.com
-- **`start.sh`** - Production startup script
-- **`render.yaml`** - Service configuration
+- **`docker-compose.yml`** - Docker services configuration
+- **`package.json`** - Scripts for local development
 - **TypeScript compilation** - Server builds to `/dist` directory
-- **React build** - Client builds to `/build` directory
+- **React build** - Client builds to `/build` directory (if configured)
+- **Database initialization** - Automatic with Docker Compose
 
-### Important Files for Deployment
-- ✅ **`render.yaml`** - Render.com configuration
-- ✅ **`build.sh`** - Build automation
-- ✅ **`start.sh`** - Production startup
-- ✅ **`DEPLOY.md`** - Complete deployment guide
+### Important Files for Development
+- ✅ **`docker-compose.yml`** - Docker configuration
+- ✅ **`env.dev`** - Environment template
+- ✅ **`.env`** - Local environment variables (create from env.dev)
+- ✅ **Database scripts** - SQL initialization and seeds
 - ✅ **Environment templates** - `.env.example` files
 - ✅ **Separated packages** - Independent client/server dependencies
 

@@ -644,3 +644,25 @@
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T21:03:36.759Z"}
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:03:40.621Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T21:03:40.881Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T21:55:32.337Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:55:34.920Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T21:55:34.998Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T21:55:42.121Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:55:44.658Z"}
+{"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-16T21:55:44.724Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-16T21:55:51.252Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-16T21:55:59.273Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:56:03.092Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:56:15.094Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:56:27.600Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:56:42.627Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:57:17.254Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:57:26.983Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T21:59:07.597Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T23:02:09.712Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T23:02:17.550Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T23:02:26.031Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-16T23:04:34.992Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:18:14.849Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:18:20.029Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:19:10.018Z"}

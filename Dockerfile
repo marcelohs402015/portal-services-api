@@ -1,41 +1,49 @@
-# =====================================================
-# Portal Services API - Dockerfile para Produção
-# =====================================================
-
-# Usar Node.js 18 Alpine como base
+# Portal Services API - Production Dockerfile for Render
 FROM node:18-alpine
 
-# Instalar dependências do sistema
-RUN apk add --no-cache python3 make g++
-
-# Definir diretório de trabalho
+# Set working directory
 WORKDIR /app
 
-# Copiar package.json e package-lock.json (root e appserver)
-COPY package*.json ./
-COPY appserver/package*.json ./appserver/
+# Install system dependencies
+RUN apk add --no-cache python3 make g++
 
-# Instalar TODAS as dependências (incluindo devDependencies para build)
-RUN npm ci && cd appserver && npm ci
+# Copy package files
+COPY appserver/package*.json ./
 
-# Copiar código fonte
-COPY . .
+# Install production dependencies only
+RUN npm ci --only=production && npm cache clean --force
 
-# Copiar scripts SQL para inicialização
-COPY create-tables.sql /app/
-COPY seeds.sql /app/
+# Copy source code
+COPY appserver/ .
 
-# Criar diretório de logs
-RUN mkdir -p logs
-
-# Compilar TypeScript
+# Build TypeScript
 RUN npm run build
 
-# Remover devDependencies após o build para reduzir tamanho da imagem
-RUN npm prune --production && cd appserver && npm prune --production
+# Remove dev dependencies and source files to reduce image size
+RUN rm -rf src/ tsconfig*.json *.md docs/ tests/ && \
+    rm -rf node_modules/@types && \
+    npm prune --production
 
-# Expor porta
+# Create logs directory
+RUN mkdir -p logs
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+# Change ownership of the app directory
+RUN chown -R nodejs:nodejs /app
+USER nodejs
+
+# Expose port
 EXPOSE 3001
 
-# Comando para iniciar a aplicação
-CMD ["node", "appserver/dist/server.js"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node healthcheck.js
+
+# Debug environment variables (remove in production)
+RUN echo "🔍 Environment Debug:" && node debug-env.js
+
+# Start the application
+CMD ["node", "dist/server.js"]
