@@ -20,12 +20,16 @@ console.log('🔧 Informações do banco:', getDatabaseInfo());
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+// Middleware - CORS configurado para desenvolvimento e produção
+const corsOrigins = process.env.NODE_ENV === 'production' 
+  ? [process.env.CORS_ORIGIN || '*']
+  : ['http://localhost:3000', 'http://localhost:3001'];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: process.env.CORS_ORIGIN === '*' ? '*' : corsOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
-  credentials: true
+  credentials: process.env.NODE_ENV !== 'production'
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
