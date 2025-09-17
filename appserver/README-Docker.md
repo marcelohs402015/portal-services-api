@@ -127,9 +127,8 @@ appserver/
 Edite o arquivo `docker.env` para configurar:
 
 ```bash
-# Segurança (MUDE EM PRODUÇÃO!)
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-SESSION_SECRET=your-session-secret-change-in-production
+# API Keys (para integração N8N)
+API_KEYS_ENABLED=true
 
 # Banco de dados
 DB_PASSWORD=admin  # Mude para uma senha forte

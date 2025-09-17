@@ -25,9 +25,8 @@ console.log('DB_USER:', process.env.DB_USER);
 console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '[DEFINIDA]' : 'NÃO DEFINIDA');
 console.log('DB_SSL:', process.env.DB_SSL);
 
-console.log('\n🔐 JWT Variables:');
-console.log('JWT_SECRET presente:', !!process.env.JWT_SECRET);
-console.log('JWT_REFRESH_SECRET presente:', !!process.env.JWT_REFRESH_SECRET);
+console.log('\n🔑 API Key Variables:');
+console.log('API_KEYS_ENABLED:', process.env.API_KEYS_ENABLED || 'true (default)');
 
 console.log('\n🌐 CORS:');
 console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN);

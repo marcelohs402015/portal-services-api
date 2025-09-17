@@ -40,9 +40,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const logger_1 = require("./shared/logger");
-const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
-const auth_middleware_1 = require("./middlewares/auth.middleware");
-const auth_types_1 = require("./types/auth.types");
+const apiKey_routes_1 = __importDefault(require("./routes/apiKey.routes"));
+const apiKey_middleware_1 = require("./middlewares/apiKey.middleware");
+const api_types_1 = require("./types/api.types");
 const rateLimiter_middleware_1 = require("./middlewares/rateLimiter.middleware");
 const database_1 = require("./config/database");
 // Criar logger
@@ -100,8 +100,8 @@ app.get('/health', async (req, res) => {
     });
 });
 // API Routes
-// Rotas de Autenticação (públicas)
-app.use('/api/auth', auth_routes_1.default);
+// Rotas de API Keys
+app.use('/api/keys', apiKey_routes_1.default);
 // Health check da API (rota pública)
 app.get('/api/health', (req, res) => {
     res.json({
@@ -111,10 +111,62 @@ app.get('/api/health', (req, res) => {
         version: '2.0.0'
     });
 });
+// Rota temporária para obter API Key de teste
+app.get('/api/test-key', (req, res) => {
+    res.json({
+        success: true,
+        message: 'Use esta API Key para testes no Bruno',
+        apiKey: 'psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
+        usage: 'Authorization: Bearer psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
+        permissions: [
+            'read:categories',
+            'create:categories',
+            'update:categories',
+            'delete:categories',
+            'read:clients',
+            'create:clients',
+            'update:clients',
+            'delete:clients',
+            'read:services',
+            'create:services',
+            'update:services',
+            'delete:services',
+            'read:quotations',
+            'create:quotations',
+            'update:quotations',
+            'delete:quotations',
+            'read:appointments',
+            'create:appointments',
+            'update:appointments',
+            'delete:appointments',
+            'read:emails',
+            'create:emails',
+            'update:emails',
+            'delete:emails',
+            'read:stats',
+            'admin:all'
+        ]
+    });
+});
+// Rota de debug para testar API Key
+app.post('/api/debug-key', (req, res) => {
+    const authHeader = req.headers.authorization;
+    const apiKey = authHeader?.split(' ')[1];
+    res.json({
+        success: true,
+        debug: {
+            authHeader,
+            apiKey,
+            apiKeyLength: apiKey?.length,
+            startsWithPsk: apiKey?.startsWith('psk_'),
+            headers: req.headers
+        }
+    });
+});
 // ====== ROTAS PROTEGIDAS - REQUEREM AUTENTICAÇÃO ======
 // Adicione authenticate como middleware para proteger rotas
 // GET /api/categories - Lista todas as categorias (autenticação opcional para leitura)
-app.get('/api/categories', auth_middleware_1.optionalAuth, async (req, res) => {
+app.get('/api/categories', apiKey_middleware_1.optionalApiKey, async (req, res) => {
     try {
         console.log('📋 Listando categorias...');
         const result = await database_1.pool.query('SELECT * FROM categories ORDER BY name ASC');
@@ -135,7 +187,7 @@ app.get('/api/categories', auth_middleware_1.optionalAuth, async (req, res) => {
     }
 });
 // GET /api/categories/:id - Obter categoria por ID (autenticação opcional)
-app.get('/api/categories/:id', auth_middleware_1.optionalAuth, async (req, res) => {
+app.get('/api/categories/:id', apiKey_middleware_1.optionalApiKey, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -168,7 +220,7 @@ app.get('/api/categories/:id', auth_middleware_1.optionalAuth, async (req, res) 
     }
 });
 // POST /api/categories - Criar nova categoria (requer autenticação e permissão)
-app.post('/api/categories', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.CREATE_CATEGORY), async (req, res) => {
+app.post('/api/categories', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_CATEGORIES), async (req, res) => {
     try {
         const { name, description, color = '#3B82F6', active = true } = req.body;
         if (!name || !description) {
@@ -203,7 +255,7 @@ app.post('/api/categories', auth_middleware_1.authenticate, (0, auth_middleware_
     }
 });
 // PUT /api/categories/:id - Atualizar categoria (requer autenticação e permissão)
-app.put('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.UPDATE_CATEGORY), async (req, res) => {
+app.put('/api/categories/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_CATEGORIES), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -239,7 +291,7 @@ app.put('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middlewa
     }
 });
 // DELETE /api/categories/:id - Deletar categoria (soft delete) (requer autenticação e permissão)
-app.delete('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.DELETE_CATEGORY), async (req, res) => {
+app.delete('/api/categories/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_CATEGORIES), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -276,7 +328,7 @@ app.delete('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middl
 // CLIENTS ROUTES
 // =====================================================
 // GET /api/clients - Lista todos os clientes (autenticação opcional)
-app.get('/api/clients', auth_middleware_1.optionalAuth, async (req, res) => {
+app.get('/api/clients', apiKey_middleware_1.optionalApiKey, async (req, res) => {
     try {
         console.log('👥 Listando clientes...');
         let query = 'SELECT * FROM clients WHERE 1=1';
@@ -309,7 +361,7 @@ app.get('/api/clients', auth_middleware_1.optionalAuth, async (req, res) => {
     }
 });
 // GET /api/clients/:id - Obter cliente por ID
-app.get('/api/clients/:id', async (req, res) => {
+app.get('/api/clients/:id', apiKey_middleware_1.optionalApiKey, async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🔍 Buscando cliente ID: ${id}`);
@@ -336,7 +388,7 @@ app.get('/api/clients/:id', async (req, res) => {
     }
 });
 // POST /api/clients - Criar novo cliente
-app.post('/api/clients', async (req, res) => {
+app.post('/api/clients', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_CLIENTS), async (req, res) => {
     try {
         const { name, email, phone, address, notes = '' } = req.body;
         if (!name || !email) {
@@ -371,7 +423,7 @@ app.post('/api/clients', async (req, res) => {
     }
 });
 // PUT /api/clients/:id - Atualizar cliente
-app.put('/api/clients/:id', async (req, res) => {
+app.put('/api/clients/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_CLIENTS), async (req, res) => {
     try {
         const id = req.params.id;
         const { name, email, phone, address, notes } = req.body;
@@ -427,7 +479,7 @@ app.put('/api/clients/:id', async (req, res) => {
     }
 });
 // DELETE /api/clients/:id - Deletar cliente
-app.delete('/api/clients/:id', async (req, res) => {
+app.delete('/api/clients/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_CLIENTS), async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando cliente ID: ${id}`);
@@ -454,7 +506,7 @@ app.delete('/api/clients/:id', async (req, res) => {
     }
 });
 // GET /api/services - Lista todos os serviços
-app.get('/api/services', async (req, res) => {
+app.get('/api/services', apiKey_middleware_1.optionalApiKey, async (req, res) => {
     try {
         console.log('📋 Listando serviços...');
         const result = await database_1.pool.query('SELECT * FROM services ORDER BY name ASC');
@@ -596,7 +648,7 @@ app.get('/api/emails/:id', async (req, res) => {
     }
 });
 // POST /api/emails - Criar novo email
-app.post('/api/emails', async (req, res) => {
+app.post('/api/emails', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_EMAILS), async (req, res) => {
     try {
         const { gmail_id, subject, sender_email, sender_name, date, body = '', category = null, processed = false } = req.body;
         if (!gmail_id || !subject || !sender_email || !date) {
@@ -635,7 +687,7 @@ app.post('/api/emails', async (req, res) => {
     }
 });
 // PUT /api/emails/:id - Atualizar email
-app.put('/api/emails/:id', async (req, res) => {
+app.put('/api/emails/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_EMAILS), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -705,7 +757,7 @@ app.put('/api/emails/:id', async (req, res) => {
     }
 });
 // DELETE /api/emails/:id - Deletar email
-app.delete('/api/emails/:id', async (req, res) => {
+app.delete('/api/emails/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_EMAILS), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -981,7 +1033,7 @@ app.get('/api/quotations/:id', async (req, res) => {
     }
 });
 // POST /api/quotations - Criar novo orçamento
-app.post('/api/quotations', async (req, res) => {
+app.post('/api/quotations', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_QUOTATIONS), async (req, res) => {
     try {
         const { client_name, client_email, client_phone, client_address, services = [], subtotal = 0, discount = 0, total = 0, status = 'draft', valid_until, notes = '' } = req.body;
         if (!client_email || !services.length) {
@@ -1010,7 +1062,7 @@ app.post('/api/quotations', async (req, res) => {
     }
 });
 // PUT /api/quotations/:id - Atualizar orçamento
-app.put('/api/quotations/:id', async (req, res) => {
+app.put('/api/quotations/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_QUOTATIONS), async (req, res) => {
     try {
         const id = req.params.id;
         const { client_email, client_name, client_phone, client_address, services, subtotal, discount, total, status, valid_until, notes } = req.body;
@@ -1090,7 +1142,7 @@ app.put('/api/quotations/:id', async (req, res) => {
     }
 });
 // DELETE /api/quotations/:id - Deletar orçamento
-app.delete('/api/quotations/:id', async (req, res) => {
+app.delete('/api/quotations/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_QUOTATIONS), async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando orçamento ID: ${id}`);
@@ -1180,7 +1232,7 @@ app.get('/api/services/:id', async (req, res) => {
     }
 });
 // POST /api/services - Criar novo serviço
-app.post('/api/services', async (req, res) => {
+app.post('/api/services', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_SERVICES), async (req, res) => {
     try {
         const { name, description, category, price = 0, estimated_time, active = true, unit = 'hour', materials = [] } = req.body;
         if (!name || !description || !category) {
@@ -1209,7 +1261,7 @@ app.post('/api/services', async (req, res) => {
     }
 });
 // PUT /api/services/:id - Atualizar serviço
-app.put('/api/services/:id', async (req, res) => {
+app.put('/api/services/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_SERVICES), async (req, res) => {
     try {
         const id = req.params.id;
         const { name, description, category, price, estimated_time, active, unit, materials } = req.body;
@@ -1277,7 +1329,7 @@ app.put('/api/services/:id', async (req, res) => {
     }
 });
 // DELETE /api/services/:id - Deletar serviço
-app.delete('/api/services/:id', async (req, res) => {
+app.delete('/api/services/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_SERVICES), async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando serviço ID: ${id}`);
@@ -1371,7 +1423,7 @@ app.get('/api/appointments/:id', async (req, res) => {
     }
 });
 // POST /api/appointments - Criar novo agendamento
-app.post('/api/appointments', async (req, res) => {
+app.post('/api/appointments', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.CREATE_APPOINTMENTS), async (req, res) => {
     try {
         const { client_id, client_name, service_ids = [], service_names = [], date, time, duration = 120, address, notes = '', status = 'scheduled' } = req.body;
         if (!client_id || !client_name || !date || !time) {
@@ -1400,7 +1452,7 @@ app.post('/api/appointments', async (req, res) => {
     }
 });
 // PUT /api/appointments/:id - Atualizar agendamento
-app.put('/api/appointments/:id', async (req, res) => {
+app.put('/api/appointments/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.UPDATE_APPOINTMENTS), async (req, res) => {
     try {
         const id = req.params.id;
         const { client_id, client_name, service_ids, service_names, date, time, duration, address, notes, status } = req.body;
@@ -1476,7 +1528,7 @@ app.put('/api/appointments/:id', async (req, res) => {
     }
 });
 // DELETE /api/appointments/:id - Deletar agendamento
-app.delete('/api/appointments/:id', async (req, res) => {
+app.delete('/api/appointments/:id', apiKey_middleware_1.authenticateApiKey, (0, apiKey_middleware_1.requirePermission)(api_types_1.ApiPermission.DELETE_APPOINTMENTS), async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando agendamento ID: ${id}`);

@@ -2,10 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { createLogger } from './shared/logger';
-import authRoutes from './routes/auth.routes';
-import { authenticate, optionalAuth, requirePermission, authorize } from './middlewares/auth.middleware';
-import { UserRole, Permission } from './types/auth.types';
-import { globalRateLimit, authRateLimit, createRateLimit } from './middlewares/rateLimiter.middleware';
+import apiKeyRoutes from './routes/apiKey.routes';
+import { authenticateApiKey, optionalApiKey, requirePermission } from './middlewares/apiKey.middleware';
+import { ApiPermission } from './types/api.types';
+import { globalRateLimit } from './middlewares/rateLimiter.middleware';
 import { pool, testConnection, getDatabaseInfo } from './config/database';
 
 // Criar logger
@@ -76,8 +76,8 @@ app.get('/health', async (req, res) => {
 
 // API Routes
 
-// Rotas de Autenticação (públicas)
-app.use('/api/auth', authRoutes);
+// Rotas de API Keys
+app.use('/api/keys', apiKeyRoutes);
 
 // Health check da API (rota pública)
 app.get('/api/health', (req, res) => {
@@ -89,11 +89,66 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Rota temporária para obter API Key de teste
+app.get('/api/test-key', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Use esta API Key para testes no Bruno',
+    apiKey: 'psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
+    usage: 'Authorization: Bearer psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
+    permissions: [
+      'read:categories',
+      'create:categories', 
+      'update:categories',
+      'delete:categories',
+      'read:clients',
+      'create:clients',
+      'update:clients', 
+      'delete:clients',
+      'read:services',
+      'create:services',
+      'update:services',
+      'delete:services',
+      'read:quotations',
+      'create:quotations',
+      'update:quotations',
+      'delete:quotations',
+      'read:appointments',
+      'create:appointments',
+      'update:appointments',
+      'delete:appointments',
+      'read:emails',
+      'create:emails',
+      'update:emails',
+      'delete:emails',
+      'read:stats',
+      'admin:all'
+    ]
+  });
+});
+
+// Rota de debug para testar API Key
+app.post('/api/debug-key', (req, res) => {
+  const authHeader = req.headers.authorization;
+  const apiKey = authHeader?.split(' ')[1];
+  
+  res.json({
+    success: true,
+    debug: {
+      authHeader,
+      apiKey,
+      apiKeyLength: apiKey?.length,
+      startsWithPsk: apiKey?.startsWith('psk_'),
+      headers: req.headers
+    }
+  });
+});
+
 // ====== ROTAS PROTEGIDAS - REQUEREM AUTENTICAÇÃO ======
 // Adicione authenticate como middleware para proteger rotas
 
 // GET /api/categories - Lista todas as categorias (autenticação opcional para leitura)
-app.get('/api/categories', optionalAuth, async (req, res) => {
+app.get('/api/categories', optionalApiKey, async (req, res) => {
   try {
     console.log('📋 Listando categorias...');
     const result = await pool.query('SELECT * FROM categories ORDER BY name ASC');
@@ -115,7 +170,7 @@ app.get('/api/categories', optionalAuth, async (req, res) => {
 });
 
 // GET /api/categories/:id - Obter categoria por ID (autenticação opcional)
-app.get('/api/categories/:id', optionalAuth, async (req, res) => {
+app.get('/api/categories/:id', optionalApiKey, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -151,7 +206,7 @@ app.get('/api/categories/:id', optionalAuth, async (req, res) => {
 });
 
 // POST /api/categories - Criar nova categoria (requer autenticação e permissão)
-app.post('/api/categories', authenticate, requirePermission(Permission.CREATE_CATEGORY), async (req, res) => {
+app.post('/api/categories', authenticateApiKey, requirePermission(ApiPermission.CREATE_CATEGORIES), async (req, res) => {
   try {
     const { name, description, color = '#3B82F6', active = true } = req.body;
 
@@ -194,7 +249,7 @@ app.post('/api/categories', authenticate, requirePermission(Permission.CREATE_CA
 });
 
 // PUT /api/categories/:id - Atualizar categoria (requer autenticação e permissão)
-app.put('/api/categories/:id', authenticate, requirePermission(Permission.UPDATE_CATEGORY), async (req, res) => {
+app.put('/api/categories/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_CATEGORIES), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -237,7 +292,7 @@ app.put('/api/categories/:id', authenticate, requirePermission(Permission.UPDATE
 });
 
 // DELETE /api/categories/:id - Deletar categoria (soft delete) (requer autenticação e permissão)
-app.delete('/api/categories/:id', authenticate, requirePermission(Permission.DELETE_CATEGORY), async (req, res) => {
+app.delete('/api/categories/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_CATEGORIES), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -281,7 +336,7 @@ app.delete('/api/categories/:id', authenticate, requirePermission(Permission.DEL
 // =====================================================
 
 // GET /api/clients - Lista todos os clientes (autenticação opcional)
-app.get('/api/clients', optionalAuth, async (req, res) => {
+app.get('/api/clients', optionalApiKey, async (req, res) => {
   try {
     console.log('👥 Listando clientes...');
     
@@ -320,7 +375,7 @@ app.get('/api/clients', optionalAuth, async (req, res) => {
 });
 
 // GET /api/clients/:id - Obter cliente por ID
-app.get('/api/clients/:id', async (req, res) => {
+app.get('/api/clients/:id', optionalApiKey, async (req, res) => {
   try {
     const id = req.params.id;
     console.log(`🔍 Buscando cliente ID: ${id}`);
@@ -350,7 +405,7 @@ app.get('/api/clients/:id', async (req, res) => {
 });
 
 // POST /api/clients - Criar novo cliente
-app.post('/api/clients', async (req, res) => {
+app.post('/api/clients', authenticateApiKey, requirePermission(ApiPermission.CREATE_CLIENTS), async (req, res) => {
   try {
     const { name, email, phone, address, notes = '' } = req.body;
 
@@ -393,7 +448,7 @@ app.post('/api/clients', async (req, res) => {
 });
 
 // PUT /api/clients/:id - Atualizar cliente
-app.put('/api/clients/:id', async (req, res) => {
+app.put('/api/clients/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_CLIENTS), async (req, res) => {
   try {
     const id = req.params.id;
     const { name, email, phone, address, notes } = req.body;
@@ -443,7 +498,7 @@ app.put('/api/clients/:id', async (req, res) => {
 });
 
 // DELETE /api/clients/:id - Deletar cliente
-app.delete('/api/clients/:id', async (req, res) => {
+app.delete('/api/clients/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_CLIENTS), async (req, res) => {
   try {
     const id = req.params.id;
     console.log(`🗑️ Deletando cliente ID: ${id}`);
@@ -473,7 +528,7 @@ app.delete('/api/clients/:id', async (req, res) => {
 });
 
 // GET /api/services - Lista todos os serviços
-app.get('/api/services', async (req, res) => {
+app.get('/api/services', optionalApiKey, async (req, res) => {
   try {
     console.log('📋 Listando serviços...');
     const result = await pool.query('SELECT * FROM services ORDER BY name ASC');
@@ -636,7 +691,7 @@ app.get('/api/emails/:id', async (req, res) => {
 });
 
 // POST /api/emails - Criar novo email
-app.post('/api/emails', async (req, res) => {
+app.post('/api/emails', authenticateApiKey, requirePermission(ApiPermission.CREATE_EMAILS), async (req, res) => {
   try {
     const {
       gmail_id,
@@ -693,7 +748,7 @@ app.post('/api/emails', async (req, res) => {
 });
 
 // PUT /api/emails/:id - Atualizar email
-app.put('/api/emails/:id', async (req, res) => {
+app.put('/api/emails/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_EMAILS), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -760,7 +815,7 @@ app.put('/api/emails/:id', async (req, res) => {
 });
 
 // DELETE /api/emails/:id - Deletar email
-app.delete('/api/emails/:id', async (req, res) => {
+app.delete('/api/emails/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_EMAILS), async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
@@ -1065,7 +1120,7 @@ app.get('/api/quotations/:id', async (req, res) => {
 });
 
 // POST /api/quotations - Criar novo orçamento
-app.post('/api/quotations', async (req, res) => {
+app.post('/api/quotations', authenticateApiKey, requirePermission(ApiPermission.CREATE_QUOTATIONS), async (req, res) => {
   try {
     const {
       client_name,
@@ -1112,7 +1167,7 @@ app.post('/api/quotations', async (req, res) => {
 });
 
 // PUT /api/quotations/:id - Atualizar orçamento
-app.put('/api/quotations/:id', async (req, res) => {
+app.put('/api/quotations/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_QUOTATIONS), async (req, res) => {
   try {
     const id = req.params.id;
     const { client_email, client_name, client_phone, client_address, services, subtotal, discount, total, status, valid_until, notes } = req.body;
@@ -1168,7 +1223,7 @@ app.put('/api/quotations/:id', async (req, res) => {
 });
 
 // DELETE /api/quotations/:id - Deletar orçamento
-app.delete('/api/quotations/:id', async (req, res) => {
+app.delete('/api/quotations/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_QUOTATIONS), async (req, res) => {
   try {
     const id = req.params.id;
     console.log(`🗑️ Deletando orçamento ID: ${id}`);
@@ -1271,7 +1326,7 @@ app.get('/api/services/:id', async (req, res) => {
 });
 
 // POST /api/services - Criar novo serviço
-app.post('/api/services', async (req, res) => {
+app.post('/api/services', authenticateApiKey, requirePermission(ApiPermission.CREATE_SERVICES), async (req, res) => {
   try {
     const { name, description, category, price = 0, estimated_time, active = true, unit = 'hour', materials = [] } = req.body;
 
@@ -1306,7 +1361,7 @@ app.post('/api/services', async (req, res) => {
 });
 
 // PUT /api/services/:id - Atualizar serviço
-app.put('/api/services/:id', async (req, res) => {
+app.put('/api/services/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_SERVICES), async (req, res) => {
   try {
     const id = req.params.id;
     const { name, description, category, price, estimated_time, active, unit, materials } = req.body;
@@ -1359,7 +1414,7 @@ app.put('/api/services/:id', async (req, res) => {
 });
 
 // DELETE /api/services/:id - Deletar serviço
-app.delete('/api/services/:id', async (req, res) => {
+app.delete('/api/services/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_SERVICES), async (req, res) => {
   try {
     const id = req.params.id;
     console.log(`🗑️ Deletando serviço ID: ${id}`);
@@ -1467,7 +1522,7 @@ app.get('/api/appointments/:id', async (req, res) => {
 });
 
 // POST /api/appointments - Criar novo agendamento
-app.post('/api/appointments', async (req, res) => {
+app.post('/api/appointments', authenticateApiKey, requirePermission(ApiPermission.CREATE_APPOINTMENTS), async (req, res) => {
   try {
     const {
       client_id,
@@ -1513,7 +1568,7 @@ app.post('/api/appointments', async (req, res) => {
 });
 
 // PUT /api/appointments/:id - Atualizar agendamento
-app.put('/api/appointments/:id', async (req, res) => {
+app.put('/api/appointments/:id', authenticateApiKey, requirePermission(ApiPermission.UPDATE_APPOINTMENTS), async (req, res) => {
   try {
     const id = req.params.id;
     const { client_id, client_name, service_ids, service_names, date, time, duration, address, notes, status } = req.body;
@@ -1568,7 +1623,7 @@ app.put('/api/appointments/:id', async (req, res) => {
 });
 
 // DELETE /api/appointments/:id - Deletar agendamento
-app.delete('/api/appointments/:id', async (req, res) => {
+app.delete('/api/appointments/:id', authenticateApiKey, requirePermission(ApiPermission.DELETE_APPOINTMENTS), async (req, res) => {
   try {
     const id = req.params.id;
     console.log(`🗑️ Deletando agendamento ID: ${id}`);
