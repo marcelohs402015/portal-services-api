@@ -669,3 +669,198 @@
 {"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T18:33:17.364Z"}
 {"level":"info","message":"Database connection established","service":"portal-services-server","timestamp":"2025-09-17T18:33:17.422Z"}
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-17T18:33:43.792Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-17T19:06:04.236Z"}
+{"email":"admin@portalservices.com","level":"info","message":"Novo usuário criado","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:06:04.369Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"manager@portalservices.com","level":"info","message":"Novo usuário criado","role":"manager","service":"user-service","timestamp":"2025-09-17T19:06:04.478Z","userId":"11a9a0a2-a170-43eb-8609-b5174c4f5eeb"}
+{"email":"user@portalservices.com","level":"info","message":"Novo usuário criado","role":"user","service":"user-service","timestamp":"2025-09-17T19:06:04.592Z","userId":"2ac392fd-3fe2-4923-9c6a-c1e931f5f4ad"}
+{"email":"guest@portalservices.com","level":"info","message":"Novo usuário criado","role":"guest","service":"user-service","timestamp":"2025-09-17T19:06:04.708Z","userId":"88eecb68-87f8-469b-8090-8892bcb9340a"}
+{"level":"info","message":"Usuários padrão inicializados","service":"user-service","timestamp":"2025-09-17T19:06:04.708Z"}
+{"environment":"development","level":"info","message":"Database connection established","service":"database-config","timestamp":"2025-09-17T19:06:04.714Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:06:06.859Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.463Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.483Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.498Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/clients","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.526Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/services","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.552Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/quotations","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.578Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/appointments","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.603Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/emails","service":"portal-services-server","timestamp":"2025-09-17T19:06:17.627Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/stats/dashboard","service":"portal-services-server","timestamp":"2025-09-17T19:06:18.084Z","userAgent":"curl/8.5.0"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:06:37.075Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:07:07.271Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:07:37.509Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:08:07.811Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:08:38.029Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:09:08.204Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:09:38.389Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:09:40.658Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:09:40.793Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"dcbd53a3bf361412dcd9917741dc4677","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:09:40.809Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","rememberMe":false,"service":"auth-controller","timestamp":"2025-09-17T19:09:40.819Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:09:40.817Z","tokenId":"7754eec594bcb7a296f4c627eb64b4a556c1f3262a6074fd6f4661ba1e128c6a","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:10:08.674Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:10:38.894Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:11:09.066Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:11:39.285Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:12:09.505Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:12:39.720Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:12:45.088Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:12:45.196Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"85b13760459de067faf716d04a6abcf7","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:12:45.198Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","rememberMe":false,"service":"auth-controller","timestamp":"2025-09-17T19:12:45.201Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:12:45.201Z","tokenId":"87f1832d8950d2eb8ee9741f1f96a65e7a1fda8bf32591f326322680c294aaa9","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:13:09.935Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:13:40.267Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:14:10.479Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:14:40.693Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:14:56.411Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:14:56.528Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"69cf21dc3f99c48abb47a18addc25e49","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:14:56.530Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:14:56.532Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:14:56.532Z","tokenId":"3563c48d1c471505163af92cbf9133fa00f770db7bd98ede8bbfd28b4c29bacf","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:14:57.418Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:14:57.545Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"822ee361731a0681e0014c75041193e0","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:14:57.546Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:14:57.548Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:14:57.548Z","tokenId":"a63d0cf279482ced5eedc4b273d82b47c8e6f0c2cac1d01d6ae4e665a8ec8728","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:15:10.895Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:15:41.094Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:16:11.275Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:16:41.462Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:17:11.659Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:17:41.839Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:18:12.043Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:18:42.283Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:19:12.860Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:19:34.623Z","userAgent":"curl/8.5.0"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:19:39.830Z","userAgent":"curl/8.5.0"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:19:40.339Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"e227398b466deb1af18e4a9fd36215a5","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:19:40.346Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:19:40.353Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:19:40.352Z","tokenId":"6ec7a31c05ac682c4065f9097e626e474ada3a706a172f11332c68e4add9a871","userAgent":"curl/8.5.0","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:19:43.113Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:19:49.144Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:19:49.261Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"e2a446b3f1d366af82c27d5b680c1439","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:19:49.264Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:19:49.266Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:19:49.266Z","tokenId":"247432b92666da0dbfe73a23b9ecb95c90b4f712e3e00e1d6f837a955098ce83","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:19:53.543Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:19:53.663Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"63eee32916de91b5d63faea8abee830c","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:19:53.666Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:19:53.675Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:19:53.674Z","tokenId":"e9f5e19016b80f723dd6875570fc6eef221c325c77d9656d4b23cf47a1c33ce7","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:20:13.336Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:20:29.698Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:20:43.547Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:20:48.579Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:20:58.337Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:21:04.310Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:21:04.412Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"01d6f0ab37d5753d5bb2eef44dfd75be","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:21:04.414Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:21:04.416Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:21:04.416Z","tokenId":"64a3619abde25b080bc00095f7dda2c6159414b0fb77ff016e94fe4909262f93","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:21:13.738Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:21:28.453Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:21:29.183Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:21:29.393Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:21:29.567Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:21:29.743Z","userAgent":"bruno-runtime/2.10.1"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:21:44.160Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:22:14.480Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:22:44.682Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:23:14.904Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:23:45.112Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:23:54.396Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:23:54.501Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"0ca9a4bd22d6889c7735b90eef531a16","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:23:54.504Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:23:54.506Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:23:54.505Z","tokenId":"45ab05fd19e659d4eb0d9854a092072d0a9ecab4223b3878710528fc9c7ae4e3","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:24:15.302Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:24:45.504Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:25:01.852Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:25:02.002Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"912fbb4a497ef91fcdea67227d476782","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:25:02.003Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:25:02.005Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:25:02.005Z","tokenId":"01caef86a486dcfda35a3d375c9b27d80150af31dceb43c130eeecb05af06a5e","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:25:02.802Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:25:02.901Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"5dc8e51da424e641ee052e4d2c34c5d9","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:25:02.903Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:25:02.904Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:25:02.904Z","tokenId":"f4af06ad5e7589fda740ab57771b4d14f902ad91905f3d6861c3e108292b3a24","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:25:15.730Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:25:45.919Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:26:16.109Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:26:46.306Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:27:16.509Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:27:46.826Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:28:17.151Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:28:47.380Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:29:17.593Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:29:47.751Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:30:17.969Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:30:48.383Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:31:18.554Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:31:35.318Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:31:35.434Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"004f3b71f40ba4b04057bf3c11ead602","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:31:35.436Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:31:35.438Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:31:35.437Z","tokenId":"352ca20ae8cf6390069a2ba5671a092c7a9fba0aaa536bd81249f77c18824319","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:31:36.264Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:31:36.368Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"ed1df2ecf87367b5a0cad124d737f3eb","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:31:36.370Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:31:36.371Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:31:36.371Z","tokenId":"833587f43f72a232dd08a3549116a2612095375d7ca2c7d7e18db9f86c1b5007","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:31:48.730Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:32:04.037Z","userAgent":"curl/8.5.0"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:32:04.180Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"4547215008fd3e71d5e5ad61714cb470","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:32:04.185Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:32:04.190Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:32:04.190Z","tokenId":"3e42bdadb8bdfbe00236670c6b80039f80dedbad3e64d10fdb8520af610f15e4","userAgent":"curl/8.5.0","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:32:18.925Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:32:49.151Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:32:53.606Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:32:53.753Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"8170713da285c8f60382354f35302f19","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:32:53.756Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:32:53.759Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:32:53.759Z","tokenId":"4561d3f4529cc48be38f146ecfa976bd9f4a6bbac7c2cce6d6e6d2082cd85c2a","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:33:19.432Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:33:49.667Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:33:56.224Z","userAgent":"bruno-runtime/2.10.1"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:33:56.323Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"82eae2f5016ec540411fc3e26ba65b31","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:33:56.325Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:33:56.328Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:33:56.327Z","tokenId":"fc4bc5bffc37149a7ee0f931dd202f55141149b5190a9717e24bf2ce55378210","userAgent":"bruno-runtime/2.10.1","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:34:19.866Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:34:45.484Z","userAgent":"bruno-runtime/2.10.1"}
+{"error":"invalid token","level":"warn","message":"Falha na validação do access token","service":"jwt-service","timestamp":"2025-09-17T19:34:45.487Z","token":"\"eyJhbGciOiJIUzI1NiI..."}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:34:46.467Z","userAgent":"bruno-runtime/2.10.1"}
+{"error":"invalid token","level":"warn","message":"Falha na validação do access token","service":"jwt-service","timestamp":"2025-09-17T19:34:46.468Z","token":"\"eyJhbGciOiJIUzI1NiI..."}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:34:46.978Z","userAgent":"bruno-runtime/2.10.1"}
+{"error":"invalid token","level":"warn","message":"Falha na validação do access token","service":"jwt-service","timestamp":"2025-09-17T19:34:46.978Z","token":"\"eyJhbGciOiJIUzI1NiI..."}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:34:47.200Z","userAgent":"bruno-runtime/2.10.1"}
+{"error":"invalid token","level":"warn","message":"Falha na validação do access token","service":"jwt-service","timestamp":"2025-09-17T19:34:47.201Z","token":"\"eyJhbGciOiJIUzI1NiI..."}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:34:47.382Z","userAgent":"bruno-runtime/2.10.1"}
+{"error":"invalid token","level":"warn","message":"Falha na validação do access token","service":"jwt-service","timestamp":"2025-09-17T19:34:47.382Z","token":"\"eyJhbGciOiJIUzI1NiI..."}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:34:50.055Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:35:20.319Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:35:50.548Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:36:20.803Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:36:31.748Z","userAgent":"curl/8.5.0"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:36:31.881Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"4205dfffd4a02cacc219274a48272dd7","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:36:31.884Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:36:31.885Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:36:31.885Z","tokenId":"713d281bc24e4a696ca8a5b0537a589553d27b79c50694586d80cc2095eb8524","userAgent":"curl/8.5.0","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/auth/login","service":"portal-services-server","timestamp":"2025-09-17T19:36:34.832Z","userAgent":"curl/8.5.0"}
+{"email":"admin@portalservices.com","level":"info","message":"Usuário autenticado com sucesso","role":"super_admin","service":"user-service","timestamp":"2025-09-17T19:36:34.950Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"jti":"4988420316210d529f661bf897916bf1","level":"info","message":"Access token gerado","role":"super_admin","service":"jwt-service","timestamp":"2025-09-17T19:36:34.952Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"email":"admin@portalservices.com","level":"info","message":"Login bem-sucedido","service":"auth-controller","timestamp":"2025-09-17T19:36:34.957Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ipAddress":"::ffff:172.24.0.1","level":"info","message":"Refresh token gerado","service":"jwt-service","timestamp":"2025-09-17T19:36:34.953Z","tokenId":"a0966cfff458226832aad32efab03793c84fcd3eaeeb4841f764847b45c85324","userAgent":"curl/8.5.0","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/auth/profile","service":"portal-services-server","timestamp":"2025-09-17T19:36:45.639Z","userAgent":"curl/8.5.0"}
+{"level":"http","message":"Requisição autenticada","method":"GET","path":"/profile","role":"super_admin","service":"auth-middleware","timestamp":"2025-09-17T19:36:45.646Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:36:51.099Z"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"GET /api/auth/me","service":"portal-services-server","timestamp":"2025-09-17T19:37:00.275Z","userAgent":"curl/8.5.0"}
+{"level":"http","message":"Requisição autenticada","method":"GET","path":"/me","role":"super_admin","service":"auth-middleware","timestamp":"2025-09-17T19:37:00.279Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"ip":"::ffff:172.24.0.1","level":"http","message":"POST /api/categories","service":"portal-services-server","timestamp":"2025-09-17T19:37:11.910Z","userAgent":"curl/8.5.0"}
+{"level":"http","message":"Requisição autenticada","method":"POST","path":"/api/categories","role":"super_admin","service":"auth-middleware","timestamp":"2025-09-17T19:37:11.913Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
+{"id":6,"level":"info","message":"Category created","name":"Eletricista2","service":"portal-services-server","timestamp":"2025-09-17T19:37:11.933Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:37:21.501Z"}
