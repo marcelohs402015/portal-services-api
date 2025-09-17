@@ -864,3 +864,4 @@
 {"level":"http","message":"Requisição autenticada","method":"POST","path":"/api/categories","role":"super_admin","service":"auth-middleware","timestamp":"2025-09-17T19:37:11.913Z","userId":"5a21618d-1dc4-4cda-be0b-1edd1ea2df8f"}
 {"id":6,"level":"info","message":"Category created","name":"Eletricista2","service":"portal-services-server","timestamp":"2025-09-17T19:37:11.933Z"}
 {"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:37:21.501Z"}
+{"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T19:37:51.816Z"}
