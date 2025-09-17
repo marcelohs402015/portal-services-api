@@ -43,8 +43,8 @@ psql $DATABASE_URL < appserver/database/init.sql
 ```
 DATABASE_URL = [fornecido automaticamente pelo Render]
 NODE_ENV = production
-JWT_SECRET = [clique Generate]
-JWT_REFRESH_SECRET = [clique Generate]
+JWT_SECRET = portal-services-jwt-secret-key-2024-production
+JWT_REFRESH_SECRET = portal-services-refresh-secret-key-2024-production
 PORT = 10000
 ```
 

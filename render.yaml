@@ -22,10 +22,10 @@ services:
       
       # JWT Configuration
       - key: JWT_SECRET
-        generateValue: true
+        value: portal-services-jwt-secret-key-2024-production
       
       - key: JWT_REFRESH_SECRET
-        generateValue: true
+        value: portal-services-refresh-secret-key-2024-production
       
       - key: JWT_ACCESS_EXPIRY
         value: 15m
