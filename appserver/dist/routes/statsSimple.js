@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createStatsRoutesSimple = void 0;
+exports.createStatsRoutesSimple = createStatsRoutesSimple;
 const express_1 = __importDefault(require("express"));
 function createStatsRoutesSimple(db) {
     const router = express_1.default.Router();
@@ -114,4 +114,3 @@ function createStatsRoutesSimple(db) {
     });
     return router;
 }
-exports.createStatsRoutesSimple = createStatsRoutesSimple;

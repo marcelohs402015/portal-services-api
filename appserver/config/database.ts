@@ -6,10 +6,11 @@
 
 import { Pool, PoolConfig } from 'pg';
 import dotenv from 'dotenv';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
 
 // Carregar variáveis de ambiente
 dotenv.config();
+const logger = createLogger('database-config');
 
 /**
  * Cria configuração do banco baseada no ambiente

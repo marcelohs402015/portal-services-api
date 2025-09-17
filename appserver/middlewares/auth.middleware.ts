@@ -11,7 +11,9 @@ import {
   RolePermissions 
 } from '../types/auth.types';
 import { jwtService } from '../services/JWTService';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
+
+const logger = createLogger('auth-middleware');
 
 /**
  * Middleware de autenticação - Verifica se o usuário está autenticado

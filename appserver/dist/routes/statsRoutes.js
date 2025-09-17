@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createStatsRoutes = void 0;
+exports.createStatsRoutes = createStatsRoutes;
 const express_1 = require("express");
 function createStatsRoutes(db) {
     const router = (0, express_1.Router)();
@@ -263,4 +263,3 @@ function createStatsRoutes(db) {
     });
     return router;
 }
-exports.createStatsRoutes = createStatsRoutes;

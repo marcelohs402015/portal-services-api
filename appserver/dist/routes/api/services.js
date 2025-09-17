@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createServicesRoutes = void 0;
+exports.createServicesRoutes = createServicesRoutes;
 const express_1 = require("express");
 const logger_js_1 = require("../../shared/logger.js");
 const zod_1 = require("zod");
@@ -293,4 +293,3 @@ function createServicesRoutes(db) {
     });
     return router;
 }
-exports.createServicesRoutes = createServicesRoutes;

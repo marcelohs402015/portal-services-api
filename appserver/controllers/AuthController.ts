@@ -12,7 +12,9 @@ import {
 } from '../types/auth.types';
 import { userService } from '../services/UserService';
 import { jwtService } from '../services/JWTService';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
+
+const logger = createLogger('auth-controller');
 
 // Schemas de validação
 const loginSchema = z.object({

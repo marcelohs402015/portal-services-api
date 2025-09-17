@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCategoryRoutesReal = void 0;
+exports.createCategoryRoutesReal = createCategoryRoutesReal;
 const express_1 = require("express");
 const logger_js_1 = require("../shared/logger.js");
 const logger = (0, logger_js_1.createLogger)('CategoryRoutesReal');
@@ -85,4 +85,3 @@ function createCategoryRoutesReal(db) {
     });
     return router;
 }
-exports.createCategoryRoutesReal = createCategoryRoutesReal;

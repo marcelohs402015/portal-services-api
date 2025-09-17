@@ -13,12 +13,13 @@ import {
   RolePermissions,
   SecurityOptions
 } from '../types/auth.types';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
 
 export class UserService {
   private users: Map<string, User> = new Map();
   private emailToUserId: Map<string, string> = new Map();
   private loginAttempts: Map<string, { count: number; lockedUntil?: Date }> = new Map();
+  private logger = createLogger('user-service');
   private securityOptions: SecurityOptions;
 
   constructor() {
@@ -81,7 +82,7 @@ export class UserService {
       role: UserRole.GUEST
     });
 
-    logger.info('Usuários padrão inicializados');
+    this.logger.info('Usuários padrão inicializados');
   }
 
   /**
@@ -129,7 +130,7 @@ export class UserService {
     this.users.set(user.id, user);
     this.emailToUserId.set(user.email, user.id);
 
-    logger.info('Novo usuário criado', {
+    this.logger.info('Novo usuário criado', {
       userId: user.id,
       email: user.email,
       role: user.role
@@ -219,7 +220,7 @@ export class UserService {
     user.lastLoginAt = new Date();
     user.updatedAt = new Date();
 
-    logger.info('Usuário autenticado com sucesso', {
+    this.logger.info('Usuário autenticado com sucesso', {
       userId: user.id,
       email: user.email,
       role: user.role
@@ -239,7 +240,7 @@ export class UserService {
       const lockoutMs = this.securityOptions.lockoutDuration * 60 * 1000;
       attempts.lockedUntil = new Date(Date.now() + lockoutMs);
       
-      logger.warn('Conta bloqueada por múltiplas tentativas de login', {
+      this.logger.warn('Conta bloqueada por múltiplas tentativas de login', {
         email,
         attempts: attempts.count,
         lockedUntil: attempts.lockedUntil
@@ -290,7 +291,7 @@ export class UserService {
     user.password = await bcrypt.hash(newPassword, 10);
     user.updatedAt = new Date();
 
-    logger.info('Senha atualizada', { userId });
+    this.logger.info('Senha atualizada', { userId });
   }
 
   /**
@@ -311,7 +312,7 @@ export class UserService {
     fullUser.passwordResetToken = resetToken;
     fullUser.passwordResetExpires = expiry;
 
-    logger.info('Reset de senha solicitado', {
+    this.logger.info('Reset de senha solicitado', {
       userId: user.id,
       email: user.email
     });
@@ -348,7 +349,7 @@ export class UserService {
     userFound.passwordResetExpires = undefined;
     userFound.updatedAt = new Date();
 
-    logger.info('Senha resetada com sucesso', { userId: userFound.id });
+    this.logger.info('Senha resetada com sucesso', { userId: userFound.id });
   }
 
   /**
@@ -372,7 +373,7 @@ export class UserService {
     userFound.emailVerificationToken = undefined;
     userFound.updatedAt = new Date();
 
-    logger.info('Email verificado', {
+    this.logger.info('Email verificado', {
       userId: userFound.id,
       email: userFound.email
     });
@@ -407,7 +408,7 @@ export class UserService {
 
     user.updatedAt = new Date();
 
-    logger.info('Perfil atualizado', {
+    this.logger.info('Perfil atualizado', {
       userId,
       updatedFields: Object.keys(data)
     });
@@ -427,7 +428,7 @@ export class UserService {
     user.isActive = isActive;
     user.updatedAt = new Date();
 
-    logger.info('Status do usuário alterado', {
+    this.logger.info('Status do usuário alterado', {
       userId,
       isActive
     });
@@ -483,7 +484,7 @@ export class UserService {
     this.users.delete(userId);
     this.emailToUserId.delete(user.email);
 
-    logger.info('Usuário deletado', { userId });
+    this.logger.info('Usuário deletado', { userId });
   }
 }
 

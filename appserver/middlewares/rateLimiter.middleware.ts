@@ -4,7 +4,9 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
+
+const logger = createLogger('rate-limiter');
 
 interface RateLimitOptions {
   windowMs: number;      // Janela de tempo em ms

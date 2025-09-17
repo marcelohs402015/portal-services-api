@@ -12,11 +12,12 @@ import {
   RefreshToken,
   UserRole 
 } from '../types/auth.types';
-import logger from '../utils/logger';
+import { createLogger } from '../shared/logger';
 
 export class JWTService {
   private config: JWTConfig;
   private refreshTokens: Map<string, RefreshToken> = new Map();
+  private logger = createLogger('jwt-service');
 
   constructor() {
     this.config = this.loadConfig();
@@ -30,7 +31,7 @@ export class JWTService {
     const refreshTokenSecret = process.env.JWT_REFRESH_SECRET || this.generateSecret();
     
     if (!process.env.JWT_SECRET) {
-      logger.warn('JWT_SECRET não configurado, usando secret gerado temporariamente');
+      this.logger.warn('JWT_SECRET não configurado, usando secret gerado temporariamente');
     }
 
     return {
@@ -67,10 +68,10 @@ export class JWTService {
         issuer: this.config.issuer,
         audience: this.config.audience,
         algorithm: 'HS256'
-      }
+      } as jwt.SignOptions
     );
 
-    logger.info('Access token gerado', {
+    this.logger.info('Access token gerado', {
       userId: payload.userId,
       role: payload.role,
       jti
@@ -95,7 +96,7 @@ export class JWTService {
         expiresIn: this.config.refreshTokenExpiry,
         issuer: this.config.issuer,
         algorithm: 'HS256'
-      }
+      } as jwt.SignOptions
     );
 
     // Armazena o refresh token
@@ -114,7 +115,7 @@ export class JWTService {
 
     this.refreshTokens.set(tokenId, refreshToken);
 
-    logger.info('Refresh token gerado', {
+    this.logger.info('Refresh token gerado', {
       userId,
       tokenId,
       userAgent,
@@ -140,7 +141,7 @@ export class JWTService {
         payload: decoded
       };
     } catch (error: any) {
-      logger.warn('Falha na validação do access token', {
+      this.logger.warn('Falha na validação do access token', {
         error: error.message,
         token: token.substring(0, 20) + '...'
       });
@@ -187,7 +188,7 @@ export class JWTService {
         }
       };
     } catch (error: any) {
-      logger.warn('Falha na validação do refresh token', {
+      this.logger.warn('Falha na validação do refresh token', {
         error: error.message
       });
 
@@ -229,7 +230,7 @@ export class JWTService {
     
     if (token) {
       token.revokedAt = new Date();
-      logger.info('Refresh token revogado', { tokenId });
+      this.logger.info('Refresh token revogado', { tokenId });
       return true;
     }
 
@@ -249,7 +250,7 @@ export class JWTService {
       }
     });
 
-    logger.info('Todos os refresh tokens do usuário revogados', {
+    this.logger.info('Todos os refresh tokens do usuário revogados', {
       userId,
       count
     });
@@ -272,7 +273,7 @@ export class JWTService {
     });
 
     if (removed > 0) {
-      logger.info('Tokens expirados removidos', { count: removed });
+      this.logger.info('Tokens expirados removidos', { count: removed });
     }
 
     return removed;
@@ -339,7 +340,7 @@ export class JWTService {
         expiresIn,
         issuer: this.config.issuer,
         algorithm: 'HS256'
-      }
+      } as jwt.SignOptions
     );
   }
 

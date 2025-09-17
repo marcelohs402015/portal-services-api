@@ -3,7 +3,7 @@
 // Portal Services - Category Routes
 // =====================================================
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCategoryRoutes = void 0;
+exports.createCategoryRoutes = createCategoryRoutes;
 const express_1 = require("express");
 const CategoryController_js_1 = require("../controllers/CategoryController.js");
 const logger_js_1 = require("../shared/logger.js");
@@ -32,4 +32,3 @@ function createCategoryRoutes(db) {
     router.put('/reorder', controller.updateCategoryOrder);
     return router;
 }
-exports.createCategoryRoutes = createCategoryRoutes;

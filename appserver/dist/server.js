@@ -1,63 +1,108 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const pg_1 = __importDefault(require("pg"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const logger_1 = require("./shared/logger");
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+const auth_middleware_1 = require("./middlewares/auth.middleware");
+const auth_types_1 = require("./types/auth.types");
+const rateLimiter_middleware_1 = require("./middlewares/rateLimiter.middleware");
+const database_1 = require("./config/database");
 // Criar logger
 const logger = (0, logger_1.createLogger)('portal-services-server');
 // Carregar variáveis de ambiente
 dotenv_1.default.config();
-const { Pool } = pg_1.default;
 console.log('🚀 Iniciando Portal Services Server...');
+console.log('🔧 Informações do banco:', (0, database_1.getDatabaseInfo)());
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
-// Database config - variáveis individuais
-const dbConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-    database: process.env.DB_NAME || 'portalservicesdb',
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'admin',
-    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
-};
-const pool = new Pool(dbConfig);
-console.log('🔧 Configuração do banco:', { host: dbConfig.host, port: dbConfig.port, database: dbConfig.database, user: dbConfig.user, ssl: !!dbConfig.ssl });
 // Middleware
 app.use((0, cors_1.default)({
     origin: ['http://localhost:3000', 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
     credentials: true
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+// Rate limiting global
+app.use(rateLimiter_middleware_1.globalRateLimit);
+// Log de requisições
+app.use((req, res, next) => {
+    logger.http(`${req.method} ${req.path}`, {
+        ip: req.ip,
+        userAgent: req.headers['user-agent']
+    });
+    next();
+});
 console.log('✅ Middlewares configurados');
 // Test database connection
-pool.query('SELECT 1').then(() => {
-    console.log('✅ Banco de dados conectado');
-    logger.info('Database connection established');
-}).catch(err => {
-    console.log('❌ Erro na conexão com banco:', err.message);
-    logger.error('Database connection failed', { error: err.message });
+(0, database_1.testConnection)().then(connected => {
+    if (!connected && process.env.NODE_ENV === 'production') {
+        console.error('🛑 Não foi possível conectar ao banco em produção');
+        process.exit(1);
+    }
 });
-// Health check
-app.get('/health', (req, res) => {
+// Health check (rota pública)
+app.get('/health', async (req, res) => {
     console.log('📋 Health check solicitado');
+    // Importar healthCheck dinamicamente para evitar dependência circular
+    const { healthCheck } = await Promise.resolve().then(() => __importStar(require('./config/database')));
+    const dbStatus = await healthCheck();
     res.json({
         success: true,
         message: 'Portal Services API is running',
         timestamp: new Date().toISOString(),
         version: '2.0.0',
         environment: process.env.NODE_ENV || 'development',
-        database: 'connected'
+        database: {
+            connected: dbStatus.connected,
+            latency: dbStatus.latency,
+            ...(dbStatus.error && { error: dbStatus.error })
+        }
     });
 });
 // API Routes
+// Rotas de Autenticação (públicas)
+app.use('/api/auth', auth_routes_1.default);
+// Health check da API (rota pública)
 app.get('/api/health', (req, res) => {
     res.json({
         success: true,
@@ -66,11 +111,13 @@ app.get('/api/health', (req, res) => {
         version: '2.0.0'
     });
 });
-// GET /api/categories - Lista todas as categorias
-app.get('/api/categories', async (req, res) => {
+// ====== ROTAS PROTEGIDAS - REQUEREM AUTENTICAÇÃO ======
+// Adicione authenticate como middleware para proteger rotas
+// GET /api/categories - Lista todas as categorias (autenticação opcional para leitura)
+app.get('/api/categories', auth_middleware_1.optionalAuth, async (req, res) => {
     try {
         console.log('📋 Listando categorias...');
-        const result = await pool.query('SELECT * FROM categories ORDER BY name ASC');
+        const result = await database_1.pool.query('SELECT * FROM categories ORDER BY name ASC');
         console.log(`✅ Encontradas ${result.rows.length} categorias`);
         res.json({
             success: true,
@@ -87,8 +134,8 @@ app.get('/api/categories', async (req, res) => {
         });
     }
 });
-// GET /api/categories/:id - Obter categoria por ID
-app.get('/api/categories/:id', async (req, res) => {
+// GET /api/categories/:id - Obter categoria por ID (autenticação opcional)
+app.get('/api/categories/:id', auth_middleware_1.optionalAuth, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -98,7 +145,7 @@ app.get('/api/categories/:id', async (req, res) => {
             });
         }
         console.log(`🔍 Buscando categoria ID: ${id}`);
-        const result = await pool.query('SELECT * FROM categories WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM categories WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -120,8 +167,8 @@ app.get('/api/categories/:id', async (req, res) => {
         });
     }
 });
-// POST /api/categories - Criar nova categoria
-app.post('/api/categories', async (req, res) => {
+// POST /api/categories - Criar nova categoria (requer autenticação e permissão)
+app.post('/api/categories', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.CREATE_CATEGORY), async (req, res) => {
     try {
         const { name, description, color = '#3B82F6', active = true } = req.body;
         if (!name || !description) {
@@ -131,7 +178,7 @@ app.post('/api/categories', async (req, res) => {
             });
         }
         console.log(`➕ Criando categoria: ${name}`);
-        const result = await pool.query('INSERT INTO categories (name, description, color, active) VALUES ($1, $2, $3, $4) RETURNING *', [name, description, color, active]);
+        const result = await database_1.pool.query('INSERT INTO categories (name, description, color, active) VALUES ($1, $2, $3, $4) RETURNING *', [name, description, color, active]);
         console.log(`✅ Categoria criada com ID: ${result.rows[0].id}`);
         logger.info('Category created', { id: result.rows[0].id, name });
         res.status(201).json({
@@ -155,8 +202,8 @@ app.post('/api/categories', async (req, res) => {
         });
     }
 });
-// PUT /api/categories/:id - Atualizar categoria
-app.put('/api/categories/:id', async (req, res) => {
+// PUT /api/categories/:id - Atualizar categoria (requer autenticação e permissão)
+app.put('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.UPDATE_CATEGORY), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -167,7 +214,7 @@ app.put('/api/categories/:id', async (req, res) => {
         }
         const { name, description, color, active } = req.body;
         console.log(`✏️  Atualizando categoria ID: ${id}`);
-        const result = await pool.query('UPDATE categories SET name = $1, description = $2, color = $3, active = $4, updated_at = CURRENT_TIMESTAMP WHERE id = $5 RETURNING *', [name, description, color, active, id]);
+        const result = await database_1.pool.query('UPDATE categories SET name = $1, description = $2, color = $3, active = $4, updated_at = CURRENT_TIMESTAMP WHERE id = $5 RETURNING *', [name, description, color, active, id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -191,8 +238,8 @@ app.put('/api/categories/:id', async (req, res) => {
         });
     }
 });
-// DELETE /api/categories/:id - Deletar categoria (soft delete)
-app.delete('/api/categories/:id', async (req, res) => {
+// DELETE /api/categories/:id - Deletar categoria (soft delete) (requer autenticação e permissão)
+app.delete('/api/categories/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.requirePermission)(auth_types_1.Permission.DELETE_CATEGORY), async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         if (isNaN(id)) {
@@ -202,7 +249,7 @@ app.delete('/api/categories/:id', async (req, res) => {
             });
         }
         console.log(`🗑️  Desativando categoria ID: ${id}`);
-        const result = await pool.query('UPDATE categories SET active = false, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING name', [id]);
+        const result = await database_1.pool.query('UPDATE categories SET active = false, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING name', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -228,8 +275,8 @@ app.delete('/api/categories/:id', async (req, res) => {
 // =====================================================
 // CLIENTS ROUTES
 // =====================================================
-// GET /api/clients - Lista todos os clientes
-app.get('/api/clients', async (req, res) => {
+// GET /api/clients - Lista todos os clientes (autenticação opcional)
+app.get('/api/clients', auth_middleware_1.optionalAuth, async (req, res) => {
     try {
         console.log('👥 Listando clientes...');
         let query = 'SELECT * FROM clients WHERE 1=1';
@@ -244,7 +291,7 @@ app.get('/api/clients', async (req, res) => {
             params.push(`%${req.query.email}%`);
         }
         query += ' ORDER BY name ASC';
-        const result = await pool.query(query, params);
+        const result = await database_1.pool.query(query, params);
         console.log(`✅ Encontrados ${result.rows.length} clientes`);
         res.json({
             success: true,
@@ -266,7 +313,7 @@ app.get('/api/clients/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🔍 Buscando cliente ID: ${id}`);
-        const result = await pool.query('SELECT * FROM clients WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM clients WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -299,7 +346,7 @@ app.post('/api/clients', async (req, res) => {
             });
         }
         console.log(`➕ Criando cliente: ${name}`);
-        const result = await pool.query('INSERT INTO clients (name, email, phone, address, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, email, phone, address, notes]);
+        const result = await database_1.pool.query('INSERT INTO clients (name, email, phone, address, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, email, phone, address, notes]);
         console.log(`✅ Cliente criado com ID: ${result.rows[0].id}`);
         logger.info('Client created', { id: result.rows[0].id, name });
         res.status(201).json({
@@ -356,7 +403,7 @@ app.put('/api/clients/:id', async (req, res) => {
         }
         values.push(id);
         console.log(`✏️ Atualizando cliente ID: ${id}`);
-        const result = await pool.query(`UPDATE clients SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
+        const result = await database_1.pool.query(`UPDATE clients SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -384,7 +431,7 @@ app.delete('/api/clients/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando cliente ID: ${id}`);
-        const result = await pool.query('DELETE FROM clients WHERE id = $1', [id]);
+        const result = await database_1.pool.query('DELETE FROM clients WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
@@ -410,7 +457,7 @@ app.delete('/api/clients/:id', async (req, res) => {
 app.get('/api/services', async (req, res) => {
     try {
         console.log('📋 Listando serviços...');
-        const result = await pool.query('SELECT * FROM services ORDER BY name ASC');
+        const result = await database_1.pool.query('SELECT * FROM services ORDER BY name ASC');
         console.log(`✅ Encontrados ${result.rows.length} serviços`);
         res.json({
             success: true,
@@ -468,7 +515,7 @@ app.get('/api/emails', async (req, res) => {
         const offset = (page - 1) * limit;
         query += ` LIMIT $${paramIndex++} OFFSET $${paramIndex}`;
         params.push(limit, offset);
-        const result = await pool.query(query, params);
+        const result = await database_1.pool.query(query, params);
         // Get total count for pagination
         let countQuery = 'SELECT COUNT(*) as total FROM emails';
         const countParams = [];
@@ -491,7 +538,7 @@ app.get('/api/emails', async (req, res) => {
                 countParams.push(`%${req.query.subject}%`);
             }
         }
-        const countResult = await pool.query(countQuery, countParams);
+        const countResult = await database_1.pool.query(countQuery, countParams);
         const total = parseInt(countResult.rows[0].total);
         const totalPages = Math.ceil(total / limit);
         console.log(`✅ Encontrados ${result.rows.length} emails (página ${page}/${totalPages})`);
@@ -526,7 +573,7 @@ app.get('/api/emails/:id', async (req, res) => {
             });
         }
         console.log(`🔍 Buscando email ID: ${id}`);
-        const result = await pool.query('SELECT * FROM emails WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM emails WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -561,7 +608,7 @@ app.post('/api/emails', async (req, res) => {
         // Combine sender_email and sender_name into sender field
         const sender = sender_name ? `${sender_name} <${sender_email}>` : sender_email;
         console.log(`➕ Criando email: ${subject}`);
-        const result = await pool.query(`INSERT INTO emails (gmail_id, subject, sender, date, body, category, processed)
+        const result = await database_1.pool.query(`INSERT INTO emails (gmail_id, subject, sender, date, body, category, processed)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`, [gmail_id, subject, sender, date, body, category, processed]);
         console.log(`✅ Email criado com ID: ${result.rows[0].id}`);
@@ -634,7 +681,7 @@ app.put('/api/emails/:id', async (req, res) => {
         }
         values.push(id);
         console.log(`✏️ Atualizando email ID: ${id}`);
-        const result = await pool.query(`UPDATE emails SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
+        const result = await database_1.pool.query(`UPDATE emails SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -668,7 +715,7 @@ app.delete('/api/emails/:id', async (req, res) => {
             });
         }
         console.log(`🗑️ Deletando email ID: ${id}`);
-        const result = await pool.query('DELETE FROM emails WHERE id = $1', [id]);
+        const result = await database_1.pool.query('DELETE FROM emails WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
@@ -698,10 +745,10 @@ app.get('/api/stats/business', async (req, res) => {
     try {
         console.log('📊 Buscando estatísticas do negócio...');
         // Total clients
-        const clientsResult = await pool.query('SELECT COUNT(*) as count FROM clients');
+        const clientsResult = await database_1.pool.query('SELECT COUNT(*) as count FROM clients');
         const totalClients = parseInt(clientsResult.rows[0].count);
         // Total quotations and revenue
-        const quotationsResult = await pool.query(`
+        const quotationsResult = await database_1.pool.query(`
       SELECT 
         COUNT(*) as total_quotations,
         COALESCE(SUM(total), 0) as total_revenue,
@@ -712,7 +759,7 @@ app.get('/api/stats/business', async (req, res) => {
     `);
         const quotationStats = quotationsResult.rows[0];
         // Total appointments
-        const appointmentsResult = await pool.query(`
+        const appointmentsResult = await database_1.pool.query(`
       SELECT 
         COUNT(*) as total_appointments,
         COUNT(CASE WHEN status = 'scheduled' THEN 1 END) as scheduled,
@@ -723,10 +770,10 @@ app.get('/api/stats/business', async (req, res) => {
     `);
         const appointmentStats = appointmentsResult.rows[0];
         // Total services
-        const servicesResult = await pool.query('SELECT COUNT(*) as count FROM services WHERE active = true');
+        const servicesResult = await database_1.pool.query('SELECT COUNT(*) as count FROM services WHERE active = true');
         const totalServices = parseInt(servicesResult.rows[0].count);
         // Email statistics
-        const emailsResult = await pool.query(`
+        const emailsResult = await database_1.pool.query(`
       SELECT 
         COUNT(*) as total_emails,
         COUNT(CASE WHEN processed = true THEN 1 END) as processed_emails,
@@ -735,7 +782,7 @@ app.get('/api/stats/business', async (req, res) => {
     `);
         const emailStats = emailsResult.rows[0];
         // Monthly revenue trend (last 6 months)
-        const monthlyRevenueResult = await pool.query(`
+        const monthlyRevenueResult = await database_1.pool.query(`
       SELECT 
         DATE_TRUNC('month', created_at) as month,
         COALESCE(SUM(total), 0) as revenue,
@@ -746,7 +793,7 @@ app.get('/api/stats/business', async (req, res) => {
       ORDER BY month DESC
     `);
         // Service category distribution
-        const categoryStatsResult = await pool.query(`
+        const categoryStatsResult = await database_1.pool.query(`
       SELECT 
         c.name as category,
         COUNT(DISTINCT s.id) as service_count,
@@ -808,7 +855,7 @@ app.get('/api/stats/business', async (req, res) => {
 app.get('/api/stats/revenue/monthly', async (req, res) => {
     try {
         console.log('📊 Buscando receita mensal...');
-        const monthlyRevenueResult = await pool.query(`
+        const monthlyRevenueResult = await database_1.pool.query(`
       SELECT 
         DATE_TRUNC('month', created_at) as month,
         COALESCE(SUM(total), 0) as revenue,
@@ -846,10 +893,10 @@ app.get('/api/stats/dashboard', async (req, res) => {
         console.log('📊 Buscando estatísticas do dashboard...');
         // Contadores básicos
         const [clientsResult, quotationsResult, appointmentsResult, emailsResult] = await Promise.all([
-            pool.query('SELECT COUNT(*) as count FROM clients'),
-            pool.query('SELECT COUNT(*) as count, COALESCE(SUM(total), 0) as revenue FROM quotations'),
-            pool.query('SELECT COUNT(*) as count FROM appointments'),
-            pool.query('SELECT COUNT(*) as count FROM emails')
+            database_1.pool.query('SELECT COUNT(*) as count FROM clients'),
+            database_1.pool.query('SELECT COUNT(*) as count, COALESCE(SUM(total), 0) as revenue FROM quotations'),
+            database_1.pool.query('SELECT COUNT(*) as count FROM appointments'),
+            database_1.pool.query('SELECT COUNT(*) as count FROM emails')
         ]);
         const stats = {
             totalClients: parseInt(clientsResult.rows[0].count),
@@ -889,7 +936,7 @@ app.get('/api/quotations', async (req, res) => {
             params.push(`%${req.query.client_email}%`);
         }
         query += ' ORDER BY created_at DESC';
-        const result = await pool.query(query, params);
+        const result = await database_1.pool.query(query, params);
         console.log(`✅ Encontrados ${result.rows.length} orçamentos`);
         res.json({
             success: true,
@@ -911,7 +958,7 @@ app.get('/api/quotations/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🔍 Buscando orçamento ID: ${id}`);
-        const result = await pool.query('SELECT * FROM quotations WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM quotations WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -944,7 +991,7 @@ app.post('/api/quotations', async (req, res) => {
             });
         }
         console.log(`➕ Criando orçamento para: ${client_name}`);
-        const result = await pool.query('INSERT INTO quotations (id, client_name, client_email, client_phone, client_address, services, subtotal, discount, total, status, valid_until, notes) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [client_name, client_email, client_phone, client_address, JSON.stringify(services), parseFloat(subtotal), parseFloat(discount), parseFloat(total), status, valid_until, notes]);
+        const result = await database_1.pool.query('INSERT INTO quotations (id, client_name, client_email, client_phone, client_address, services, subtotal, discount, total, status, valid_until, notes) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [client_name, client_email, client_phone, client_address, JSON.stringify(services), parseFloat(subtotal), parseFloat(discount), parseFloat(total), status, valid_until, notes]);
         console.log(`✅ Orçamento criado com ID: ${result.rows[0].id}`);
         logger.info('Quotation created', { id: result.rows[0].id, client_name });
         res.status(201).json({
@@ -1019,7 +1066,7 @@ app.put('/api/quotations/:id', async (req, res) => {
         }
         values.push(id);
         console.log(`✏️ Atualizando orçamento ID: ${id}`);
-        const result = await pool.query(`UPDATE quotations SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
+        const result = await database_1.pool.query(`UPDATE quotations SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -1047,7 +1094,7 @@ app.delete('/api/quotations/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando orçamento ID: ${id}`);
-        const result = await pool.query('DELETE FROM quotations WHERE id = $1', [id]);
+        const result = await database_1.pool.query('DELETE FROM quotations WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
@@ -1088,7 +1135,7 @@ app.get('/api/services', async (req, res) => {
             params.push(req.query.active === 'true');
         }
         query += ' ORDER BY name ASC';
-        const result = await pool.query(query, params);
+        const result = await database_1.pool.query(query, params);
         console.log(`✅ Encontrados ${result.rows.length} serviços`);
         res.json({
             success: true,
@@ -1110,7 +1157,7 @@ app.get('/api/services/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🔍 Buscando serviço ID: ${id}`);
-        const result = await pool.query('SELECT * FROM services WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM services WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -1143,7 +1190,7 @@ app.post('/api/services', async (req, res) => {
             });
         }
         console.log(`➕ Criando serviço: ${name}`);
-        const result = await pool.query('INSERT INTO services (id, name, description, category, price, estimated_time, active, unit, materials) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [name, description, category, parseFloat(price), estimated_time, active, unit, JSON.stringify(materials)]);
+        const result = await database_1.pool.query('INSERT INTO services (id, name, description, category, price, estimated_time, active, unit, materials) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [name, description, category, parseFloat(price), estimated_time, active, unit, JSON.stringify(materials)]);
         console.log(`✅ Serviço criado com ID: ${result.rows[0].id}`);
         logger.info('Service created', { id: result.rows[0].id, name });
         res.status(201).json({
@@ -1206,7 +1253,7 @@ app.put('/api/services/:id', async (req, res) => {
         }
         values.push(id);
         console.log(`✏️ Atualizando serviço ID: ${id}`);
-        const result = await pool.query(`UPDATE services SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
+        const result = await database_1.pool.query(`UPDATE services SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -1234,7 +1281,7 @@ app.delete('/api/services/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando serviço ID: ${id}`);
-        const result = await pool.query('DELETE FROM services WHERE id = $1', [id]);
+        const result = await database_1.pool.query('DELETE FROM services WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
@@ -1279,7 +1326,7 @@ app.get('/api/appointments', async (req, res) => {
             params.push(req.query.date);
         }
         query += ' ORDER BY date DESC, time DESC';
-        const result = await pool.query(query, params);
+        const result = await database_1.pool.query(query, params);
         console.log(`✅ Encontrados ${result.rows.length} agendamentos`);
         res.json({
             success: true,
@@ -1301,7 +1348,7 @@ app.get('/api/appointments/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🔍 Buscando agendamento ID: ${id}`);
-        const result = await pool.query('SELECT * FROM appointments WHERE id = $1', [id]);
+        const result = await database_1.pool.query('SELECT * FROM appointments WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -1334,7 +1381,7 @@ app.post('/api/appointments', async (req, res) => {
             });
         }
         console.log(`➕ Criando agendamento para: ${client_name}`);
-        const result = await pool.query('INSERT INTO appointments (id, client_id, client_name, service_ids, service_names, date, time, duration, address, notes, status) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *', [client_id, client_name, JSON.stringify(service_ids), JSON.stringify(service_names), date, time, duration, address, notes, status]);
+        const result = await database_1.pool.query('INSERT INTO appointments (id, client_id, client_name, service_ids, service_names, date, time, duration, address, notes, status) VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *', [client_id, client_name, JSON.stringify(service_ids), JSON.stringify(service_names), date, time, duration, address, notes, status]);
         console.log(`✅ Agendamento criado com ID: ${result.rows[0].id}`);
         logger.info('Appointment created', { id: result.rows[0].id, client_name });
         res.status(201).json({
@@ -1405,7 +1452,7 @@ app.put('/api/appointments/:id', async (req, res) => {
         }
         values.push(id);
         console.log(`✏️ Atualizando agendamento ID: ${id}`);
-        const result = await pool.query(`UPDATE appointments SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
+        const result = await database_1.pool.query(`UPDATE appointments SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP WHERE id = $${idx} RETURNING *`, values);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -1433,7 +1480,7 @@ app.delete('/api/appointments/:id', async (req, res) => {
     try {
         const id = req.params.id;
         console.log(`🗑️ Deletando agendamento ID: ${id}`);
-        const result = await pool.query('DELETE FROM appointments WHERE id = $1', [id]);
+        const result = await database_1.pool.query('DELETE FROM appointments WHERE id = $1', [id]);
         if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
@@ -1529,12 +1576,12 @@ startServer();
 process.on('SIGINT', async () => {
     console.log('\n👋 Encerrando servidor...');
     logger.info('Server shutting down');
-    await pool.end();
+    await database_1.pool.end();
     process.exit(0);
 });
 process.on('SIGTERM', async () => {
     console.log('\n👋 Encerrando servidor (SIGTERM)...');
     logger.info('Server shutting down (SIGTERM)');
-    await pool.end();
+    await database_1.pool.end();
     process.exit(0);
 });

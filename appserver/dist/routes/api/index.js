@@ -3,7 +3,7 @@
 // Portal Services - API Routes Index
 // =====================================================
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createAPIRoutes = void 0;
+exports.createAPIRoutes = createAPIRoutes;
 const express_1 = require("express");
 const categories_js_1 = require("../categories.js");
 const services_js_1 = require("../services.js");
@@ -36,4 +36,3 @@ function createAPIRoutes(db) {
     router.use('/', (0, statsSimple_js_1.createStatsRoutesSimple)(db));
     return router;
 }
-exports.createAPIRoutes = createAPIRoutes;

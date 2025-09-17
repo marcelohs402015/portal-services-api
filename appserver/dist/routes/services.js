@@ -3,7 +3,7 @@
 // Portal Services - Service Routes
 // =====================================================
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createServiceRoutes = void 0;
+exports.createServiceRoutes = createServiceRoutes;
 const express_1 = require("express");
 const ServiceController_js_1 = require("../controllers/ServiceController.js");
 const logger_js_1 = require("../shared/logger.js");
@@ -36,4 +36,3 @@ function createServiceRoutes(db) {
     router.patch('/:id/soft-delete', controller.softDeleteService);
     return router;
 }
-exports.createServiceRoutes = createServiceRoutes;

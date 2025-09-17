@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runMigrations = void 0;
+exports.runMigrations = runMigrations;
 const logger_js_1 = require("../shared/logger.js");
 const logger = (0, logger_js_1.createLogger)('DBMigrations');
 async function runMigrations(database) {
@@ -135,7 +135,6 @@ async function runMigrations(database) {
         throw error;
     }
 }
-exports.runMigrations = runMigrations;
 async function createIndexesAndTriggers(database) {
     const createIndexes = `
     CREATE INDEX IF NOT EXISTS idx_emails_gmail_id ON emails(gmail_id);

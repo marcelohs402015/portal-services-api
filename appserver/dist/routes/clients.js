@@ -3,7 +3,7 @@
 // Portal Services - Client Routes
 // =====================================================
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createClientRoutes = void 0;
+exports.createClientRoutes = createClientRoutes;
 const express_1 = require("express");
 const ClientController_js_1 = require("../controllers/ClientController.js");
 const logger_js_1 = require("../shared/logger.js");
@@ -38,4 +38,3 @@ function createClientRoutes(db) {
     router.patch('/:id/soft-delete', controller.softDeleteClient);
     return router;
 }
-exports.createClientRoutes = createClientRoutes;
