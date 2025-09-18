@@ -1,0 +1,67 @@
+# Portal Services API - Dockerfile com PostgreSQL
+# Sobe PostgreSQL + API em um único container no Render
+
+FROM node:18-alpine
+
+# Instalar dependências do sistema
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    postgresql \
+    postgresql-contrib
+
+# Configurar PostgreSQL
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=admin
+ENV POSTGRES_DB=portalservicesdb
+ENV PGDATA=/var/lib/postgresql/data
+
+# Criar diretórios necessários
+RUN mkdir -p /var/lib/postgresql/data \
+    && mkdir -p /app/logs
+
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar package.json e package-lock.json
+COPY appserver/package*.json ./
+
+# Instalar dependências Node.js
+RUN npm ci --only=production && npm cache clean --force
+
+# Copiar código fonte
+COPY appserver/ .
+
+# Build da aplicação TypeScript
+RUN npm run build
+
+# Remover arquivos desnecessários
+RUN rm -rf src/ tsconfig*.json *.md docs/ tests/ && \
+    rm -rf node_modules/@types && \
+    npm ci --only=production && \
+    npm cache clean --force
+
+# Copiar scripts de inicialização do banco
+COPY appserver/database/init/ /docker-entrypoint-initdb.d/
+
+# Copiar script de inicialização
+COPY start-with-postgres.sh /start.sh
+RUN chmod +x /start.sh
+
+# Criar usuário nodejs
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+# Alterar propriedade dos diretórios
+RUN chown -R nodejs:nodejs /app
+
+# Expor porta da aplicação
+EXPOSE 10000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD node healthcheck.js
+
+# Comando de inicialização
+CMD ["/start.sh"]

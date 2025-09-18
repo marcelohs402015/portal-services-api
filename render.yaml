@@ -1,27 +1,25 @@
-# Portal Services API - Render Blueprint
-# Deploy automático com PostgreSQL gerenciado
-# URL: https://render.com/deploy?repo=https://github.com/SEU_USUARIO/portal-services-api
+# Portal Services API - Render Blueprint com PostgreSQL em Docker
+# Deploy: https://render.com/deploy?repo=https://github.com/SEU_USUARIO/portal-services-api
 
 services:
-  # PostgreSQL Database Gerenciado
-  - type: pserv
-    name: portal-services-db
-    plan: free
-    databaseName: portalservicesdb
-    user: portalservicesdb_user
-    region: oregon
-    ipAllowList: []
-    
-  # Portal Services API
+  # Portal Services API com PostgreSQL em Docker
   - type: web
     name: portal-services-api
     plan: free
     region: oregon
     runtime: docker
-    dockerfilePath: ./Dockerfile.render
+    dockerfilePath: ./Dockerfile.postgres
     dockerContext: ./
     healthCheckPath: /health
     numInstances: 1
+    
+    # Disco persistente para dados do PostgreSQL
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+    
+    # Variáveis de ambiente
     envVars:
       # Server Configuration
       - key: NODE_ENV
@@ -31,35 +29,29 @@ services:
       - key: APP_VERSION
         value: "2.0.0"
       
-      # Database Configuration (automática via Render)
-      - key: DATABASE_URL
-        fromDatabase:
-          name: portal-services-db
-          property: connectionString
-      
-      # Database Configuration (fallback individual)
+      # Database Configuration (PostgreSQL em Docker)
       - key: DB_HOST
-        fromDatabase:
-          name: portal-services-db
-          property: host
+        value: localhost
       - key: DB_PORT
-        fromDatabase:
-          name: portal-services-db
-          property: port
+        value: "5432"
       - key: DB_NAME
-        fromDatabase:
-          name: portal-services-db
-          property: database
+        value: portalservicesdb
       - key: DB_USER
-        fromDatabase:
-          name: portal-services-db
-          property: user
+        value: admin
       - key: DB_PASSWORD
-        fromDatabase:
-          name: portal-services-db
-          property: password
+        value: admin
       - key: DB_SSL
-        value: "true"
+        value: "false"
+      
+      # PostgreSQL Configuration
+      - key: POSTGRES_USER
+        value: admin
+      - key: POSTGRES_PASSWORD
+        value: admin
+      - key: POSTGRES_DB
+        value: portalservicesdb
+      - key: PGDATA
+        value: /var/lib/postgresql/data
       
       # API Configuration
       - key: API_KEYS_ENABLED
@@ -74,8 +66,8 @@ services:
         value: "email-management,service-management,quotations"
     
     # Build Configuration
-    buildCommand: echo "Building with Docker..."
-    startCommand: echo "Starting with Docker CMD..."
+    buildCommand: echo "Building with Docker PostgreSQL..."
+    startCommand: echo "Starting with PostgreSQL in Docker..."
     
     # Health Check
     healthCheckPath: /health
