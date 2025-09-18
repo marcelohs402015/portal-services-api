@@ -25,7 +25,10 @@
     "test": "cd appserver && npm test",
     "setup": "cd appserver && npm run setup",
     "deploy:prepare": "npm run typecheck && npm run build",
-    "init-db": "node appserver/scripts/init-database.js"
+    "init-db": "node appserver/scripts/init-database.js",
+    "init-db:production": "node appserver/scripts/init-production-db.js",
+    "test:render-config": "node test-render-config.js",
+    "build:render": "docker build -f Dockerfile.render -t portal-services-render ."
   },
   "keywords": [
     "portal-services",
