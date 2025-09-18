@@ -34,3 +34,96 @@
 {"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_38b4...","name":"N8N Read Only - Automações"},{"key":"psk_8e34...","name":"N8N Full Access - Automações"},{"key":"psk_12ee...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T13:47:57.521Z"}
 {"environment":"production","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T13:47:58.246Z"}
 {"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T13:47:59.568Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_f951...","name":"N8N Read Only - Automações"},{"key":"psk_9723...","name":"N8N Full Access - Automações"},{"key":"psk_93ea...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:12:45.780Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:12:46.085Z"}
+{"error":"SSL/TLS required","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:12:46.501Z"}
+{"apiKeyName":"Test API Key - Bruno","endpoint":"/api/categories","ip":"::1","level":"info","message":"Acesso autorizado via API Key","method":"POST","permissions":26,"service":"api-key-middleware","timestamp":"2025-09-18T14:13:05.297Z"}
+{"error":"SSL/TLS required","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-18T14:13:05.703Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:13:39.326Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:13:39.338Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_1612...","name":"N8N Read Only - Automações"},{"key":"psk_828d...","name":"N8N Full Access - Automações"},{"key":"psk_c6cd...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:16:34.670Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:16:36.383Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:16:37.548Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:17:05.057Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:17:05.063Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_3070...","name":"N8N Read Only - Automações"},{"key":"psk_4b4c...","name":"N8N Full Access - Automações"},{"key":"psk_7110...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:17:21.917Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:17:22.789Z"}
+{"error":"SSL/TLS required","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:17:23.172Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:17:46.520Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:17:46.535Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_c478...","name":"N8N Read Only - Automações"},{"key":"psk_315f...","name":"N8N Full Access - Automações"},{"key":"psk_4358...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:17:48.337Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:17:48.750Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:17:49.949Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:17:50.733Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:17:50.736Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_3624...","name":"N8N Read Only - Automações"},{"key":"psk_a7f8...","name":"N8N Full Access - Automações"},{"key":"psk_aae6...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:17:57.417Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:17:57.875Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:17:58.961Z"}
+{"apiKeyName":"Test API Key - Bruno","endpoint":"/api/categories","ip":"::1","level":"info","message":"Acesso autorizado via API Key","method":"POST","permissions":26,"service":"api-key-middleware","timestamp":"2025-09-18T14:19:13.977Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-18T14:19:15.560Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:19:58.764Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:19:58.770Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_3f04...","name":"N8N Read Only - Automações"},{"key":"psk_66b0...","name":"N8N Full Access - Automações"},{"key":"psk_7d8a...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:20:02.845Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:20:04.449Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:20:05.243Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_2335...","name":"N8N Read Only - Automações"},{"key":"psk_5dfe...","name":"N8N Full Access - Automações"},{"key":"psk_1193...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:20:23.299Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:20:23.488Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:20:24.784Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:21:34.633Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:21:34.636Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_9769...","name":"N8N Read Only - Automações"},{"key":"psk_98fc...","name":"N8N Full Access - Automações"},{"key":"psk_84d9...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:22:16.950Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:22:17.190Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:22:18.301Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:22:59.370Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:22:59.374Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_4e3f...","name":"N8N Read Only - Automações"},{"key":"psk_1628...","name":"N8N Full Access - Automações"},{"key":"psk_d165...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:23:03.755Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:23:04.365Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:23:04.654Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_cdf2...","name":"N8N Read Only - Automações"},{"key":"psk_f4b2...","name":"N8N Full Access - Automações"},{"key":"psk_01eb...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:23:25.120Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:23:25.487Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:23:26.751Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:23:32.361Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:23:32.370Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_5d2b...","name":"N8N Read Only - Automações"},{"key":"psk_08d1...","name":"N8N Full Access - Automações"},{"key":"psk_91bb...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:24:31.010Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:24:32.264Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:24:33.516Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:24:50.731Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:24:50.733Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_cd33...","name":"N8N Read Only - Automações"},{"key":"psk_6af1...","name":"N8N Full Access - Automações"},{"key":"psk_627a...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:24:54.373Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:24:55.442Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:24:55.803Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_af13...","name":"N8N Read Only - Automações"},{"key":"psk_29b4...","name":"N8N Full Access - Automações"},{"key":"psk_1f57...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:31:10.808Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:31:11.504Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:31:13.042Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:31:27.216Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:31:27.218Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_f466...","name":"N8N Read Only - Automações"},{"key":"psk_ed46...","name":"N8N Full Access - Automações"},{"key":"psk_4615...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:31:29.599Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:31:30.277Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:31:31.460Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:31:47.184Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:31:47.193Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_1811...","name":"N8N Read Only - Automações"},{"key":"psk_319b...","name":"N8N Full Access - Automações"},{"key":"psk_d870...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:31:49.458Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:31:49.986Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:31:51.391Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:31:52.069Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:31:52.073Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_9c8e...","name":"N8N Read Only - Automações"},{"key":"psk_c5cf...","name":"N8N Full Access - Automações"},{"key":"psk_1a8f...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:32:07.386Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:32:08.076Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:32:09.396Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:32:30.824Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:32:30.827Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_6893...","name":"N8N Read Only - Automações"},{"key":"psk_7083...","name":"N8N Full Access - Automações"},{"key":"psk_84e2...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:32:47.286Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:32:47.853Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:32:49.009Z"}
+{"apiKeyName":"Test API Key - Bruno","endpoint":"/api/categories","ip":"::1","level":"info","message":"Acesso autorizado via API Key","method":"POST","permissions":26,"service":"api-key-middleware","timestamp":"2025-09-18T14:32:59.431Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-18T14:33:00.720Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:33:24.330Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:33:24.332Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_07c0...","name":"N8N Read Only - Automações"},{"key":"psk_55b7...","name":"N8N Full Access - Automações"},{"key":"psk_5a29...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:33:25.197Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:33:25.325Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:33:26.412Z"}
+{"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-18T14:33:28.536Z"}
+{"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-18T14:33:28.539Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_3a80...","name":"N8N Read Only - Automações"},{"key":"psk_3b55...","name":"N8N Full Access - Automações"},{"key":"psk_0fa5...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T14:33:29.561Z"}
+{"environment":"development","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T14:33:29.704Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:33:30.796Z"}

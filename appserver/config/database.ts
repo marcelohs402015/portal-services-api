@@ -26,11 +26,25 @@ function createDatabaseConfig(): PoolConfig {
   console.log('🔗 Usando DATABASE_URL para conexão');
   console.log('🔍 DATABASE_URL detectada:', process.env.DATABASE_URL.substring(0, 20) + '...');
   
+  // Parse manual da URL para debug
+  try {
+    const url = new URL(process.env.DATABASE_URL);
+    console.log('🔍 Debug URL:', {
+      host: url.hostname,
+      port: url.port,
+      database: url.pathname.slice(1),
+      username: url.username,
+      password: url.password ? '***' + url.password.slice(-4) : 'NO_PASSWORD',
+      passwordLength: url.password ? url.password.length : 0
+    });
+    // console.log('🔍 Senha completa (para debug):', url.password);
+  } catch (e) {
+    console.error('❌ Erro ao parsear DATABASE_URL:', e);
+  }
+  
   const config: PoolConfig = {
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' 
-      ? { rejectUnauthorized: false } // Necessário para Render
-      : false,
+    ssl: { rejectUnauthorized: false }, // Sempre SSL para Render PostgreSQL
     // Pool settings otimizados
     max: parseInt(process.env.DB_POOL_MAX || '20'),
     min: parseInt(process.env.DB_POOL_MIN || '2'),
