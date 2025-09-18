@@ -3,69 +3,49 @@
 ## PASSO 1: PREPARAR PROJETO LOCAL
 # Execute estes comandos no terminal do Cursor (Ctrl + `)
 
-# 1.1 Instalar dependências do backend
-cd appserver
-npm install
+# 1.1 Instalar todas as dependências
+npm run install:all
 
-# 1.2 Instalar dependências do frontend (se houver)
-cd ../appclient
-npm install
-cd ..
+## PASSO 2: CONFIGURAR VARIÁVEIS DE AMBIENTE
+# Copiar arquivo de exemplo
+cp env.dev .env
 
-## PASSO 2: CONFIGURAR BANCO DE DADOS LOCAL
-# Usar Docker Compose para PostgreSQL
+# Editar .env e configurar DATABASE_URL com seu PostgreSQL do Render
+# DATABASE_URL=postgresql://user:password@host:port/database
 
-# 2.1 Subir banco de dados
+## PASSO 3: TESTAR LOCAL
+# 3.1 Executar servidor
 npm run dev
 
-# 2.2 Verificar se está rodando
-npm run dev:logs
-
-## PASSO 3: CONFIGURAR VARIÁVEIS DE AMBIENTE
-# Criar arquivo .env baseado em env.dev
-
-## PASSO 4: TESTAR LOCAL
-# 4.1 Backend
-npm run server:dev
-
-# 4.2 Frontend (se houver)
-npm run client:dev
-
-# 4.3 Ambos juntos
-npm run dev
+# 3.2 Verificar health check
+curl http://localhost:3001/health
 
 ## COMANDOS ÚTEIS PARA DESENVOLVIMENTO
 
-# Ver logs do Docker
-docker-compose logs -f
+# Testar API com token
+curl -H "Authorization: Bearer psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" \
+     -H "Content-Type: application/json" \
+     -X GET \
+     http://localhost:3001/api/categories
 
-# Parar serviços
-npm run dev:stop
-
-# Resetar banco de dados
-npm run db:reset
-
-# Executar seeds
-npm run db:seed
+# Criar nova categoria
+curl -H "Authorization: Bearer psk_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" \
+     -H "Content-Type: application/json" \
+     -X POST \
+     -d '{"name":"Categoria Teste","description":"Nova categoria","color":"#FF6B6B","active":true}' \
+     http://localhost:3001/api/categories
 
 ## COMANDOS GIT
 git add .
 git commit -m "feat: descrição da feature"
 git push origin main
 
-## COMANDOS DEBUG LOCAL
-# Testar health check
-curl http://localhost:3001/health
-
-# Ver logs do servidor
-npm run dev:logs
-
-# Conectar ao banco via psql
-docker exec -it portal-services-db psql -U admin -d portalservicesdb
-
 ## COMANDOS PARA BUILD
 # Build do servidor
-npm run build:server
-
-# Build completo
 npm run build
+
+# Verificar tipos
+npm run typecheck
+
+# Executar testes
+npm run test

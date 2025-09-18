@@ -31,3 +31,6 @@
 {"ip":"::1","level":"http","message":"GET /health","service":"portal-services-server","timestamp":"2025-09-17T21:15:35.637Z"}
 {"level":"info","message":"Server shutting down (SIGTERM)","service":"portal-services-server","timestamp":"2025-09-17T21:15:47.052Z"}
 {"level":"info","message":"Database connection pool closed","service":"database-config","timestamp":"2025-09-17T21:15:47.056Z"}
+{"keys":[{"key":"psk_0123...","name":"Test API Key - Bruno"},{"key":"psk_38b4...","name":"N8N Read Only - Automações"},{"key":"psk_8e34...","name":"N8N Full Access - Automações"},{"key":"psk_12ee...","name":"Admin - Acesso Total"}],"level":"info","message":"API Keys padrão inicializadas","service":"api-key-service","timestamp":"2025-09-18T13:47:57.521Z"}
+{"environment":"production","level":"info","message":"Server started","port":"3001","service":"portal-services-server","timestamp":"2025-09-18T13:47:58.246Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T13:47:59.568Z"}

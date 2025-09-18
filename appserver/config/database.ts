@@ -13,63 +13,36 @@ dotenv.config();
 const logger = createLogger('database-config');
 
 /**
- * Cria configuração do banco baseada no ambiente
+ * Cria configuração do banco usando DATABASE_URL
  */
 function createDatabaseConfig(): PoolConfig {
-  // PRIORIDADE 1: DATABASE_URL (Render, Heroku, etc)
-  if (process.env.DATABASE_URL && process.env.DATABASE_URL !== '') {
-    console.log('🔗 Usando DATABASE_URL para conexão');
-    console.log('🔍 DATABASE_URL detectada:', process.env.DATABASE_URL.substring(0, 20) + '...');
-    
-    const config: PoolConfig = {
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' 
-        ? { rejectUnauthorized: false } // Necessário para Render
-        : false,
-      // Pool settings otimizados para produção
-      max: parseInt(process.env.DB_POOL_MAX || '20'),
-      min: parseInt(process.env.DB_POOL_MIN || '2'),
-      idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'),
-      connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '2000'),
-    };
-
-    // Log da conexão (sem expor senha)
-    const urlParts = process.env.DATABASE_URL.split('@');
-    const hostInfo = urlParts[1] || 'unknown';
-    console.log(`📍 Conectando ao banco: ${hostInfo.split('/')[0]}`);
-    
-    return config;
+  // Verificar se DATABASE_URL está presente
+  if (!process.env.DATABASE_URL || process.env.DATABASE_URL === '') {
+    console.error('❌ DATABASE_URL não encontrada!');
+    console.error('Configure a variável DATABASE_URL no Render ou arquivo .env');
+    throw new Error('DATABASE_URL é obrigatória para conexão com banco');
   }
 
-  // PRIORIDADE 2: Variáveis individuais (desenvolvimento local)
-  console.log('🔧 Usando variáveis individuais para conexão');
-  console.log('🔍 NODE_ENV:', process.env.NODE_ENV);
-  console.log('🔍 DATABASE_URL presente:', !!process.env.DATABASE_URL);
+  console.log('🔗 Usando DATABASE_URL para conexão');
+  console.log('🔍 DATABASE_URL detectada:', process.env.DATABASE_URL.substring(0, 20) + '...');
   
   const config: PoolConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-    database: process.env.DB_NAME || 'portalservicesdb',
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'admin',
-    ssl: process.env.DB_SSL === 'true' 
-      ? { rejectUnauthorized: false }
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' 
+      ? { rejectUnauthorized: false } // Necessário para Render
       : false,
-    // Pool settings
-    max: parseInt(process.env.DB_POOL_MAX || '10'),
+    // Pool settings otimizados
+    max: parseInt(process.env.DB_POOL_MAX || '20'),
     min: parseInt(process.env.DB_POOL_MIN || '2'),
     idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'),
     connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '2000'),
   };
 
-  console.log('📍 Configuração do banco:', {
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    user: config.user,
-    ssl: !!config.ssl
-  });
-
+  // Log da conexão (sem expor senha)
+  const urlParts = process.env.DATABASE_URL.split('@');
+  const hostInfo = urlParts[1] || 'unknown';
+  console.log(`📍 Conectando ao banco: ${hostInfo.split('/')[0]}`);
+  
   return config;
 }
 
@@ -198,26 +171,17 @@ process.on('SIGINT', async () => {
 
 // Export configuração para debug (sem senha)
 export function getDatabaseInfo() {
-  const config = createDatabaseConfig();
-  
-  if ('connectionString' in config) {
-    const url = config.connectionString || '';
-    const parts = url.split('@');
-    const hostInfo = parts[1] || 'unknown';
-    
-    return {
-      type: 'DATABASE_URL',
-      host: hostInfo.split('/')[0],
-      ssl: !!config.ssl
-    };
+  if (!process.env.DATABASE_URL) {
+    return { type: 'DATABASE_URL', error: 'DATABASE_URL não configurada' };
   }
+
+  const url = process.env.DATABASE_URL;
+  const parts = url.split('@');
+  const hostInfo = parts[1] || 'unknown';
   
   return {
-    type: 'Individual Variables',
-    host: config.host,
-    port: config.port,
-    database: config.database,
-    user: config.user,
-    ssl: !!config.ssl
+    type: 'DATABASE_URL',
+    host: hostInfo.split('/')[0],
+    ssl: process.env.NODE_ENV === 'production'
   };
 }
