@@ -1,40 +1,82 @@
-# Render Blueprint - Portal Services API
-# Deploy: https://render.com/deploy?repo=https://github.com/SEU_USUARIO/portal-services-api
+# Portal Services API - Render Blueprint
+# Deploy automático com PostgreSQL gerenciado
+# URL: https://render.com/deploy?repo=https://github.com/SEU_USUARIO/portal-services-api
 
 services:
-  # PostgreSQL Database
+  # PostgreSQL Database Gerenciado
   - type: pserv
     name: portal-services-db
     plan: free
     databaseName: portalservicesdb
-    user: admin
+    user: portalservicesdb_user
     region: oregon
     ipAllowList: []
     
-  # Node.js API Server
+  # Portal Services API
   - type: web
     name: portal-services-api
     plan: free
     region: oregon
     runtime: docker
-    dockerfilePath: ./appserver/Dockerfile.render
-    dockerContext: ./appserver
+    dockerfilePath: ./Dockerfile.render
+    dockerContext: ./
     healthCheckPath: /health
     numInstances: 1
     envVars:
+      # Server Configuration
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
+      - key: APP_VERSION
+        value: "2.0.0"
+      
+      # Database Configuration (automática via Render)
       - key: DATABASE_URL
         fromDatabase:
           name: portal-services-db
           property: connectionString
+      
+      # Database Configuration (fallback individual)
+      - key: DB_HOST
+        fromDatabase:
+          name: portal-services-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portal-services-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portal-services-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portal-services-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portal-services-db
+          property: password
+      - key: DB_SSL
+        value: "true"
+      
+      # API Configuration
       - key: API_KEYS_ENABLED
-        value: true
+        value: "true"
       - key: LOG_LEVEL
         value: info
       - key: CORS_ORIGIN
         value: "*"
-    buildCommand: echo "Using Docker build"
-    startCommand: echo "Using Docker CMD"
+      
+      # Features
+      - key: FEATURES
+        value: "email-management,service-management,quotations"
+    
+    # Build Configuration
+    buildCommand: echo "Building with Docker..."
+    startCommand: echo "Starting with Docker CMD..."
+    
+    # Health Check
+    healthCheckPath: /health
+    healthCheckGracePeriod: 300

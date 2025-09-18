@@ -1,47 +1,49 @@
-# Portal Services API - Production Dockerfile for Render
+# Portal Services API - Dockerfile para Render
+# Otimizado para deploy automático com PostgreSQL gerenciado
+
 FROM node:18-alpine
 
-# Set working directory
-WORKDIR /app
-
-# Install system dependencies
+# Instalar dependências do sistema
 RUN apk add --no-cache python3 make g++
 
-# Copy package files
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar package.json e package-lock.json
 COPY appserver/package*.json ./
 
-# Install dependencies
+# Instalar dependências
 RUN npm ci --only=production && npm cache clean --force
 
-# Copy source code
+# Copiar código fonte
 COPY appserver/ .
 
-# Build TypeScript
+# Build da aplicação TypeScript
 RUN npm run build
 
-# Remove source files and dev dependencies to reduce image size
+# Remover arquivos desnecessários para reduzir tamanho da imagem
 RUN rm -rf src/ tsconfig*.json *.md docs/ tests/ && \
     rm -rf node_modules/@types && \
     npm ci --only=production && \
     npm cache clean --force
 
-# Create logs directory
+# Criar diretório de logs
 RUN mkdir -p logs
 
-# Create non-root user for security
+# Criar usuário não-root para segurança
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001
 
-# Change ownership of the app directory
+# Alterar propriedade do diretório da aplicação
 RUN chown -R nodejs:nodejs /app
 USER nodejs
 
-# Expose port
-EXPOSE 3001
+# Expor porta (Render usa porta dinâmica)
+EXPOSE 10000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD node healthcheck.js
 
-# Start the application
+# Comando de inicialização
 CMD ["node", "dist/server.js"]

@@ -17,6 +17,12 @@ dotenv.config();
 console.log('🚀 Iniciando Portal Services Server...');
 console.log('🔧 Informações do banco:', getDatabaseInfo());
 
+// Auto-inicialização do banco (apenas em produção)
+if (process.env.NODE_ENV === 'production') {
+  console.log('🔄 Executando auto-inicialização do banco...');
+  require('./scripts/auto-init-db');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
