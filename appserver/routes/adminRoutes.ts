@@ -1,9 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { createLogger } from '../shared/logger.js';
-import { ensureDatabaseExists } from '../database/ensureDatabase.js';
-import { runMigrations } from '../database/migrations.js';
 import { Database } from '../database/Database.js';
-import { DataSeeder } from '../database/seedData.js';
 
 const logger = createLogger('AdminRoutes');
 const router = Router();
@@ -33,126 +30,117 @@ const adminAuthMiddleware = (req: Request, res: Response, next: NextFunction) =>
   });
 };
 
-// Endpoint para configurar o banco de dados e rodar as migrações
-router.post('/setup-database', adminAuthMiddleware, async (req: Request, res: Response) => {
+// Endpoint de status do banco de dados
+router.get('/database-status', adminAuthMiddleware, async (req: Request, res: Response) => {
   try {
     const db = req.app.get('db') as Database;
     if (!db) {
-      throw new Error('A conexão com o banco de dados não foi encontrada na aplicação.');
+      return res.status(500).json({
+        success: false,
+        error: 'Conexão com banco não encontrada'
+      });
     }
 
-    const dbConfig = db.getConfig();
-
-    logger.info('Iniciando a criação e verificação do banco de dados...');
-    await ensureDatabaseExists(dbConfig.database, {
-      user: dbConfig.user,
-      password: dbConfig.password,
-      host: dbConfig.host,
-      port: dbConfig.port,
-      ssl: dbConfig.ssl,
-    });
-    logger.info('Banco de dados verificado com sucesso.');
-
-    logger.info('Iniciando a execução das migrações...');
-    await runMigrations(db);
-    logger.info('Migrações do banco de dados concluídas com sucesso.');
-
-    // Seed default data
-    logger.info('Carregando dados padrão...');
-    const dataSeeder = new DataSeeder(db);
-    await dataSeeder.seedDefaultData();
-    logger.info('Dados padrão carregados com sucesso.');
-
-    res.status(200).json({
-      success: true,
-      message: 'Banco de dados, migrações e dados padrão configurados com sucesso!',
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
-    logger.error('Falha ao configurar o banco de dados:', { error: errorMessage, stack: (error as Error).stack });
-    res.status(500).json({
-      success: false,
-      error: 'Falha ao configurar o banco de dados.',
-      details: errorMessage,
-    });
-  }
-});
-
-// Endpoint para recarregar dados padrão
-router.post('/reload-default-data', adminAuthMiddleware, async (req: Request, res: Response) => {
-  try {
-    const db = req.app.get('db') as Database;
-    if (!db) {
-      throw new Error('A conexão com o banco de dados não foi encontrada na aplicação.');
-    }
-
-    const { force } = req.body;
+    // Teste simples de conexão
+    const result = await db.query('SELECT NOW() as current_time, version() as version');
     
-    logger.info('Iniciando recarregamento de dados padrão...');
-    const dataSeeder = new DataSeeder(db);
-    
-    if (force) {
-      await dataSeeder.forceReseed();
-      logger.info('Dados padrão recarregados com força (dados existentes foram removidos).');
-    } else {
-      await dataSeeder.seedDefaultData();
-      logger.info('Dados padrão recarregados (apenas se banco estiver vazio).');
-    }
-
     res.status(200).json({
       success: true,
-      message: force 
-        ? 'Dados padrão recarregados com sucesso (dados existentes foram removidos)!'
-        : 'Dados padrão recarregados com sucesso (apenas se banco estiver vazio)!',
-      force: force || false
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
-    logger.error('Falha ao recarregar dados padrão:', { error: errorMessage, stack: (error as Error).stack });
-    res.status(500).json({
-      success: false,
-      error: 'Falha ao recarregar dados padrão.',
-      details: errorMessage,
-    });
-  }
-});
-
-// Endpoint para verificar status dos dados
-router.get('/data-status', adminAuthMiddleware, async (req: Request, res: Response) => {
-  try {
-    const db = req.app.get('db') as Database;
-    if (!db) {
-      throw new Error('A conexão com o banco de dados não foi encontrada na aplicação.');
-    }
-
-    const dataSeeder = new DataSeeder(db);
-    const hasData = await dataSeeder.hasData();
-
-    // Contar registros em cada tabela
-    const categoriesResult = await db.query('SELECT COUNT(*) as count FROM categories');
-    const servicesResult = await db.query('SELECT COUNT(*) as count FROM services');
-    const templatesResult = await db.query('SELECT COUNT(*) as count FROM email_templates');
-    const settingsResult = await db.query('SELECT COUNT(*) as count FROM system_settings');
-
-    res.status(200).json({
-      success: true,
+      message: 'Banco de dados conectado com sucesso',
       data: {
-        hasData,
-        counts: {
-          categories: parseInt(categoriesResult.rows[0].count),
-          services: parseInt(servicesResult.rows[0].count),
-          emailTemplates: parseInt(templatesResult.rows[0].count),
-          systemSettings: parseInt(settingsResult.rows[0].count)
-        }
+        current_time: result.rows[0].current_time,
+        version: result.rows[0].version
       }
     });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
-    logger.error('Falha ao verificar status dos dados:', { error: errorMessage, stack: (error as Error).stack });
+    logger.error('Erro ao verificar status do banco:', { error: errorMessage });
     res.status(500).json({
       success: false,
-      error: 'Falha ao verificar status dos dados.',
-      details: errorMessage,
+      error: 'Erro ao conectar com banco de dados',
+      details: errorMessage
+    });
+  }
+});
+
+// Endpoint para executar query personalizada (cuidado!)
+router.post('/execute-query', adminAuthMiddleware, async (req: Request, res: Response) => {
+  try {
+    const db = req.app.get('db') as Database;
+    if (!db) {
+      return res.status(500).json({
+        success: false,
+        error: 'Conexão com banco não encontrada'
+      });
+    }
+
+    const { query } = req.body;
+    
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({
+        success: false,
+        error: 'Query SQL é obrigatória'
+      });
+    }
+
+    logger.warn('Executando query personalizada:', { query: query.substring(0, 100) });
+    const result = await db.query(query);
+    
+    res.status(200).json({
+      success: true,
+      message: 'Query executada com sucesso',
+      data: {
+        rows: result.rows,
+        rowCount: result.rowCount
+      }
+    });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+    logger.error('Falha ao executar query:', { error: errorMessage });
+    res.status(500).json({
+      success: false,
+      error: 'Falha ao executar query',
+      details: errorMessage
+    });
+  }
+});
+
+// Endpoint para verificar status das tabelas
+router.get('/tables-status', adminAuthMiddleware, async (req: Request, res: Response) => {
+  try {
+    const db = req.app.get('db') as Database;
+    if (!db) {
+      return res.status(500).json({
+        success: false,
+        error: 'Conexão com banco não encontrada'
+      });
+    }
+
+    // Contar registros nas principais tabelas
+    const tables = ['categories', 'clients', 'services', 'quotations', 'appointments', 'emails'];
+    const counts: Record<string, number> = {};
+
+    for (const table of tables) {
+      try {
+        const result = await db.query(`SELECT COUNT(*) as count FROM ${table}`);
+        counts[table] = parseInt(result.rows[0].count);
+      } catch (error) {
+        counts[table] = -1; // Indica que a tabela não existe ou erro
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Status das tabelas obtido com sucesso',
+      data: { counts }
+    });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+    logger.error('Falha ao verificar status das tabelas:', { error: errorMessage });
+    res.status(500).json({
+      success: false,
+      error: 'Falha ao verificar status das tabelas',
+      details: errorMessage
     });
   }
 });

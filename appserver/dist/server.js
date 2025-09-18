@@ -51,14 +51,22 @@ const logger = (0, logger_1.createLogger)('portal-services-server');
 dotenv_1.default.config();
 console.log('🚀 Iniciando Portal Services Server...');
 console.log('🔧 Informações do banco:', (0, database_1.getDatabaseInfo)());
+// Auto-inicialização do banco (apenas em produção)
+if (process.env.NODE_ENV === 'production') {
+    console.log('🔄 Executando auto-inicialização do banco...');
+    require('./scripts/auto-init-db');
+}
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
-// Middleware
+// Middleware - CORS configurado para desenvolvimento e produção
+const corsOrigins = process.env.NODE_ENV === 'production'
+    ? [process.env.CORS_ORIGIN || '*']
+    : ['http://localhost:3000', 'http://localhost:3001'];
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: process.env.CORS_ORIGIN === '*' ? '*' : corsOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
-    credentials: true
+    credentials: process.env.NODE_ENV !== 'production'
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));

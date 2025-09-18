@@ -79,6 +79,8 @@ export async function testConnection(): Promise<boolean> {
       process.exit(1);
     }
     
+    console.log('⚠️ Continuando em desenvolvimento sem conexão de banco (apenas para testes de API)');
+    
     return false;
   }
 }
