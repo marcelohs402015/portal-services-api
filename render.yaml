@@ -25,7 +25,7 @@ services:
       
       # Database Configuration (PostgreSQL Separado no Render)
       - key: DATABASE_URL
-        value: postgresql://postgres_db_h43p_user:ZUHkKGgeMy3SdnOvdisbDPr1050wUdW6@dpg-d360h71r0fns73bhcbjg-a:5432/postgres_db_h43p
+        value: postgresql://postgres_db_h43p_user:ZUHkKGgeWy3Sdn9vd1sbQPrl05QwUdW6@dpg-d360h71r0fns73bhcbjg-a.oregon-postgres.render.com:5432/postgres_db_h43p
       
       # API Key Configuration
       - key: API_KEY_SECRET

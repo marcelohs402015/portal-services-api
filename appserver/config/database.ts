@@ -10,16 +10,30 @@ import { createLogger } from '../shared/logger';
 
 // Carregar variáveis de ambiente
 dotenv.config();
+
+// Em produção no Render, as variáveis já estão no process.env
+if (process.env.NODE_ENV === 'production') {
+  console.log('🏭 Modo produção: usando variáveis do sistema');
+} else {
+  console.log('🔧 Modo desenvolvimento: carregando .env');
+}
 const logger = createLogger('database-config');
 
 /**
  * Cria configuração do banco usando DATABASE_URL
  */
 function createDatabaseConfig(): PoolConfig {
+  // Debug das variáveis de ambiente
+  console.log('🔍 Variáveis de ambiente disponíveis:');
+  console.log('- NODE_ENV:', process.env.NODE_ENV);
+  console.log('- PORT:', process.env.PORT);
+  console.log('- DATABASE_URL presente:', !!process.env.DATABASE_URL);
+  
   // Verificar se DATABASE_URL está presente
   if (!process.env.DATABASE_URL || process.env.DATABASE_URL === '') {
     console.error('❌ DATABASE_URL não encontrada!');
     console.error('Configure a variável DATABASE_URL no Render ou arquivo .env');
+    console.error('📋 Variáveis disponíveis:', Object.keys(process.env).filter(key => key.includes('DATABASE') || key.includes('DB')));
     throw new Error('DATABASE_URL é obrigatória para conexão com banco');
   }
 

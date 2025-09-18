@@ -18,3 +18,5 @@
 {"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Error creating category","service":"portal-services-server","timestamp":"2025-09-18T14:33:00.720Z"}
 {"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:33:26.412Z"}
 {"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:33:30.796Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:44:02.460Z"}
+{"error":"password authentication failed for user \"postgres_db_h43p_user\"","level":"error","message":"Database connection failed","service":"database-config","timestamp":"2025-09-18T14:44:19.672Z"}
